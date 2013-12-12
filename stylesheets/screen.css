@@ -1,0 +1,446 @@
+/* line 19, ../sass/screen.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 22, ../sass/screen.scss */
+body {
+  background-color: #fcfaf2;
+}
+
+@media (min-width: 24em) {
+  /* line 27, ../sass/screen.scss */
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Oxygen', sans-serif;
+    background-color: #fcfaf2;
+    color: #4f4f48;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  /* line 38, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+  .container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  /* line 35, ../sass/screen.scss */
+  .container nav {
+    width: 100%;
+    float: right;
+    margin-right: 0;
+    background-color: #0c0c0c;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px 0 12px;
+    border-bottom: 1px solid #bdc0ba;
+  }
+  /* line 42, ../sass/screen.scss */
+  .container nav a {
+    color: #fcfaf2;
+    text-decoration: none;
+    letter-spacing: 1px;
+    padding: 10px 10px;
+  }
+  /* line 48, ../sass/screen.scss */
+  .container nav a:hover {
+    background-color: #4f4f48;
+    padding-bottom: 12px;
+    border-bottom: 10px solid #f75c2f;
+  }
+  /* line 55, ../sass/screen.scss */
+  .container header {
+    width: 100%;
+    float: right;
+    margin-right: 0;
+    color: #0c0c0c;
+    margin: 0 auto;
+    padding: 0;
+    height: 90%;
+  }
+  /* line 61, ../sass/screen.scss */
+  .container header #titleFrame {
+    border: 1px solid #bdc0ba;
+    padding: 100px 240px;
+  }
+  /* line 66, ../sass/screen.scss */
+  .container header aside h1 {
+    font-family: sans-serif;
+    position: fixed;
+    font-size: 16px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    color: #bdc0ba;
+    top: 45%;
+    padding: 0;
+    margin: 0;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+  }
+  /* line 81, ../sass/screen.scss */
+  .container header aside .asideLeft {
+    left: -60px;
+  }
+  /* line 82, ../sass/screen.scss */
+  .container header aside .asideRight {
+    right: -70px;
+  }
+  /* line 84, ../sass/screen.scss */
+  .container header .charBlock {
+    background-color: #4f4f48;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 3px;
+  }
+  /* line 91, ../sass/screen.scss */
+  .container header h1 {
+    font-size: 16px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  /* line 97, ../sass/screen.scss */
+  .container header h2 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: normal;
+    font-size: 80px;
+    color: #fcfaf2;
+    line-height: 80px;
+    text-align: center;
+    -moz-transform: translateY(9px);
+    -ms-transform: translateY(9px);
+  }
+  /* line 107, ../sass/screen.scss */
+  .container header h3 {
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: normal;
+    text-align: right;
+    margin-top: 2px;
+    padding-right: 2px;
+  }
+  /* line 117, ../sass/screen.scss */
+  .container section {
+    width: 100%;
+    float: left;
+    margin-right: 2.12766%;
+    font-family: 'Oxygen', sans-serif;
+    height: 100%;
+  }
+  /* line 121, ../sass/screen.scss */
+  .container section article {
+    width: 31.91489%;
+    float: left;
+    margin-right: 2.12766%;
+    padding-left: 34.04255%;
+    padding-right: 34.04255%;
+  }
+  /* line 124, ../sass/screen.scss */
+  .container section article h1 {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 30px 0;
+    text-align: center;
+  }
+  /* line 130, ../sass/screen.scss */
+  .container section article p {
+    font-size: 16px;
+    margin: 20px 0;
+    line-height: 24px;
+  }
+  /* line 135, ../sass/screen.scss */
+  .container section article a {
+    color: #4f4f48;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  /* line 140, ../sass/screen.scss */
+  .container section article a:hover {
+    color: #f75c2f;
+  }
+  /* line 148, ../sass/screen.scss */
+  .container section#about article {
+    background-color: #4f4f48;
+    color: #fcfaf2;
+  }
+  /* line 151, ../sass/screen.scss */
+  .container section#about article .span4 {
+    width: 100%;
+    float: right;
+    margin-right: 0;
+    padding: 0 20px;
+  }
+  /* line 155, ../sass/screen.scss */
+  .container section#about article a {
+    color: #fcfaf2;
+  }
+  /* line 158, ../sass/screen.scss */
+  .container section#about article a:hover {
+    color: #f75c2f;
+  }
+  /* line 165, ../sass/screen.scss */
+  .container section#work article {
+    width: 48.93617%;
+    float: right;
+    margin-right: 0;
+    padding-left: 25.53191%;
+    padding-right: 25.53191%;
+  }
+  /* line 168, ../sass/screen.scss */
+  .container section#work article .galleryGrid {
+    width: 30.43478%;
+    float: left;
+    margin-right: 4.34783%;
+    color: #4f4f48;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  /* line 184, C:/Ruby193/lib/ruby/gems/1.9.1/gems/susy-1.0.9/sass/susy/_grid.scss */
+  .container section#work article .galleryGrid:nth-child(3n) {
+    float: right;
+    margin-right: 0;
+  }
+  /* line 174, ../sass/screen.scss */
+  .container section#work article .galleryGrid img {
+    -moz-box-shadow: 1px 1px 2px #4f4f48;
+    -webkit-box-shadow: 1px 1px 2px #4f4f48;
+    box-shadow: 1px 1px 2px #4f4f48;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#4f4f48')";
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#4f4f48');
+    width: 100%;
+  }
+  /* line 182, ../sass/screen.scss */
+  .container section#work article .galleryGrid p {
+    position: relative;
+    background-color: #fcfaf2;
+    margin: 0px;
+    bottom: 0px;
+  }
+  /* line 189, ../sass/screen.scss */
+  .container section#work article #moreWork {
+    text-align: center;
+  }
+  /* line 191, ../sass/screen.scss */
+  .container section#work article #moreWork h2 {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: normal;
+    text-align: center;
+    background-color: #4f4f48;
+    color: #fcfaf2;
+    padding: 10px 20px;
+  }
+  /* line 200, ../sass/screen.scss */
+  .container section#work article #moreWork a:hover h2 {
+    background-color: #f75c2f;
+    color: #fcfaf2;
+  }
+  /* line 206, ../sass/screen.scss */
+  .container section#work article a {
+    color: #4f4f48;
+    font-weight: normal;
+  }
+  /* line 210, ../sass/screen.scss */
+  .container section#work article a:hover .galleryGrid {
+    color: #f75c2f;
+  }
+  /* line 216, ../sass/screen.scss */
+  .container section#contact {
+    width: 100%;
+    float: left;
+    margin-right: 2.12766%;
+    height: 80%;
+  }
+  /* line 219, ../sass/screen.scss */
+  .container section#contact article {
+    text-align: center;
+  }
+  /* line 222, ../sass/screen.scss */
+  .container section#contact article h2 {
+    display: inline-block;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 40px 0 -30px;
+    text-align: center;
+  }
+  /* line 231, ../sass/screen.scss */
+  .container section#contact #linkGroup {
+    margin-top: 60px;
+    text-align: center;
+  }
+  /* line 234, ../sass/screen.scss */
+  .container section#contact #linkGroup .socialIcon {
+    display: inline-block;
+    background-color: #4f4f48;
+    font-size: 24px;
+    width: 40px;
+    height: 35px;
+    text-align: center;
+    margin: 0px;
+    padding-top: 5px;
+  }
+  /* line 243, ../sass/screen.scss */
+  .container section#contact #linkGroup .socialIcon span {
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transform: translateY(-8px);
+    -moz-transform: translateY(-8px);
+    -ms-transform: translateY(-8px);
+    -o-transform: translateY(-8px);
+  }
+  /* line 252, ../sass/screen.scss */
+  .container section#contact #linkGroup a {
+    color: #fcfaf2;
+  }
+  /* line 255, ../sass/screen.scss */
+  .container section#contact #linkGroup a:hover .socialIcon {
+    background-color: #f75c2f;
+  }
+  /* line 261, ../sass/screen.scss */
+  .container #goTop {
+    width: 48.93617%;
+    float: left;
+    margin-right: 2.12766%;
+    padding-left: 25.53191%;
+    padding-right: 25.53191%;
+    font-family: 'Oxygen', sans-serif;
+    font-size: 24px;
+    text-align: right;
+    margin-bottom: -5px;
+    -moz-transform: translateY(1px);
+    -ms-transform: translateY(1px);
+  }
+  /* line 271, ../sass/screen.scss */
+  .container #goTop a {
+    color: #0c0c0c;
+    text-decoration: none;
+  }
+  /* line 275, ../sass/screen.scss */
+  .container #goTop a:hover {
+    color: #f75c2f;
+  }
+  /* line 277, ../sass/screen.scss */
+  .container #goTop a:hover .triangle-up {
+    border-bottom: 18px solid #f75c2f;
+  }
+  /* line 281, ../sass/screen.scss */
+  .container #goTop .triangle-up {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 18px solid #0c0c0c;
+  }
+  /* line 291, ../sass/screen.scss */
+  .container footer {
+    width: 100%;
+    float: left;
+    margin-right: 2.12766%;
+    font-family: 'Oxygen', sans-serif;
+    text-align: center;
+    background-color: #0c0c0c;
+    color: #fcfaf2;
+    height: 20%;
+  }
+  /* line 298, ../sass/screen.scss */
+  .container footer h1 {
+    font-size: 16px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    margin-top: 60px;
+  }
+
+  /* line 308, ../sass/screen.scss */
+  canvas {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -moz-tap-highlight-color: rgba(255, 255, 255, 0);
+    -ms-tap-highlight-color: rgba(255, 255, 255, 0);
+    -o-tap-highlight-color: rgba(255, 255, 255, 0);
+  }
+
+  /* line 318, ../sass/screen.scss */
+  .verticalAlignContainer {
+    display: table;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  /* line 324, ../sass/screen.scss */
+  .verticalSectionContainer {
+    display: table;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* line 331, ../sass/screen.scss */
+  .verticalAlignCell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  /* line 336, ../sass/screen.scss */
+  .line-seperator {
+    width: 100%;
+    float: right;
+    margin-right: 0;
+    text-align: center;
+    border-bottom: 1px dotted #bdc0ba;
+    margin: 20px 0 30px;
+  }
+  /* line 341, ../sass/screen.scss */
+  .line-seperator img {
+    margin-bottom: -44px;
+    text-align: center;
+    height: 100%;
+  }
+}
+@media (min-width: 10em) and (max-width: 24em) {
+  /* line 352, ../sass/screen.scss */
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* line 38, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+  .container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  /* line 356, ../sass/screen.scss */
+  .container header {
+    font-family: 'Muli', sans-serif;
+  }
+  /* line 359, ../sass/screen.scss */
+  .container header h1 {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  /* line 365, ../sass/screen.scss */
+  .container section {
+    width: 100%;
+    float: left;
+    margin-right: 4.34783%;
+  }
+  /* line 367, ../sass/screen.scss */
+  .container section article {
+    width: 100%;
+    float: right;
+    margin-right: 0;
+  }
+}
