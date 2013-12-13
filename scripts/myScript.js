@@ -11,13 +11,18 @@ $(document).ready(function(){
 	canvasWidth=$("#p5Parent").width();
 	canvasHeight=$( window ).height()*0.8;
 	p5Engine=new Processing($p5Canvas,mySketch);
-	$('section.scrollsections').scrollSections({
-		createNavigation: false,
-		navigation: true,
-		after: function($currentSection, $previousSection){
-			window.location.hash=$currentSection.attr('id');
-		}
-	});
+	console.log("DectectTierIphone= "+MobileEsp.DetectTierIphone());
+	//TODO: add device detection code here, scrollsections doesn't work on mobile because it relies on mouse wheel
+	if(!MobileEsp.DetectTierIphone()){
+		$('section.scrollsections').scrollSections({
+			createNavigation: false,
+			navigation: true,
+			after: function($currentSection, $previousSection){
+				window.location.hash=$currentSection.attr('id');
+			}
+		});
+	}	
+
 });
 
 $(window).resize(function() {
