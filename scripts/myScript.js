@@ -1,18 +1,24 @@
 var $p5Canvas;
 var p5Engine;
 var canvasWidth, canvasHeight;
+var screenSizeRatio;
 var p5Font;
 var p5FontSize=18;
 var nodeCount=0;
 var springCount=0;
+var shadowDisplacement=3;
 
 $(document).ready(function(){	
 	$p5Canvas=$('#p5Canvas').get(0);
 	canvasWidth=$("#p5Parent").width();
-	canvasHeight=$( window ).height()*0.8;
+	canvasHeight=$( window ).height();
+	screenSizeRatio=canvasWidth/960;
+	if(canvasWidth>640)p5FontSize=18;
+	else if(canvasWidth<640)p5FontSize=12;
 	p5Engine=new Processing($p5Canvas,mySketch);
-	console.log("DectectTierIphone= "+MobileEsp.DetectTierIphone());
-	//TODO: add device detection code here, scrollsections doesn't work on mobile because it relies on mouse wheel
+	//console.log("DectectTierIphone= "+MobileEsp.DetectTierIphone());
+	//mdectec.js > MobileEsp
+
 	if(!MobileEsp.DetectTierIphone()){
 		$('section.scrollsections').scrollSections({
 			createNavigation: false,
@@ -28,7 +34,8 @@ $(document).ready(function(){
 $(window).resize(function() {
 	$p5Canvas=$('#p5Canvas').get(0);
 	canvasWidth=$("#p5Parent").width();
-	canvasHeight=$( window ).height()*0.8;
+	canvasHeight=$( window ).height();
+	screenSizeRatio=canvasWidth/960;
 	p5Engine.resize();
 	/*  */
 	//p5Engine.stopDrawing();
@@ -69,16 +76,13 @@ function mySketch(processing){
 
 	p5.draw=function(){
 		p5.background(252,250,242);
+		createReadme();
 		for(var i=0; i<springArray.length; i++){
 			springArray[i].update();
 			springArray[i].render();			
 		}
 		p5.noStroke();
-		if(seletecNodeId>-1){
-			nodeArray[seletecNodeId].location.x=p5.mouseX;
-			nodeArray[seletecNodeId].location.y=p5.mouseY;
-			nodeArray[seletecNodeId].render();		
-		}
+		
 		for(i=0; i<nodeArray.length; i++){
 			if(i!=seletecNodeId){
 				nodeArray[i].attractArray(nodeArray);
@@ -86,10 +90,14 @@ function mySketch(processing){
 				nodeArray[i].render();
 			}			
 		}
+		if(seletecNodeId>-1){
+			nodeArray[seletecNodeId].location.x=p5.mouseX;
+			nodeArray[seletecNodeId].location.y=p5.mouseY;
+			nodeArray[seletecNodeId].render();		
+		}
 		for(i=0; i<nodeArray.length; i++){
 			nodeArray[i].renderText();
-		}
-		createReadme();
+		}		
 	}
 
 	p5.mousePressed=function(){
@@ -117,9 +125,9 @@ function mySketch(processing){
 		seletecNodeId=-1;
 	}
 
-	p5.resize=function(){
-		 // Multiple calls to size() for 3D renders are not allowed.
+	p5.resize=function(){		
 		p5.size(canvasWidth,canvasHeight);
+		//resize node.
 	}
 
 	p5.stopDrawing=function(){
@@ -128,47 +136,56 @@ function mySketch(processing){
 	}
 
 	var createReadme=function(){
-		p5.ellipse(canvasWidth/4,30,32,32);
-		p5.fill(252,250,242);
-		p5.ellipse(canvasWidth/4,30,24,24);
-		p5.fill(189,192,186);		
-		createReadmePie();
+		var readmePieRadius=24;
+		var pieX=20;
+		var pieY=96;
+		//p5.fill(145,152,159,150);
+		//p5.ellipse(pieX + shadowDisplacement,pieY + shadowDisplacement,32,32);
 		p5.fill(79,79,72);
-		p5.text("= Click / Drag",20+canvasWidth/4,36);
+		p5.ellipse(pieX,pieY,32,32);
+		p5.fill(252,250,242);
+		p5.ellipse(pieX,pieY,24,24);
+		p5.fill(189,192,186);		
+		createReadmePie(pieX, pieY);
+		p5.fill(79,79,72);
+		p5.text("= Click / Drag",pieX+20,pieY+6);
+		p5.textSize(36);
+		p5.text("MY SKILL SET",pieX-16,pieY-32);
+		p5.textSize(p5FontSize);
 	}
 
-	var createReadmePie=function(){
+	var createReadmePie=function(initX, initY){
 		var pieRadius=12;
 		var radTarget=720;
 		var radPieChart=p5.radians(readmePieAngle);
 		p5.beginShape();
-		p5.vertex(canvasWidth/4,30);
+		p5.vertex(initX,initY);
 		for(var i=0; i<radPieChart; i+=0.01){
 			var rotateAngle=i-p5.PI/2;
-			p5.vertex(canvasWidth/4 + pieRadius*p5.cos(rotateAngle),30 + pieRadius*p5.sin(rotateAngle));
+			p5.vertex(initX + pieRadius*p5.cos(rotateAngle),initY + pieRadius*p5.sin(rotateAngle));
 		}
-		p5.vertex(canvasWidth/4,30);
+		p5.vertex(initX,initY);
 		p5.endShape(p5.CLOSE);
 		if(readmePieAngle<radTarget)readmePieAngle+=2;
 		if(readmePieAngle>=radTarget)readmePieAngle=0;
 	}
 
-	var createRandomGraphic=function(){
-		for(var i=0; i<numNodes; i++){
-			nodeArray[i]=new p5Node(p5);
-			nodeArray[i].setLocation(p5.width/2+p5.random(-1,1), p5.height/2+p5.random(-1,1));
-		}
-		var springCount=0;
-		for(i=0; i<nodeArray.length-1; i++){
-			var randomCount=p5.floor(p5.random(1,2));
-			for(var j=0; j<randomCount; j++){
-				var randomNodeId=p5.floor(p5.random(i+1, nodeArray.length));
-				springArray[springCount]=new p5Spring(p5);
-				springArray[springCount].setupNode(nodeArray[i],nodeArray[randomNodeId]);
-				springCount++;
-			}
-		}
-	}
+	// var createRandomGraphic=function(){
+	// 	for(var i=0; i<numNodes; i++){
+	// 		nodeArray[i]=new p5Node(p5);
+	// 		nodeArray[i].setLocation(p5.width/2+p5.random(-1,1), p5.height/2+p5.random(-1,1));
+	// 	}
+	// 	var springCount=0;
+	// 	for(i=0; i<nodeArray.length-1; i++){
+	// 		var randomCount=p5.floor(p5.random(1,2));
+	// 		for(var j=0; j<randomCount; j++){
+	// 			var randomNodeId=p5.floor(p5.random(i+1, nodeArray.length));
+	// 			springArray[springCount]=new p5Spring(p5);
+	// 			springArray[springCount].setupNode(nodeArray[i],nodeArray[randomNodeId]);
+	// 			springCount++;
+	// 		}
+	// 	}
+	// }
 
 	var initializeSprings=function(){
 		var i=0;
@@ -192,11 +209,11 @@ function mySketch(processing){
 	}
 
 	var initializeGraphic=function(){
-		var regNodeRadius=50;
-		var regSpringLength=100;
-		var randLength=100;
-		var largeNodeRadius=80;
-		var longSpringLength=240;
+		var regNodeRadius=50*screenSizeRatio;
+		var largeNodeRadius=80*screenSizeRatio;
+		var regSpringLength=120*screenSizeRatio;
+		var randLength=100*screenSizeRatio;	
+		var longSpringLength=240*screenSizeRatio;
 		var cGraphic="ff90b44b";
 		var cInteractive="ff00aa90";
 		var cTechnical="ff2ea9df";
@@ -310,11 +327,11 @@ function p5Node(processing){
 	}
 
 	node.enlarge=function(){
-		node.radius+=20;		
+		node.radius*=1.5;		
 	}
 
 	node.shrink=function(){
-		node.radius-=20;		
+		node.radius/=1.5;		
 	}
 	
 	node.attractArray=function(nodeArray){
@@ -344,6 +361,14 @@ function p5Node(processing){
 	}
 
 	node.render=function(){
+		if(Boolean(node.showSkill)){
+			p5.fill(145,152,159,60);
+			p5.ellipse(node.location.x + shadowDisplacement * 8, node.location.y + shadowDisplacement * 8, 
+						node.radius - shadowDisplacement* 4, node.radius - shadowDisplacement* 4);
+		}else{
+			p5.fill(145,152,159,150);
+			p5.ellipse(node.location.x + shadowDisplacement, node.location.y + shadowDisplacement, node.radius,node.radius);
+		}
 		p5.fill(p5.unhex(node.color));
 		p5.ellipse(node.location.x, node.location.y, node.radius,node.radius);
 		p5.fill(255);		
@@ -410,8 +435,11 @@ function p5Spring(processing){
 	}
 
 	spring.render=function(){
-		p5.stroke(spring.tension,192,186);
-		p5.strokeWeight(2);
+		p5.strokeWeight(4);
+		p5.stroke(145,152,159,200);
+		p5.line(spring.startNode.location.x + shadowDisplacement/2, spring.startNode.location.y + shadowDisplacement/2,
+				spring.endNode.location.x + shadowDisplacement/2, spring.endNode.location.y + shadowDisplacement/2);
+		p5.stroke(spring.tension,192,186);		
 		p5.line(spring.startNode.location.x, spring.startNode.location.y,
 				spring.endNode.location.x, spring.endNode.location.y);
 

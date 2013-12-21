@@ -14,6 +14,7 @@ $imgShadowBlur: 2px;
 // $darkGray: #4f4f48;
 // $orange: #f75c2f;
 
+//common
 @import "base";
 
 html, body{
@@ -23,352 +24,636 @@ body{
 	background-color: $pale;
 }
 
-@include at-breakpoint(24em 12){
-	.container{
-		@include container;
-		font-family: 'Oxygen', sans-serif;
-		background-color: $pale;
-		color:$darkGray;
-		height:100%;
-		padding: 0;
-		margin: 0;
-		nav{
-			@include span-columns(12 omega,12);
-			background-color: $dark;
-			font-size:18px;
-			text-align: center;
-			padding:$navPadding 0 $navPadding + 2px;
-			border-bottom: 1px solid $grey;
-			a{	  	
-				color:$pale;		
-				text-decoration: none;
-				letter-spacing: 1px;
-				padding: $navPadding 10px;
-			}
-			a:hover{
-				background-color: $darkGray;
-				padding-bottom: $navPadding + 2px;
-				border-bottom: 10px solid $orange;
-			}  
-		}
+.container{
+	@include container;
+	font-family: 'Oxygen', sans-serif;
+	background-color: $pale;
+	color:$darkGray;
+	height:100%;
+	padding: 0;
+	margin: 0;
+}
 
-		header{
-			@include span-columns(12 omega,12);
-			color: $dark;
-			margin:0 auto;
-			padding:0;
-			height:90%;
-			#titleFrame{
-				border:1px solid $grey;
-				padding: 100px 240px;
-			}
-			aside{
-				h1{
-					font-family: sans-serif;
-					position: fixed;
-					font-size: 16px;
-			  		font-weight: normal;
-			  		letter-spacing: 1px;
-			  		color: $grey;
-			  		top:45%;
-			  		padding:0;
-			  		margin:0;
-			  		-webkit-transform: rotate(90deg);
-					-moz-transform: rotate(90deg);
-					-ms-transform: rotate(90deg);
-					-o-transform: rotate(90deg);
-				}
-				.asideLeft{	left:-60px;	}
-			  	.asideRight{ right:-70px; }	
-			}
-			.charBlock{
-				background-color: $darkGray;
-				display: inline-block;
-				width: 100px;
-				height: 100px;
-				margin-bottom: 3px;
-			}
-			h1{	
-				font-size: 16px;
-				font-weight: normal;
-				letter-spacing: 1px;				
-				margin-bottom: 2px;
-			}
-			h2{	
-				font-family: 'Josefin Sans', sans-serif;
-				font-weight: normal;
-				font-size: 80px;
-				color: $pale;
-				line-height: 80px;
-				text-align: center;
-				-moz-transform: translateY(9px);
-				-ms-transform: translateY(9px);
-			}
-			h3{	
-				font-size: 16px;
-				letter-spacing: 1px;
-				font-weight: normal;
-				text-align: right;
-				margin-top:2px;
-				padding-right: 2px;
-			}
-		}
+nav{	
+	@include span-columns(12 omega,12);
+	background-color: $dark;
+	font-size:18px;
+	text-align: center;
+	padding:$navPadding 0 $navPadding + 2px;
+	border-bottom: 1px solid $grey;
+	a{	  	
+		color:$pale;
+		text-decoration: none;
+		letter-spacing: 1px;
+		padding: $navPadding 10px;
+	}
+	a:active, a:visited{color:$pale;}
+	a:hover{
+		background-color: $darkGray;
+		padding-bottom: $navPadding + 2px;
+		border-bottom: 10px solid $orange;
+	}  
+}
 
-		section{
-			@include span-columns(12,12);
-			font-family: 'Oxygen', sans-serif;
-			height: 100%;
-			article{
-				@include span-columns(4,12);
-				@include pad(4,4);
-				h1{
-					font-size: 30px;
-					font-weight: bold;
-					margin:30px 0;
-					text-align: center; 			
-				}				
-				p{
-					font-size: 16px;
-					margin:20px 0;
-					line-height: 24px;
-				}
-				a{	  
-					color: $darkGray;
-					text-decoration: none;		
-					font-weight: bold;
-				}
-				a:hover{
-					color: $orange;
-				}	  		
+header{
+	@include span-columns(12 omega,12);
+	color: $darkGray;
+	margin:0 auto;
+	padding:0;
+	height:90%;
+
+	#titleFrame{
+		border:1px solid $grey;
+		padding: 100px 240px;
+	}
+	aside{
+		h1{
+			font-family: sans-serif;
+			position: fixed;
+			font-size: 16px;
+	  		font-weight: normal;
+	  		letter-spacing: 1px;
+	  		color: $grey;
+	  		top:48%;
+	  		padding:0;
+	  		margin:0;
+	  		-webkit-transform: rotate(90deg);
+			-moz-transform: rotate(90deg);
+			-ms-transform: rotate(90deg);
+			-o-transform: rotate(90deg);
+		}
+		.asideLeft{	left:-70px;	}
+	  	.asideRight{ right:-70px; }	
+	}
+	.charBlock{
+		background-color: $darkGray;
+		display: inline-block;
+		width: 160px;
+		height: 160px;
+		margin-bottom: 3px;
+	}
+	h1{	
+		font-size: 16px;
+		font-weight: normal;
+		letter-spacing: 1px;				
+		margin-bottom: 2px;
+	}
+	h2{	
+		font-family: 'Josefin Sans', sans-serif;
+		font-weight: normal;
+		font-size: 120px;
+		color: $pale;
+		line-height: 80px;
+		text-align: center;
+		padding-top:20px;
+		-moz-transform: translateY(15px);
+		-ms-transform: translateY(15px);
+	}
+	h3{	
+		font-size: 24px;
+		letter-spacing: 1px;
+		font-weight: normal;
+		text-align: right;
+		margin-top:2px;
+		padding-right: 2px;
+	}
+}
+
+section{
+	@include span-columns(12,12);
+	height: 100%;
+	article{
+		@include span-columns(6,12);
+		@include pad(3,3);
+		h1{
+			font-size: 40px;
+			font-weight: bold;
+			margin:20px 0;
+			text-align: center; 			
+		}				
+		p{
+			font-size: 16px;
+			margin:20px 0;
+			line-height: 24px;
+		}
+		a{	  
+			color: $darkGray;
+			text-decoration: underline;		
+			font-weight: bold;
+		}
+		a:hover{
+			color: $orange;
+		}	  		
+	}	
+}
+
+section#skillSet{
+	article{
+		h1{
+			margin:5% 0 10px;			
+		}
+	}
+}
+
+section#about{	
+	article{
+		@include span-columns(8,12);
+		@include pad(2,2);
+		color: $pale;
+		#aboutFrame{
+			background-color:$darkGray;
+			border:1px solid $grey;
+			padding:80px 100px;
+		}
+		h1{
+			margin:0 0 10px;			
+		}
+		p{
+			font-size: 22px;
+			letter-spacing: 2px;
+			font-weight: normal;
+		}
+		a{	  
+			color: $pale;
+		}
+		a:hover{
+			color: $orange;
+		}
+	}
+}
+
+section#work{
+	article{
+		@include span-columns(8 omega,12);
+		@include pad(2,2);
+		text-align: center;
+		a{	
+			color: $darkGray;
+			text-decoration: none;
+			font-weight: normal;
+		}
+		a:hover .galleryGrid{
+			border: 6px solid $orange;
+			padding: 0;
+			color: $orange;
+		}		
+		.galleryGrid{
+			width:25%;
+			display: inline-block;
+			color: $grey;					
+			border: 1px solid $pale;
+			padding: 5px;
+			margin:10px 10px 20px;				
+			img{
+				// -moz-box-shadow: $imgShadowPadding $imgShadowPadding $imgShadowBlur $darkGray;
+				// -webkit-box-shadow: $imgShadowPadding $imgShadowPadding $imgShadowBlur $darkGray;
+				// box-shadow: $imgShadowPadding $imgShadowPadding $imgShadowBlur $darkGray;
+				// -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#4f4f48')";
+				// filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#4f4f48');
+				width: 100%;
+			}
+			p{
+				font-size: 22px;
+				position:relative;
+				background-color:$pale;
+				margin: 10px 0;
+				bottom:0px;
 			}
 			
 		}
 
-		section#about{
-			article{					
-				background-color:$darkGray;
-				color: $pale;			
-				.span4{
-					@include span-columns(12 omega,12);
-					padding:0 20px;
-				}
-				a{	  
-					color: $pale;
-				}
-				a:hover{
-					color: $orange;
-				}
-			}
-		}
-
-		section#work{
-			article{
-				@include span-columns(6 omega,12);
-				@include pad(3,3);
-				.galleryGrid{
-					@include span-columns(2,6);
-					@include nth-omega(3n); 
-					color: $darkGray;					
-					text-align: center;
-					margin-bottom:20px;
-					img{
-						-moz-box-shadow: $imgShadowPadding $imgShadowPadding $imgShadowBlur $darkGray;
-						-webkit-box-shadow: $imgShadowPadding $imgShadowPadding $imgShadowBlur $darkGray;
-						box-shadow: $imgShadowPadding $imgShadowPadding $imgShadowBlur $darkGray;
-						-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#4f4f48')";
-						filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#4f4f48');
-						width: 100%;
-					}
-					p{
-						position:relative;
-						background-color:$pale;
-						margin: 0px;
-						bottom:0px;
-					}
-				}
-				#moreWork{
-					text-align: center;
-					h2{
-						display:inline-block;
-						font-size: 16px;
-						font-weight: normal;
-						text-align: center;
-						background-color:$darkGray;
-						color: $pale;
-						padding: 10px 20px;
-					}
-					a:hover h2{
-						background-color:$orange;
-						color: $pale;
-					}
-				}
-				
-				a{	  
-					color: $darkGray;
-					font-weight: normal;
-				}
-				a:hover .galleryGrid{
-					color: $orange;
-				}
-			}
-		}
-
-	  	section#contact{
-		  	@include span-columns(12,12);
-		  	height: 80%;
-		  	article{
-		  		text-align: center;
-		  		h2
-		  		{
-		  			display: inline-block;
-		  			font-size: 30px;
-		  			font-weight: bold;
-		  			letter-spacing:1px;
-		  			margin:40px 0 -30px;
-		  			text-align: center; 			
-		  		}
-		  	}
-		  	#linkGroup{
-		  		margin-top: 60px;
-		  		text-align: center;
-		  		.socialIcon{
-		  			display: inline-block;
-		  			background-color:$darkGray;
-		  			font-size: 24px;
-		  			width: 40px;	 
-		  			height: 35px;
-		  			text-align: center;
-		  			margin:0px;
-		  			padding-top:5px;
-		  			span{
-		  				display: inline-block;
-		  				font-size:16px;
-		  				-webkit-transform: translateY(-8px);
-						-moz-transform: translateY(-8px);
-						-ms-transform: translateY(-8px);
-						-o-transform: translateY(-8px);
-		  			}
-		  		}
-		  		a{
-		  			color: $pale;
-		  		}
-		  		a:hover .socialIcon{
-		  			background-color:$orange;
-		  		}
-		  	}
-  		}
-
-	  	#goTop{
-			@include span-columns(6,12);
-	  		@include prefix(3);
-	  		@include suffix(3);
-			font-family: 'Oxygen', sans-serif;
-			font-size: 24px;
-			text-align: right;
-			margin-bottom: -5px;
-			-moz-transform: translateY(1px);
-			-ms-transform: translateY(1px);
-			a{
-				color: $dark;
-				text-decoration: none;			
-			}
-			a:hover{
-				color:$orange;
-				.triangle-up{
-					border-bottom: 18px solid $orange;
-				}
-			}
-			.triangle-up{
-				display: inline-block;
-				width: 0;
-				height: 0;
-				border-left: 10px solid transparent;
-				border-right: 10px solid transparent;
-				border-bottom: 18px solid $dark;
-			}
-		}
-
-		footer{
-			@include span-columns(12,12);
-			font-family: 'Oxygen', sans-serif;
+		#moreWork{
 			text-align: center;
-			background-color: $dark;
-			color: $pale; 
-			height: 20%;
-			h1{
-				font-size: 16px;
+			h2{
+				display:inline-block;
+				font-size: 22px;
 				font-weight: normal;
-				letter-spacing: 1px;
-				vertical-align:middle;
-				margin-top: 60px;
+				text-align: center;
+				background-color:$darkGray;
+				color: $pale;
+				padding: 14px 24px;
 			}
+			a:hover h2{
+				background-color:$orange;
+				color: $pale;
+			}
+		}		
+		
+	}
+}
+
+section#contact{		  	
+  	height: 80%;
+  	article{
+  		text-align: center;
+  		h2
+  		{
+  			display: inline-block;
+  			font-size: 56px;
+  			font-weight: bold;
+  			letter-spacing:2px;
+  			margin:40px 0 20px;
+  			text-align: center; 			
+  		}
+  	}
+  	#linkGroup{
+  		margin-top: 20px;
+  		text-align: center;
+  		.socialIcon{
+  			display: inline-block;
+  			background-color:$darkGray;
+  			font-size: 56px;
+  			width: 80px;	 
+  			height: 76px;
+  			text-align: center;
+  			margin:0px;
+  			padding-top:5px;
+  			span{
+  				display: inline-block;
+  				font-size:32px;
+  				-webkit-transform: translateY(-18px);
+				-moz-transform: translateY(-18px);
+				-ms-transform: translateY(-18px);
+				-o-transform: translateY(-18px);
+  			}
+  		}
+  		a{
+  			color: $pale;
+  		}
+  		a:hover .socialIcon{
+  			background-color:$orange;
+  		}
+  	}
+}
+
+#goTop{
+	@include span-columns(8,12);
+	@include pad(2,2);
+	font-family: 'Oxygen', sans-serif;
+	font-size: 40px;
+	text-align: right;
+	margin-bottom: -10px;
+	-moz-transform: translateY(0px);
+	-ms-transform: translateY(0px);
+	a{
+		color: $dark;
+		text-decoration: none;			
+	}
+	a:hover{
+		color:$orange;
+		.triangle-up{
+			border-bottom: 30px solid $orange;
 		}
 	}
-	
+	.triangle-up{
+		display: inline-block;
+		width: 0;
+		height: 0;
+		border-left: 15px solid transparent;
+		border-right: 15px solid transparent;
+		border-bottom: 30px solid $dark;
+	}
+}
+
+footer{
+	@include span-columns(12,12);
+	font-family: 'Oxygen', sans-serif;
+	text-align: center;
+	background-color: $dark;
+	color: $pale; 
+	height: 20%;
+	h1{
+		font-size: 24px;
+		font-weight: normal;
+		letter-spacing: 1px;
+		vertical-align:middle;
+		margin-top: 60px;
+	}
+}
+
+#p5Parent{
+	@include span-columns(8 omega,12);
+	@include pad(2,2);
 	canvas{
-		height:100%; 
+		height:95%; 
 		width:100%;
 		outline: none;
 		-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 		-moz-tap-highlight-color: rgba(255, 255, 255, 0);
 		-ms-tap-highlight-color: rgba(255, 255, 255, 0);
 		-o-tap-highlight-color: rgba(255, 255, 255, 0);
-	}
+	}		
+}	
 
-	.verticalAlignContainer{
-		display: table;
-		height:100%;
-		margin:0 auto;
-	}
+.verticalAlignContainer{
+	display: table;
+	height:100%;
+	margin:0 auto;
+}
 
-	.verticalSectionContainer{
-		display: table;
-		height:100%;
-		width:100%;
-		margin:0 auto;
-	}
+.verticalSectionContainer{
+	display: table;
+	height:100%;
+	width:100%;
+	margin:0 auto;
+}
 
-	.verticalAlignCell{
-		display: table-cell;
-		vertical-align: middle;
-	}
+.verticalAlignCell{
+	display: table-cell;
+	vertical-align: middle;
+	text-align:left;
+}
 
-	.line-seperator{
-		@include span-columns(12 omega,12);
+.line-seperator{
+	@include span-columns(12 omega,12);
+	text-align: center;
+	border-bottom:1px dotted $grey;
+	margin: 0 0 40px;
+	img{
+		margin-bottom: -44px;
 		text-align: center;
-		border-bottom:1px dotted $grey;
-		margin: 20px 0 30px;
-		img{
-			margin-bottom: -44px;
-			text-align: center;
-			height: 100%;
+		height: 100%;
+	}
+}
+//responsive 
+@include at-breakpoint(64em 12){
+	
+}
+//Medium screen
+@include at-breakpoint(30em 12 64em){
+	header{
+		@include span-columns(12 omega,12);
+		#titleFrame{
+			border:1px solid $grey;
+			padding: 40px 140px;
+		}
+		.charBlock{
+			width: 80px;
+			height: 80px;
+		}
+		h2{	
+			font-family: 'Josefin Sans', sans-serif;
+			font-weight: normal;
+			font-size: 64px;
+			line-height: 64px;
+			padding-top:0px;
+			-moz-transform: translateY(10px);
+			-ms-transform: translateY(10px);
+		}
+		h3{	
+			font-size: 16px;
+			text-align: right;
+			margin-top:2px;
+			padding-right: 1px;
+		}
+	}
+	section{
+		@include span-columns(12,12);
+		article{
+			@include span-columns(6,12);
+			@include pad(3,3);
+			h1{
+				font-size: 30px;
+				margin:20px 0;			
+			}				
+			p{
+				font-size: 14px;
+				margin:20px 0;
+				line-height: 24px;
+			}
+			a{	  
+				color: $darkGray;
+				text-decoration: underline;		
+				font-weight: bold;
+			}
+			a:hover{
+				color: $orange;
+			}	  		
+		}	
+	}
+	section#about{	
+		article{
+			@include span-columns(10,12);
+			@include pad(1,1);
+			#aboutFrame{
+				padding:40px 100px;
+				text-align: justify;
+			}
+			h1{
+				margin:0 0 10px;			
+			}
+			p{
+				font-size: 14px;
+				letter-spacing: 1px;
+				line-height: 20px;
+			}
+		}
+	}
+	section#work{
+		article{
+			a:hover .galleryGrid{
+				border: 6px solid $orange;
+				padding: 0;
+			}		
+			.galleryGrid{
+				width:25%;
+				p{
+					font-size: 14px;
+				}				
+			}
+			#moreWork{
+				h2{
+					font-size: 14px;
+					padding: 10px 20px;
+				}
+			}
+		}
+	}
+
+	section#contact{
+		height: 70%;
+	  	article{
+	  		h2
+	  		{
+	  			font-size: 40px;
+	  			margin:20px 0 10px;			
+	  		}
+	  	}
+	  	#linkGroup{
+	  		margin-top: 10px;
+	  		.socialIcon{
+	  			font-size: 40px;
+	  			width: 60px;	 
+	  			height: 56px;
+	  			padding-top:5px;
+	  			span{
+	  				font-size:24px;
+	  				-webkit-transform: translateY(-12px);
+					-moz-transform: translateY(-14px);
+					-ms-transform: translateY(-14px);
+					-o-transform: translateY(-14px);
+	  			}
+	  		}
+	  	}
+	}
+	#goTop{
+		@include span-columns(10,12);
+		@include pad(1,1);
+		font-size: 32px;
+		margin-bottom: -7px;
+		-moz-transform: translateY(1px);
+		-ms-transform: translateY(1px);	
+		a:hover{
+			.triangle-up{
+				border-bottom: 24px solid $orange;
+			}
+		}	
+		.triangle-up{
+			border-left: 12px solid transparent;
+			border-right: 12px solid transparent;
+			border-bottom: 24px solid $dark;
+		}
+	}
+	footer{
+		@include span-columns(12,12);
+		height: 30%;
+	}
+
+}
+
+//small screen
+@include at-breakpoint(15em 6 30em){
+	nav{	
+		@include span-columns(6 omega,6);
+		font-size:14px;
+		a:hover{
+			border-bottom: 5px solid $orange;
+		}  
+	}
+	header{
+		@include span-columns(6 omega,6);
+		aside{
+			display: none;
+		}
+		.charBlock{
+			width: 40px;
+			height: 40px;
+			margin-bottom: 3px;
+		}
+		h2{	
+			font-size: 32px;
+			line-height: 32px;
+			padding-top:0px;
+			-moz-transform: translateY(4px);
+			-ms-transform: translateY(4px);
+		}
+
+		h3{	
+			font-size: 12px;
+			letter-spacing: 0px;
+		}
+	}
+	#p5Parent{
+		@include span-columns(6 omega,6);
+		@include pad(0,0);
+	}	
+	section{
+		@include span-columns(6 omega,6);
+		font-family: 'Oxygen', sans-serif;
+		height: 100%;
+		article{
+			@include span-columns(6 omega,6);
+			@include pad(0,0);
+			h1{
+				font-size: 24px;
+				margin:10px 0 4px;
+				text-align: center; 			
+			}				
+			p{
+				font-size: 16px;
+				margin:10px 0;
+				line-height: 20px;
+			}
+		}	
+	}
+	section#about{
+		background-color:$darkGray;
+		article{
+			@include span-columns(6 omega,6);
+			@include pad(0,0);
+			#aboutFrame{
+				border:none;
+				padding:0 20px;
+				text-align: justify;
+			}
+			h1{
+				margin:0 0 4px;			
+			}
+			p{
+				font-size: 14px;
+				letter-spacing: 0px;
+			}
+		}
+	}
+	section#contact{		  	
+	  	height: 70%;
+	  	article{
+	  		@include span-columns(6 omega,6);
+	  		@include pad(0,0);
+	  		h2
+	  		{
+	  			margin:20px 0 4px;
+	  			font-size: 20px;
+	  			letter-spacing:1px;		
+	  		}
+	  	}
+	  	#linkGroup{
+	  		margin-top: 4px;
+	  		.socialIcon{
+	  			font-size: 18px;
+	  			width: 32px;	 
+	  			height: 28px;
+	  			span{
+	  				display: inline-block;
+	  				font-size:16px;
+	  				-webkit-transform: translateY(-4px);
+					-moz-transform: translateY(-4px);
+					-ms-transform: translateY(-4px);
+					-o-transform: translateY(-4px);
+	  			}
+	  		}	  		
+	  	}
+	}
+	#goTop{
+		@include span-columns(6 omega,6);
+		@include pad(0,0);
+		font-size: 24px;
+		text-align: center;
+		margin-bottom: -5px;
+		-moz-transform: translateY(1px);
+		-ms-transform: translateY(1px);	
+		a:hover{
+			.triangle-up{
+				border-bottom: 18px solid $orange;
+			}
+		}	
+		.triangle-up{
+			border-left: 9px solid transparent;
+			border-right: 9px solid transparent;
+			border-bottom: 18px solid $dark;
+		}
+	}
+	footer{
+		@include span-columns(6 omega,6);
+		height: 30%;
+		h1{
+			font-size: 14px;
+			letter-spacing: 0px;
+			margin-top: 40px;
 		}
 	}
 }
 
-@include at-breakpoint(10em 6 24em) {
 
-	.container 
-	{
-	  @include container;
 
-	  header 
-	  { 
-	  	font-family: 'Muli', sans-serif;
-	  	h1
-	  	{ 
-	  		font-size: 24px;
-	  		margin: 10px 0;
-	  	}
-	  }
-
-	  section{
-	  	@include span-columns(6,6);
-	  	article{ 
-	  		@include span-columns(6 omega,6); 
-	  	}
-	  }
-	}
-	
-}
 
