@@ -11,7 +11,7 @@ var shadowDisplacement=3;
 $(document).ready(function(){	
 	$p5Canvas=$('#p5Canvas').get(0);
 	canvasWidth=$("#p5Parent").width();
-	canvasHeight=$( window ).height();
+	canvasHeight=$( window ).height()*0.9;
 	screenSizeRatio=canvasWidth/960;
 	if(canvasWidth>640)p5FontSize=18;
 	else if(canvasWidth<640)p5FontSize=12;
@@ -19,15 +19,15 @@ $(document).ready(function(){
 	//console.log("DectectTierIphone= "+MobileEsp.DetectTierIphone());
 	//mdectec.js > MobileEsp
 
-	if(!MobileEsp.DetectTierIphone()){
-		$('section.scrollsections').scrollSections({
-			createNavigation: false,
-			navigation: true,
-			after: function($currentSection, $previousSection){
-				window.location.hash=$currentSection.attr('id');
-			}
-		});
-	}	
+	// if(!MobileEsp.DetectTierIphone()){
+	// 	$('section.scrollsections').scrollSections({
+	// 		createNavigation: false,
+	// 		navigation: true,
+	// 		after: function($currentSection, $previousSection){
+	// 			window.location.hash=$currentSection.attr('id');
+	// 		}
+	// 	});
+	// }	
 
 });
 
@@ -147,9 +147,12 @@ function mySketch(processing){
 		p5.ellipse(pieX,pieY,24,24);
 		p5.fill(189,192,186);		
 		createReadmePie(pieX, pieY);
+		p5.fill(252,250,242);
+		p5.ellipse(pieX,pieY,16,16);
 		p5.fill(79,79,72);
 		p5.text("= Click / Drag",pieX+20,pieY+6);
-		p5.textSize(36);
+		var sectionFontSize=p5.max(36 * screenSizeRatio, 18);
+		p5.textSize(sectionFontSize);
 		p5.text("MY SKILL SET",pieX-16,pieY-32);
 		p5.textSize(p5FontSize);
 	}
@@ -363,8 +366,10 @@ function p5Node(processing){
 	node.render=function(){
 		if(Boolean(node.showSkill)){
 			p5.fill(145,152,159,60);
-			p5.ellipse(node.location.x + shadowDisplacement * 8, node.location.y + shadowDisplacement * 8, 
-						node.radius - shadowDisplacement* 4, node.radius - shadowDisplacement* 4);
+			p5.ellipse(node.location.x + shadowDisplacement * 8 * screenSizeRatio, 
+					   node.location.y + shadowDisplacement * 8 * screenSizeRatio, 
+					   node.radius - shadowDisplacement * 4 * screenSizeRatio, 
+					   node.radius - shadowDisplacement * 4 * screenSizeRatio);
 		}else{
 			p5.fill(145,152,159,150);
 			p5.ellipse(node.location.x + shadowDisplacement, node.location.y + shadowDisplacement, node.radius,node.radius);
@@ -377,6 +382,8 @@ function p5Node(processing){
 			p5.fill(247,92,47);
 			node.drawPie();
 		}
+		p5.fill(255);		
+		p5.ellipse(node.location.x, node.location.y, node.radius-node.radius/3,node.radius-node.radius/3);
 	}
 
 	node.drawPie=function(){
@@ -392,7 +399,7 @@ function p5Node(processing){
 		p5.vertex(node.location.x,node.location.y);
 		p5.endShape(p5.CLOSE);
 		if(node.pieChartAngle<node.targetAngle)node.pieChartAngle+=20;
-		if(node.pieChartAngle>=node.targetAngle)node.pieChartAngle=node.targetAngle;
+		if(node.pieChartAngle>=node.targetAngle)node.pieChartAngle=node.targetAngle;		
 	}
 
 	node.renderText=function(){
@@ -435,7 +442,9 @@ function p5Spring(processing){
 	}
 
 	spring.render=function(){
-		p5.strokeWeight(4);
+		var lineWidth=4 * screenSizeRatio;
+		lineWidth=p5.max(lineWidth, 1);
+		p5.strokeWeight(lineWidth);
 		p5.stroke(145,152,159,200);
 		p5.line(spring.startNode.location.x + shadowDisplacement/2, spring.startNode.location.y + shadowDisplacement/2,
 				spring.endNode.location.x + shadowDisplacement/2, spring.endNode.location.y + shadowDisplacement/2);
