@@ -727,12 +727,21 @@ footer h1 {
     height: 100%;
   }
 
-  /* line 592, ../sass/screen.scss */
+  /* line 593, ../sass/screen.scss */
+  section#skillSet #p5Parent {
+    width: 100%;
+    float: right;
+    margin-right: 0;
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+
+  /* line 598, ../sass/screen.scss */
   section#about {
     background-color: #4f4f48;
     height: 100%;
   }
-  /* line 595, ../sass/screen.scss */
+  /* line 601, ../sass/screen.scss */
   section#about article {
     width: 100%;
     float: right;
@@ -740,19 +749,19 @@ footer h1 {
     padding-left: 0%;
     padding-right: 0%;
   }
-  /* line 598, ../sass/screen.scss */
+  /* line 604, ../sass/screen.scss */
   section#about article #aboutFrame {
     border: none;
     padding: 0 20px;
     text-align: justify;
   }
-  /* line 603, ../sass/screen.scss */
+  /* line 609, ../sass/screen.scss */
   section#about article p {
     font-size: 12px;
     letter-spacing: 0px;
   }
 
-  /* line 610, ../sass/screen.scss */
+  /* line 616, ../sass/screen.scss */
   section#work article {
     width: 100%;
     float: right;
@@ -760,36 +769,36 @@ footer h1 {
     padding-left: 0%;
     padding-right: 0%;
   }
-  /* line 613, ../sass/screen.scss */
+  /* line 619, ../sass/screen.scss */
   section#work article a:hover .galleryGrid {
     border: 6px solid #f75c2f;
     padding: 0;
   }
-  /* line 617, ../sass/screen.scss */
+  /* line 623, ../sass/screen.scss */
   section#work article a:focus .galleryGrid {
     border: 6px solid #f75c2f;
     padding: 0;
   }
-  /* line 621, ../sass/screen.scss */
+  /* line 627, ../sass/screen.scss */
   section#work article .galleryGrid {
     width: 80%;
     margin: 80px 0;
   }
-  /* line 624, ../sass/screen.scss */
+  /* line 630, ../sass/screen.scss */
   section#work article .galleryGrid p {
     font-size: 14px;
   }
-  /* line 629, ../sass/screen.scss */
+  /* line 635, ../sass/screen.scss */
   section#work article #moreWork h2 {
     font-size: 14px;
     padding: 10px 20px;
   }
 
-  /* line 636, ../sass/screen.scss */
+  /* line 642, ../sass/screen.scss */
   section#contact {
     height: 70%;
   }
-  /* line 638, ../sass/screen.scss */
+  /* line 644, ../sass/screen.scss */
   section#contact article {
     width: 100%;
     float: right;
@@ -797,23 +806,23 @@ footer h1 {
     padding-left: 0%;
     padding-right: 0%;
   }
-  /* line 642, ../sass/screen.scss */
+  /* line 648, ../sass/screen.scss */
   section#contact article h2 {
     margin: 20px 0 4px;
     font-size: 18px;
     letter-spacing: 1px;
   }
-  /* line 648, ../sass/screen.scss */
+  /* line 654, ../sass/screen.scss */
   section#contact #linkGroup {
     margin-top: 4px;
   }
-  /* line 650, ../sass/screen.scss */
+  /* line 656, ../sass/screen.scss */
   section#contact #linkGroup .socialIcon {
     font-size: 18px;
     width: 32px;
     height: 28px;
   }
-  /* line 654, ../sass/screen.scss */
+  /* line 660, ../sass/screen.scss */
   section#contact #linkGroup .socialIcon span {
     display: inline-block;
     font-size: 16px;
@@ -823,7 +832,7 @@ footer h1 {
     -o-transform: translateY(-4px);
   }
 
-  /* line 665, ../sass/screen.scss */
+  /* line 671, ../sass/screen.scss */
   #goTop {
     width: 100%;
     float: right;
@@ -836,25 +845,25 @@ footer h1 {
     -moz-transform: translateY(1px);
     -ms-transform: translateY(1px);
   }
-  /* line 674, ../sass/screen.scss */
+  /* line 680, ../sass/screen.scss */
   #goTop a:hover .triangle-up {
     border-bottom: 18px solid #f75c2f;
   }
-  /* line 678, ../sass/screen.scss */
+  /* line 684, ../sass/screen.scss */
   #goTop .triangle-up {
     border-left: 9px solid transparent;
     border-right: 9px solid transparent;
     border-bottom: 18px solid #0c0c0c;
   }
 
-  /* line 684, ../sass/screen.scss */
+  /* line 690, ../sass/screen.scss */
   footer {
     width: 100%;
     float: right;
     margin-right: 0;
     height: 30%;
   }
-  /* line 687, ../sass/screen.scss */
+  /* line 693, ../sass/screen.scss */
   footer h1 {
     font-size: 14px;
     letter-spacing: 0px;

@@ -589,6 +589,12 @@ footer{
 	section#top{
 		height: 100%;
 	}
+	section#skillSet{
+		#p5Parent{
+			@include span-columns(6 omega,6);
+			@include pad(0,0);
+		}	
+	}
 	section#about{
 		background-color:$darkGray;
 		height: 100%;
