@@ -466,12 +466,9 @@ footer{
 }
 
 //responsive 
-@include at-breakpoint(64em 12){
-	
-}
 
-//Medium screen
-@include at-breakpoint(31em 12 64em){
+//large screen
+@include at-breakpoint(48em 12 64em){
 	.siteInfo{
 		font-size: 12px;
 		top:48%;
@@ -665,11 +662,210 @@ footer{
 			margin-top: 20px;
 		}
 	}
-
 }
 
-//small screen
-@include at-breakpoint(15em 6 31em){
+//mid screen / mobile landscape
+@include at-breakpoint(30em 12 48em){
+	.siteInfo{
+		display:none;
+	}
+	.highLighter{
+		display: inline-block;			
+		position:relative;
+		left:-12px;
+		top:0px;
+		width: 0;
+		height: 0;
+		border-left: 10px solid $orange;
+		border-top: 10px solid transparent;
+		border-bottom: 10px solid transparent;
+	}
+	.highLighterShadow{
+		display: inline-block;
+		position:relative;
+		left:-0px;
+		top:2px;
+		width: 0;
+		height: 0;
+		border-left: 10px solid $grey;
+		border-top: 10px solid transparent;
+		border-bottom: 10px solid transparent;
+	}
+	header{
+		@include span-columns(12 omega,12);		
+		nav{	
+			@include span-columns(12 omega,12);
+			border-bottom: 1px solid $grey;
+			font-size:16px;
+			a:hover{
+				border-bottom: 5px solid $orange;
+			}  
+		}
+
+	}
+	section{
+		@include span-columns(12,12);
+		height:100%;
+		article{
+			@include span-columns(6,12);
+			@include pad(3,3);
+			h1{
+				font-size: 30px;
+				margin:20px 0;			
+			}				
+			p{
+				font-size: 14px;
+				margin:20px 0;
+				line-height: 24px;
+			}
+			a{	  
+				color: $darkGrey;
+				text-decoration: underline;		
+				font-weight: bold;
+			}
+			a:hover{
+				color: $orange;
+			}	  		
+		}	
+	}
+	section#top{
+		.charBlock{
+			width: 60px;
+			height: 60px;
+		}
+		h2{	
+			font-family: 'Josefin Sans', sans-serif;
+			font-weight: normal;
+			font-size: 44px;
+			line-height: 44px;
+			padding-top:0px;
+			-moz-transform: translateY(-2px);
+			-ms-transform: translateY(-2px);
+		}
+		h3{	
+			font-size: 14px;
+			text-align: right;
+			margin-top:2px;
+			padding-right: 1px;
+		}
+	}
+	section#skillSet{
+		#p5Parent{
+			@include span-columns(10 omega,12);
+			@include pad(1,1);
+		}	
+	}
+	section#about{	
+		article{
+			@include span-columns(10,12);
+			@include pad(1,1);
+			#aboutFrame{
+				padding:10px 40px;
+				text-align: justify;
+			}
+			p{
+				font-size: 14px;
+				letter-spacing: 1px;
+				line-height: 16px;
+			}
+		}
+	}
+	section#workList{
+		article{
+			@include span-columns(8 omega,12);
+			@include pad(2,2);
+			a{
+				p{
+					font-size: 18px;
+					margin: 10px 0 20px;
+				}	
+			}
+		}
+		#moreWork{		
+			a{		
+				font-size: 14px;
+				padding: 10px 20px;
+			}
+		}
+	}
+	section#workDetail{
+		article{
+			@include span-columns(8 omega,12);
+			@include pad(2,2);
+			h1{
+				margin: 40px 0 4px;
+				text-align: left;
+			}
+			h2{
+				font-size: 14px;
+				margin-bottom: 40px;
+			}
+			p{
+				font-size: 14px;
+				margin:10px 0;
+				line-height: 20px;
+			}
+		}
+	}
+
+	section#contact{
+		height: 70%;
+	  	article{
+	  		h2
+	  		{
+	  			font-size: 20px;
+	  			margin:10px 0 6px;
+	  			letter-spacing: 0px;		
+	  		}
+	  	}
+	  	#linkGroup{
+	  		margin-top: 6px;
+	  		.socialIcon{
+	  			font-size: 20px;
+	  			width: 32px;	 
+	  			height: 30px;
+	  			padding-top:2px;
+	  			span{
+	  				font-size:14px;
+	  				-webkit-transform: translateY(-6px);
+					-moz-transform: translateY(-8px);
+					-ms-transform: translateY(-8px);
+					-o-transform: translateY(-8px);
+	  			}
+	  		}
+	  	}
+	}
+	#goTop{
+		@include span-columns(10 omega,12);
+		@include pad(1,1);
+		top:-24px;
+		font-size: 24px;
+		margin-bottom: -7px;
+		-moz-transform: translateY(1px);
+		-ms-transform: translateY(1px);	
+		a:hover{
+			.triangle-up{
+				border-bottom: 18px solid $orange;
+			}
+		}	
+		.triangle-up{
+			border-left: 9px solid transparent;
+			border-right: 9px solid transparent;
+			border-bottom: 18px solid $dark;
+		}
+	}
+	footer{
+		@include span-columns(12 omega,12);
+		height: 20%;
+		h1{
+			font-size: 18px;
+			margin-top: 20px;
+		}
+	}
+}
+
+//small screen portrait
+@include at-breakpoint(15em 6 30em){
 	.siteInfo{
 		display: none;
 	}
