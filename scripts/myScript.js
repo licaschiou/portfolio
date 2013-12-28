@@ -1,45 +1,43 @@
-var $p5Canvas;
-var p5Engine;
-var canvasWidth, canvasHeight;
-var screenSizeRatio;
-var p5Font;
-var p5FontSize=18;
-var nodeCount=0;
-var springCount=0;
-var shadowDisplacement=3;
+var myVars={
+	p5FontSize: 18,
+	nodeCount: 0,
+	springCount: 0,
+	shadowDisplacement: 3
+};
 
-$(document).ready(function(){	
-	$p5Canvas=$('#p5Canvas').get(0);
-	canvasWidth=$("#p5Parent").width();
-	canvasHeight=$( window ).height()*0.9;
-	screenSizeRatio=canvasWidth/960;
-	if(canvasWidth>640)p5FontSize=18;
-	else if(canvasWidth<640)p5FontSize=12;
-	p5Engine=new Processing($p5Canvas,mySketch);
-	//console.log("DectectTierIphone= "+MobileEsp.DetectTierIphone());
-	//mdectec.js > MobileEsp
-
-	// if(!MobileEsp.DetectTierIphone()){
-	// 	$('section.scrollsections').scrollSections({
-	// 		createNavigation: false,
-	// 		navigation: true,
-	// 		after: function($currentSection, $previousSection){
-	// 			window.location.hash=$currentSection.attr('id');
-	// 		}
-	// 	});
-	// }	
-
+$(document).ready(function(){
+	myVars.$p5Canvas=$('#p5Canvas').get(0);
+	if(myVars.$p5Canvas!=undefined){
+		myVars.canvasWidth=$("#p5Parent").width();
+		myVars.canvasHeight=$( window ).height() * 0.9;
+		myVars.screenSizeRatio=myVars.canvasWidth/960;
+		if(myVars.canvasWidth>640)myVars.p5FontSize=20;
+		else if(myVars.canvasWidth<640)myVars.p5FontSize=12;
+		myVars.p5Engine=new Processing(myVars.$p5Canvas,mySketch);
+	}
+	
+	if(!MobileEsp.DetectTierIphone() && $( window ).width() > 600){
+		$('section.scrollsections').scrollSections({
+			createNavigation: false,
+			navigation: true,
+			touch: true,
+			mousewheel: true,
+			scrollbar: true,			
+			after: function($currentSection, $previousSection){
+				window.location.hash=$currentSection.attr('id');
+			}
+		});
+	}
 });
 
 $(window).resize(function() {
-	$p5Canvas=$('#p5Canvas').get(0);
-	canvasWidth=$("#p5Parent").width();
-	canvasHeight=$( window ).height();
-	screenSizeRatio=canvasWidth/960;
-	p5Engine.resize();
-	/*  */
-	//p5Engine.stopDrawing();
-	//p5Engine=new Processing($p5Canvas, mySketch);
+	myVars.$p5Canvas=$('#p5Canvas').get(0);
+	myVars.canvasWidth=$("#p5Parent").width();
+	myVars.canvasHeight=$( window ).height() * 0.9;
+	myVars.screenSizeRatio=myVars.canvasWidth/960;
+	myVars.p5Engine.resize();
+	//myVars.p5Engine.stopDrawing();
+	//myVars.p5Engine=new Processing(myVars.$p5Canvas, mySketch);
 });
 
 function showMyName(){
@@ -61,21 +59,21 @@ function mySketch(processing){
 	var readmePieAngle=0;
 
 	p5.setup=function(){
-		p5.size(canvasWidth,canvasHeight);		
-		p5.background(252,250,242);
+		p5.size(myVars.canvasWidth, myVars.canvasHeight);		
+		p5.background(252,250,242,0);
 		p5.frameRate(30);
 		p5.smooth();
 		p5.fill(0);
 		p5.stroke(0);
-		p5Font=p5.createFont('Oxygen', p5FontSize, true);
-		p5.textSize(p5FontSize);
-		p5.textFont(p5Font);
+		myVars.p5Font=p5.createFont('Oxygen:700', myVars.p5FontSize, true);
+		p5.textSize(myVars.p5FontSize);
+		p5.textFont(myVars.p5Font);
 
 		initializeGraphic();
 	}
 
 	p5.draw=function(){
-		p5.background(252,250,242);
+		p5.background(252,250,242,0);
 		createReadme();
 		for(var i=0; i<springArray.length; i++){
 			springArray[i].update();
@@ -126,7 +124,7 @@ function mySketch(processing){
 	}
 
 	p5.resize=function(){		
-		p5.size(canvasWidth,canvasHeight);
+		p5.size(myVars.canvasWidth, myVars.canvasHeight);
 		//resize node.
 	}
 
@@ -151,10 +149,10 @@ function mySketch(processing){
 		p5.ellipse(pieX,pieY,16,16);
 		p5.fill(79,79,72);
 		p5.text("= Click / Drag",pieX+20,pieY+6);
-		var sectionFontSize=p5.max(36 * screenSizeRatio, 18);
+		var sectionFontSize=p5.max(36 * myVars.screenSizeRatio, 18);
 		p5.textSize(sectionFontSize);
 		p5.text("MY SKILL SET",pieX-16,pieY-32);
-		p5.textSize(p5FontSize);
+		p5.textSize(myVars.p5FontSize);
 	}
 
 	var createReadmePie=function(initX, initY){
@@ -201,83 +199,83 @@ function mySketch(processing){
 		nodeArray[index].setColor(color);
 		nodeArray[index].setName(name);		
 		nodeArray[index].setLocation(p5.width/2+p5.random(-1,1), p5.height/2+p5.random(-1,1));
-		nodeCount++;
+		myVars.nodeCount++;
 	}
 
 	var createSpringArrayItem=function(index, length, n1, n2){
 		springArray[index]=new p5Spring(p5);
 		springArray[index].setupNaturalLength(length);
 		springArray[index].setupNode(n1,n2);
-		springCount++;
+		myVars.springCount++;
 	}
 
 	var initializeGraphic=function(){
-		var regNodeRadius=50*screenSizeRatio;
-		var largeNodeRadius=80*screenSizeRatio;
-		var regSpringLength=120*screenSizeRatio;
-		var randLength=100*screenSizeRatio;	
-		var longSpringLength=240*screenSizeRatio;
+		var regNodeRadius=50 * myVars.screenSizeRatio;
+		var largeNodeRadius=80 * myVars.screenSizeRatio;
+		var regSpringLength=120 * myVars.screenSizeRatio;
+		var randLength=100 * myVars.screenSizeRatio;	
+		var longSpringLength=240 * myVars.screenSizeRatio;
 		var cGraphic="ff90b44b";
 		var cInteractive="ff00aa90";
 		var cTechnical="ff2ea9df";
 
-		createNodeArrayItem(nodeCount, largeNodeRadius, cGraphic, "Graphic");
-		nodeArray[nodeCount-1].setSkillLevel(360);
-		createNodeArrayItem(nodeCount, largeNodeRadius, cInteractive, "Interactive");
-		nodeArray[nodeCount-1].setSkillLevel(360);
-		createNodeArrayItem(nodeCount, largeNodeRadius, cTechnical, "Technical");
-		nodeArray[nodeCount-1].setSkillLevel(270);
+		createNodeArrayItem(myVars.nodeCount, largeNodeRadius, cGraphic, "Graphic");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
+		createNodeArrayItem(myVars.nodeCount, largeNodeRadius, cInteractive, "Interactive");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
+		createNodeArrayItem(myVars.nodeCount, largeNodeRadius, cTechnical, "Technical");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(270);
 		
-		createSpringArrayItem(springCount, longSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[0], nodeArray[1]);
-		createSpringArrayItem(springCount, longSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[1], nodeArray[2]);
-		createSpringArrayItem(springCount, longSpringLength+p5.floor(p5.random(randLength,randLength*2)), nodeArray[0], nodeArray[2]);
+		createSpringArrayItem(myVars.springCount, longSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[0], nodeArray[1]);
+		createSpringArrayItem(myVars.springCount, longSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[1], nodeArray[2]);
+		createSpringArrayItem(myVars.springCount, longSpringLength+p5.floor(p5.random(randLength,randLength*2)), nodeArray[0], nodeArray[2]);
 
-		createNodeArrayItem(nodeCount, regNodeRadius, cGraphic, "Visual");
-		nodeArray[nodeCount-1].setSkillLevel(360);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[0], nodeArray[nodeCount-1]);
-		createNodeArrayItem(nodeCount, regNodeRadius, cGraphic, "Typography");
-		nodeArray[nodeCount-1].setSkillLevel(360);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[0], nodeArray[nodeCount-1]);
-		createNodeArrayItem(nodeCount, regNodeRadius, cGraphic, "Print");
-		nodeArray[nodeCount-1].setSkillLevel(180);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[0], nodeArray[nodeCount-1]);
-		createNodeArrayItem(nodeCount, regNodeRadius, cGraphic, "Layout");
-		nodeArray[nodeCount-1].setSkillLevel(360);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[0], nodeArray[nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cGraphic, "Visual");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[0], nodeArray[myVars.nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cGraphic, "Typography");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[0], nodeArray[myVars.nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cGraphic, "Print");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(180);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[0], nodeArray[myVars.nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cGraphic, "Layout");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[0], nodeArray[myVars.nodeCount-1]);
 
-		createNodeArrayItem(nodeCount, regNodeRadius, cInteractive, "Information Architecture");
-		nodeArray[nodeCount-1].setSkillLevel(270);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[1], nodeArray[nodeCount-1]);
-		createNodeArrayItem(nodeCount, regNodeRadius, cInteractive, "Cognative Psycology");
-		nodeArray[nodeCount-1].setSkillLevel(180);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[1], nodeArray[nodeCount-1]);
-		createNodeArrayItem(nodeCount, regNodeRadius, cInteractive, "Prototyping");
-		nodeArray[nodeCount-1].setSkillLevel(360);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[1], nodeArray[nodeCount-1]);
-		createNodeArrayItem(nodeCount, regNodeRadius, cInteractive, "UI");
-		nodeArray[nodeCount-1].setSkillLevel(360);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(randLength/2,randLength)), nodeArray[0], nodeArray[nodeCount-1]);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(randLength/2,randLength)), nodeArray[1], nodeArray[nodeCount-1]);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(randLength/2,randLength)), nodeArray[2], nodeArray[nodeCount-1]);
-		createNodeArrayItem(nodeCount, regNodeRadius, cInteractive, "User-Centred Design");
-		nodeArray[nodeCount-1].setSkillLevel(270);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[1], nodeArray[nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cInteractive, "Information Architecture");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(270);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[1], nodeArray[myVars.nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cInteractive, "Cognative Psycology");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(180);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[1], nodeArray[myVars.nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cInteractive, "Prototyping");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[1], nodeArray[myVars.nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cInteractive, "UI");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(randLength/2,randLength)), nodeArray[0], nodeArray[myVars.nodeCount-1]);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(randLength/2,randLength)), nodeArray[1], nodeArray[myVars.nodeCount-1]);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(randLength/2,randLength)), nodeArray[2], nodeArray[myVars.nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cInteractive, "User-Centred Design");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(270);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[1], nodeArray[myVars.nodeCount-1]);
 
-		createNodeArrayItem(nodeCount, regNodeRadius, cTechnical, "HTML/CSS");
-		nodeArray[nodeCount-1].setSkillLevel(270);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[2], nodeArray[nodeCount-1]);
-		createNodeArrayItem(nodeCount, regNodeRadius, cTechnical, "Javascript");
-		nodeArray[nodeCount-1].setSkillLevel(270);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[2], nodeArray[nodeCount-1]);
-		createNodeArrayItem(nodeCount, regNodeRadius, cTechnical, "Acctionscript");
-		nodeArray[nodeCount-1].setSkillLevel(360);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[2], nodeArray[nodeCount-1]);
-		createNodeArrayItem(nodeCount, regNodeRadius, cTechnical, "Processing");
-		nodeArray[nodeCount-1].setSkillLevel(360);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[2], nodeArray[nodeCount-1]);
-		createNodeArrayItem(nodeCount, regNodeRadius, cTechnical, "Android/JAVA");
-		nodeArray[nodeCount-1].setSkillLevel(90);
-		createSpringArrayItem(springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[2], nodeArray[nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cTechnical, "HTML/CSS");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(270);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[2], nodeArray[myVars.nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cTechnical, "Javascript");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(270);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[2], nodeArray[myVars.nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cTechnical, "Acctionscript");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[2], nodeArray[myVars.nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cTechnical, "Processing");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[2], nodeArray[myVars.nodeCount-1]);
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cTechnical, "Android/JAVA");
+		nodeArray[myVars.nodeCount-1].setSkillLevel(90);
+		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[2], nodeArray[myVars.nodeCount-1]);
 	}
 }
 
@@ -366,13 +364,13 @@ function p5Node(processing){
 	node.render=function(){
 		if(Boolean(node.showSkill)){
 			p5.fill(145,152,159,60);
-			p5.ellipse(node.location.x + shadowDisplacement * 8 * screenSizeRatio, 
-					   node.location.y + shadowDisplacement * 8 * screenSizeRatio, 
-					   node.radius - shadowDisplacement * 4 * screenSizeRatio, 
-					   node.radius - shadowDisplacement * 4 * screenSizeRatio);
+			p5.ellipse(node.location.x + myVars.shadowDisplacement * 8 * myVars.screenSizeRatio, 
+					   node.location.y + myVars.shadowDisplacement * 8 * myVars.screenSizeRatio, 
+					   node.radius - myVars.shadowDisplacement * 4 * myVars.screenSizeRatio, 
+					   node.radius - myVars.shadowDisplacement * 4 * myVars.screenSizeRatio);		
 		}else{
 			p5.fill(145,152,159,150);
-			p5.ellipse(node.location.x + shadowDisplacement, node.location.y + shadowDisplacement, node.radius,node.radius);
+			p5.ellipse(node.location.x + myVars.shadowDisplacement, node.location.y + myVars.shadowDisplacement, node.radius,node.radius);
 		}
 		p5.fill(p5.unhex(node.color));
 		p5.ellipse(node.location.x, node.location.y, node.radius,node.radius);
@@ -392,7 +390,7 @@ function p5Node(processing){
 		var radPieChart=p5.radians(node.pieChartAngle);
 		p5.beginShape();
 		p5.vertex(node.location.x,node.location.y);
-		for(var i=0; i<radPieChart; i+=0.01){
+		for(var i=0; i<=radPieChart; i+=0.01){
 			var rotateAngle=i-p5.PI/2;
 			p5.vertex(node.location.x + pieRadius*p5.cos(rotateAngle),node.location.y + pieRadius*p5.sin(rotateAngle));
 		}
@@ -405,7 +403,7 @@ function p5Node(processing){
 	node.renderText=function(){
 		p5.fill(79,79,72);
 		var textWidth=p5.textWidth(node.name);
-		p5.text(node.name,node.location.x-textWidth/2,node.location.y-4-node.radius/2);
+		p5.text(node.name,node.location.x-textWidth/2,node.location.y-6-node.radius/2);
 	}
 }
 
@@ -442,12 +440,12 @@ function p5Spring(processing){
 	}
 
 	spring.render=function(){
-		var lineWidth=4 * screenSizeRatio;
+		var lineWidth=4 * myVars.screenSizeRatio;
 		lineWidth=p5.max(lineWidth, 1);
 		p5.strokeWeight(lineWidth);
 		p5.stroke(145,152,159,200);
-		p5.line(spring.startNode.location.x + shadowDisplacement/2, spring.startNode.location.y + shadowDisplacement/2,
-				spring.endNode.location.x + shadowDisplacement/2, spring.endNode.location.y + shadowDisplacement/2);
+		p5.line(spring.startNode.location.x + myVars.shadowDisplacement/2, spring.startNode.location.y + myVars.shadowDisplacement/2,
+				spring.endNode.location.x + myVars.shadowDisplacement/2, spring.endNode.location.y + myVars.shadowDisplacement/2);
 		p5.stroke(spring.tension,192,186);		
 		p5.line(spring.startNode.location.x, spring.startNode.location.y,
 				spring.endNode.location.x, spring.endNode.location.y);
