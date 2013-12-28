@@ -471,7 +471,7 @@ footer{
 }
 
 //Medium screen
-@include at-breakpoint(30em 12 64em){
+@include at-breakpoint(31em 12 64em){
 	.siteInfo{
 		font-size: 12px;
 		top:48%;
@@ -669,7 +669,7 @@ footer{
 }
 
 //small screen
-@include at-breakpoint(15em 6 30em){
+@include at-breakpoint(15em 6 31em){
 	.siteInfo{
 		display: none;
 	}
