@@ -8,6 +8,6 @@
 
 $total-columns  : 12;
 $column-width   : 60px;
-$gutter-width   : 10px;
-$grid-padding   : 10px;
+$gutter-width   : 0px;
+$grid-padding   : $gutter-width ;
 $container-style: fluid;

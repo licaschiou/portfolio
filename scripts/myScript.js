@@ -14,20 +14,27 @@ $(document).ready(function(){
 		if(myVars.canvasWidth>640)myVars.p5FontSize=20;
 		else if(myVars.canvasWidth<640)myVars.p5FontSize=12;
 		myVars.p5Engine=new Processing(myVars.$p5Canvas,mySketch);
-	}
-	
-	if(!MobileEsp.DetectTierIphone() && $( window ).width() > 600){
-		$('section.scrollsections').scrollSections({
-			createNavigation: false,
-			navigation: true,
-			touch: true,
-			mousewheel: true,
-			scrollbar: true,			
-			after: function($currentSection, $previousSection){
-				window.location.hash=$currentSection.attr('id');
-			}
+
+		$('#p5Canvas').mouseleave(function(event){
+			myVars.mouseOutOfCanvas = 1;
+		});
+		$('#p5Canvas').mouseenter(function(event){
+			myVars.mouseOutOfCanvas = 0;
 		});
 	}
+
+	// if(!MobileEsp.DetectTierIphone() && $( window ).width() > 600){
+	// 	$('section.scrollsections').scrollSections({
+	// 		createNavigation: false,
+	// 		navigation: true,
+	// 		touch: true,
+	// 		mousewheel: true,
+	// 		scrollbar: true,			
+	// 		after: function($currentSection, $previousSection){
+	// 			window.location.hash=$currentSection.attr('id');
+	// 		}
+	// 	});
+	// }
 });
 
 $(window).resize(function() {
@@ -36,8 +43,10 @@ $(window).resize(function() {
 	myVars.canvasHeight=$( window ).height() * 0.9;
 	myVars.screenSizeRatio=myVars.canvasWidth/960;
 	myVars.p5Engine.resize();
+
 	//myVars.p5Engine.stopDrawing();
-	//myVars.p5Engine=new Processing(myVars.$p5Canvas, mySketch);
+	//myVars.p5Engine=null;
+	//myVars.p5Engine = new Processing(myVars.$p5Canvas, mySketch);
 });
 
 function showMyName(){
@@ -65,7 +74,8 @@ function mySketch(processing){
 		p5.smooth();
 		p5.fill(0);
 		p5.stroke(0);
-		myVars.p5Font=p5.createFont('Oxygen:700', myVars.p5FontSize, true);
+		//myVars.p5Font=p5.createFont('Oxygen:700', myVars.p5FontSize, true);
+		myVars.p5Font=p5.createFont('Oxygen', myVars.p5FontSize, true);
 		p5.textSize(myVars.p5FontSize);
 		p5.textFont(myVars.p5Font);
 
@@ -75,6 +85,21 @@ function mySketch(processing){
 	p5.draw=function(){
 		p5.background(252,250,242,0);
 		createReadme();
+
+		if(myVars.mouseOutOfCanvas > 0){
+			if(seletecNodeId>-1){
+				nodeArray[seletecNodeId].setSelected(0);
+				nodeArray[seletecNodeId].setShowSkill(0);
+				nodeArray[seletecNodeId].shrink();
+			}		
+			seletecNodeId=-1;
+		}
+
+		if(seletecNodeId>-1){
+			nodeArray[seletecNodeId].location.x=p5.mouseX;
+			nodeArray[seletecNodeId].location.y=p5.mouseY;
+		}
+
 		for(var i=0; i<springArray.length; i++){
 			springArray[i].update();
 			springArray[i].render();			
@@ -88,11 +113,11 @@ function mySketch(processing){
 				nodeArray[i].render();
 			}			
 		}
+
 		if(seletecNodeId>-1){
-			nodeArray[seletecNodeId].location.x=p5.mouseX;
-			nodeArray[seletecNodeId].location.y=p5.mouseY;
 			nodeArray[seletecNodeId].render();		
 		}
+
 		for(i=0; i<nodeArray.length; i++){
 			nodeArray[i].renderText();
 		}		
@@ -100,6 +125,7 @@ function mySketch(processing){
 
 	p5.mousePressed=function(){
 		var mouseLoc=new p5.PVector(p5.mouseX, p5.mouseY);
+		console.log(mouseLoc);
 		for(var i=0; i<nodeArray.length; i++){
 			var distToCurosr=p5.PVector.sub(nodeArray[i].location, mouseLoc);
 			if(distToCurosr.mag()<10){
@@ -130,28 +156,29 @@ function mySketch(processing){
 
 	p5.stopDrawing=function(){
 		/* Stop all the drawing before reset pjs.*/
+		p5.background(252,250,242,0);
 		this.draw=function(){}
 	}
 
 	var createReadme=function(){
 		var readmePieRadius=24;
-		var pieX=20;
-		var pieY=96;
-		//p5.fill(145,152,159,150);
-		//p5.ellipse(pieX + shadowDisplacement,pieY + shadowDisplacement,32,32);
+		var pieX=p5.width / 2;
+		var pieY=40;
 		p5.fill(79,79,72);
-		p5.ellipse(pieX,pieY,32,32);
+		p5.ellipse(pieX,pieY,30,30);
 		p5.fill(252,250,242);
 		p5.ellipse(pieX,pieY,24,24);
 		p5.fill(189,192,186);		
 		createReadmePie(pieX, pieY);
-		p5.fill(252,250,242);
-		p5.ellipse(pieX,pieY,16,16);
+		// p5.fill(252,250,242);
+		// p5.ellipse(pieX,pieY,16,16);
 		p5.fill(79,79,72);
-		p5.text("= Click / Drag",pieX+20,pieY+6);
-		var sectionFontSize=p5.max(36 * myVars.screenSizeRatio, 18);
-		p5.textSize(sectionFontSize);
-		p5.text("MY SKILL SET",pieX-16,pieY-32);
+		//p5.fill(145,152,159);		
+		p5.text("Click / Drag",pieX+26, pieY+6);
+		//var sectionFontSize=p5.max(36 * myVars.screenSizeRatio, 18);
+		//p5.textSize(sectionFontSize);
+		var textWidth=p5.textWidth("My Skill Set");
+		p5.text("My Skill Set",pieX - textWidth - 26, pieY+6);
 		p5.textSize(myVars.p5FontSize);
 	}
 
@@ -171,23 +198,6 @@ function mySketch(processing){
 		if(readmePieAngle>=radTarget)readmePieAngle=0;
 	}
 
-	// var createRandomGraphic=function(){
-	// 	for(var i=0; i<numNodes; i++){
-	// 		nodeArray[i]=new p5Node(p5);
-	// 		nodeArray[i].setLocation(p5.width/2+p5.random(-1,1), p5.height/2+p5.random(-1,1));
-	// 	}
-	// 	var springCount=0;
-	// 	for(i=0; i<nodeArray.length-1; i++){
-	// 		var randomCount=p5.floor(p5.random(1,2));
-	// 		for(var j=0; j<randomCount; j++){
-	// 			var randomNodeId=p5.floor(p5.random(i+1, nodeArray.length));
-	// 			springArray[springCount]=new p5Spring(p5);
-	// 			springArray[springCount].setupNode(nodeArray[i],nodeArray[randomNodeId]);
-	// 			springCount++;
-	// 		}
-	// 	}
-	// }
-
 	var initializeSprings=function(){
 		var i=0;
 		createSpringArrayItem(i,"Graphic");
@@ -198,7 +208,7 @@ function mySketch(processing){
 		nodeArray[index].setRadius(size);
 		nodeArray[index].setColor(color);
 		nodeArray[index].setName(name);		
-		nodeArray[index].setLocation(p5.width/2+p5.random(-1,1), p5.height/2+p5.random(-1,1));
+		nodeArray[index].setLocation(p5.width/2+p5.random(-100,100), p5.height/2+p5.random(-100,100));
 		myVars.nodeCount++;
 	}
 
@@ -212,13 +222,16 @@ function mySketch(processing){
 	var initializeGraphic=function(){
 		var regNodeRadius=50 * myVars.screenSizeRatio;
 		var largeNodeRadius=80 * myVars.screenSizeRatio;
-		var regSpringLength=120 * myVars.screenSizeRatio;
-		var randLength=100 * myVars.screenSizeRatio;	
-		var longSpringLength=240 * myVars.screenSizeRatio;
-		var cGraphic="ff90b44b";
-		var cInteractive="ff00aa90";
-		var cTechnical="ff2ea9df";
-
+		var regSpringLength=160 * myVars.screenSizeRatio;
+		var randLength= 0; //100 * myVars.screenSizeRatio;	
+		var longSpringLength= 300 * myVars.screenSizeRatio;//240 * myVars.screenSizeRatio;
+		// var cGraphic="ff90b44b";
+		// var cInteractive="ff00aa90";
+		// var cTechnical="ff2ea9df";
+		var cGraphic="ffffb11b";
+		var cInteractive="ffcb1b45";
+		var cTechnical="ffeb3015";
+		var cUI="fff75c2f";
 		createNodeArrayItem(myVars.nodeCount, largeNodeRadius, cGraphic, "Graphic");
 		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
 		createNodeArrayItem(myVars.nodeCount, largeNodeRadius, cInteractive, "Interactive");
@@ -252,7 +265,7 @@ function mySketch(processing){
 		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cInteractive, "Prototyping");
 		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
 		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[1], nodeArray[myVars.nodeCount-1]);
-		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cInteractive, "UI");
+		createNodeArrayItem(myVars.nodeCount, regNodeRadius, cUI, "UI");
 		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
 		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(randLength/2,randLength)), nodeArray[0], nodeArray[myVars.nodeCount-1]);
 		createSpringArrayItem(myVars.springCount, regSpringLength+p5.floor(p5.random(randLength/2,randLength)), nodeArray[1], nodeArray[myVars.nodeCount-1]);
@@ -364,8 +377,8 @@ function p5Node(processing){
 	node.render=function(){
 		if(Boolean(node.showSkill)){
 			p5.fill(145,152,159,60);
-			p5.ellipse(node.location.x + myVars.shadowDisplacement * 8 * myVars.screenSizeRatio, 
-					   node.location.y + myVars.shadowDisplacement * 8 * myVars.screenSizeRatio, 
+			p5.ellipse(node.location.x + myVars.shadowDisplacement * 6 * myVars.screenSizeRatio, 
+					   node.location.y + myVars.shadowDisplacement * 6 * myVars.screenSizeRatio, 
 					   node.radius - myVars.shadowDisplacement * 4 * myVars.screenSizeRatio, 
 					   node.radius - myVars.shadowDisplacement * 4 * myVars.screenSizeRatio);		
 		}else{
@@ -380,14 +393,14 @@ function p5Node(processing){
 			p5.fill(247,92,47);
 			node.drawPie();
 		}
-		p5.fill(255);		
-		p5.ellipse(node.location.x, node.location.y, node.radius-node.radius/3,node.radius-node.radius/3);
+		//p5.fill(255);		
+		//p5.ellipse(node.location.x, node.location.y, node.radius-node.radius/3,node.radius-node.radius/3);
 	}
 
 	node.drawPie=function(){
-		var pieRadius=(node.radius-node.radius/5)/2;
+		var pieRadius=1 + (node.radius-node.radius/5)/2;
 		var radTarget=p5.radians(node.targetAngle);
-		var radPieChart=p5.radians(node.pieChartAngle);
+		var radPieChart=p5.radians(node.pieChartAngle + 1);
 		p5.beginShape();
 		p5.vertex(node.location.x,node.location.y);
 		for(var i=0; i<=radPieChart; i+=0.01){
@@ -410,19 +423,97 @@ function p5Node(processing){
 function p5Spring(processing){
 	var p5=processing;
 	var spring=this;
-	spring.naturalLength=120.0;
-	spring.currentLength=120.0;
+	var springDir=new p5.PVector();
+	var springDirInverse=new p5.PVector();
+	var startNodeConnectUp=new p5.PVector();
+	var startNodeConnectDown=new p5.PVector();
+	var endNodeConnectUp=new p5.PVector();
+	var endNodeConnectDown=new p5.PVector();
+	var anchorU1=new p5.PVector();
+	var anchorU2=new p5.PVector();
+	var anchorD1=new p5.PVector();
+	var anchorD2=new p5.PVector();
+
+	spring.naturalLength=100.0;
+	spring.currentLength=100.0;
 	spring.damping=0.25;
+	spring.curveRatio=20.0;
 	spring.springFactor=1.2;
 	spring.tension=189;
 
 	spring.setupNode=function(start, end){
 		spring.startNode=start;
 		spring.endNode=end;
+		spring.calculateConnecting();
 	}
 
 	spring.setupNaturalLength=function(length){
 		spring.naturalLength=length;		
+	}	
+
+	spring.calculateConnecting=function(){
+		var startRotateAngle = 50;
+		var endRotateAngle = 75;
+		if(spring.startNode.radius > spring.endNode.radius)
+		{
+			startRotateAngle = 75;
+			endRotateAngle = 50;
+		}
+		springDir = p5.PVector.sub(spring.endNode.location, spring.startNode.location);
+		springDir.normalize();
+		springDir.mult(spring.startNode.radius * 0.9 / 2);
+
+		springDirInverse = p5.PVector.sub(spring.startNode.location, spring.endNode.location);
+		springDirInverse.normalize();
+		springDirInverse.mult(spring.endNode.radius * 0.9 / 2);
+
+
+		startNodeConnectUp = spring.calVectorRotation(springDir.x, springDir.y, -1 * startRotateAngle).get();
+		startNodeConnectUp.add(spring.startNode.location);		
+		startNodeConnectDown = spring.calVectorRotation(springDir.x, springDir.y, startRotateAngle).get();
+		startNodeConnectDown.add(spring.startNode.location);
+
+		endNodeConnectUp = spring.calVectorRotation(springDirInverse.x, springDirInverse.y, endRotateAngle).get();
+		endNodeConnectUp.add(spring.endNode.location);		
+		endNodeConnectDown = spring.calVectorRotation(springDirInverse.x, springDirInverse.y, -1 * endRotateAngle).get();
+		endNodeConnectDown.add(spring.endNode.location);
+
+		var upCurveBaseLine = new p5.PVector.sub(endNodeConnectUp, startNodeConnectUp);
+		var upCurveLength = upCurveBaseLine.mag() / 3;
+		upCurveBaseLine.normalize();
+		upCurveBaseLine.mult(upCurveLength);
+		anchorU1 = p5.PVector.add(startNodeConnectUp, upCurveBaseLine);
+		anchorU2 = p5.PVector.add(anchorU1, upCurveBaseLine);
+
+		var upCurveBaseLineTan = spring.calVectorRotation(upCurveBaseLine.x, upCurveBaseLine.y, 90).get();
+		upCurveBaseLineTan.normalize();
+		upCurveBaseLineTan.mult(spring.curveRatio);
+		anchorU1.add(upCurveBaseLineTan);
+		anchorU2.add(upCurveBaseLineTan);
+
+		var downCurveBaseLine = new p5.PVector.sub(endNodeConnectDown, startNodeConnectDown);
+		var downCurveLength = downCurveBaseLine.mag() / 3;
+		downCurveBaseLine.normalize();
+		downCurveBaseLine.mult(downCurveLength);
+		anchorD1 = p5.PVector.add(startNodeConnectDown, downCurveBaseLine);
+		anchorD2 = p5.PVector.add(anchorD1, downCurveBaseLine);
+
+		var downCurveBaseLineTan = spring.calVectorRotation(downCurveBaseLine.x, downCurveBaseLine.y, -90).get();
+		downCurveBaseLineTan.normalize();
+		downCurveBaseLineTan.mult(spring.curveRatio);
+		anchorD1.add(downCurveBaseLineTan);
+		anchorD2.add(downCurveBaseLineTan);
+	}
+
+	spring.calVectorRotation=function(iniX, iniY, angle){
+		var resultVector=new p5.PVector();
+		resultVector.x = iniX * p5.cos(p5.radians(angle)) - iniY * p5.sin(p5.radians(angle));
+		resultVector.y = iniX * p5.sin(p5.radians(angle)) + iniY * p5.cos(p5.radians(angle));
+		return resultVector;
+	}
+
+	spring.calculateShape=function(){
+		//calculate connection
 	}
 
 	spring.update=function(){
@@ -437,19 +528,59 @@ function p5Spring(processing){
 		spring.startNode.velocity.add(force);
 		spring.endNode.velocity.add(p5.PVector.mult(force,-1));
 		spring.tension=189 * spring.currentLength/ spring.naturalLength;
+		spring.curveRatio = 20.0 * spring.currentLength / spring.naturalLength;
+		spring.curveRatio = p5.constrain(spring.curveRatio, 5, 30 * myVars.screenSizeRatio);
+		spring.calculateConnecting();
 	}
 
 	spring.render=function(){
+		
+		spring.renderCurveConnection();
+		//spring.debugGraph();
+	}
+
+	spring.renderLineConnection=function(){
 		var lineWidth=4 * myVars.screenSizeRatio;
-		lineWidth=p5.max(lineWidth, 1);
-		p5.strokeWeight(lineWidth);
+		lineWidth=p5.max(lineWidth, 1);		
+		p5.strokeWeight(lineWidth);		
 		p5.stroke(145,152,159,200);
 		p5.line(spring.startNode.location.x + myVars.shadowDisplacement/2, spring.startNode.location.y + myVars.shadowDisplacement/2,
 				spring.endNode.location.x + myVars.shadowDisplacement/2, spring.endNode.location.y + myVars.shadowDisplacement/2);
 		p5.stroke(spring.tension,192,186);		
 		p5.line(spring.startNode.location.x, spring.startNode.location.y,
 				spring.endNode.location.x, spring.endNode.location.y);
+	}
 
+	spring.renderCurveConnection=function(){
+		p5.noStroke();
+		p5.fill(145,152,159,60);
+		p5.pushMatrix();
+		p5.translate(myVars.shadowDisplacement, myVars.shadowDisplacement);
+		spring.renderCurveShape();
+		p5.popMatrix();
+		p5.stroke(145, 152, 159, 80);
+		p5.fill(252, 250, 242, 120);
+		spring.renderCurveShape();
+	}
+
+	spring.renderCurveShape=function(){
+		p5.beginShape();
+		p5.vertex(startNodeConnectUp.x, startNodeConnectUp.y);
+		p5.bezierVertex(anchorU1.x, anchorU1.y, anchorU2.x, anchorU2.y, endNodeConnectUp.x, endNodeConnectUp.y);
+		p5.vertex(endNodeConnectDown.x, endNodeConnectDown.y);
+		p5.bezierVertex(anchorD2.x, anchorD2.y, anchorD1.x, anchorD1.y, startNodeConnectDown.x, startNodeConnectDown.y);
+		p5.vertex(startNodeConnectDown.x, startNodeConnectDown.y);
+		p5.endShape();		
+	}
+
+	spring.debugGraph=function(){
+		p5.ellipse(startNodeConnectUp.x, startNodeConnectUp.y ,10, 10);
+		p5.ellipse(startNodeConnectDown.x, startNodeConnectDown.y ,10, 10);
+		p5.ellipse(endNodeConnectUp.x, endNodeConnectUp.y ,10, 10);
+		p5.ellipse(endNodeConnectDown.x, endNodeConnectDown.y ,10, 10);
+		p5.ellipse(anchorU1.x, anchorU1.y ,10, 10);
+		p5.ellipse(anchorU2.x, anchorU2.y ,10, 10);
+		p5.ellipse(anchorD1.x, anchorD1.y ,10, 10);
+		p5.ellipse(anchorD2.x, anchorD2.y ,10, 10);
 	}
 }
-
