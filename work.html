@@ -12,8 +12,15 @@
 	<link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
+<body class="gridBackground" data-responsejs='{ 
+        "create": [
+            { "prop": "width"
+            , "prefix": "data-min-width- r src"
+            , "lazy": true
+            , "breakpoints": [961, 0] }
+        ]}'>
 	<div class="container">
+
 		<div class="siteInfo fixedLeft">Chiu Wei-Chieh 2013 Portfolio</div>
 		<div class="siteInfo fixedRight">Creative director, Interactive designer</div>
 		<header id="workPageTop" class="autoHeight">
@@ -23,7 +30,7 @@
 				<a href="index.html#contact">contact</a>
 			</nav>
 		</header>
-		<section id="workDetail" class="scrollsections autoHeight gridBackground">
+		<section id="workDetail" class="scrollsections autoHeight">
 			<div class="verticalSectionContainer">
 				<div class="verticalAlignCell">
 
@@ -35,9 +42,9 @@
 						</p>
 						<p>During these days, I participated several projects, including smart home entertainment system, interactive whiteboard and gesture control application.</p>
 						<br/>
-						<img src="assets/pui_1.png" alt="pui project 1">
-						<img src="assets/pui_2.png" alt="pui project 2">
-						<img src="assets/pui_3.jpg" alt="pui project 3">						
+						<img src="assets/pui_1.png" data-src0="assets/pui_1.png" data-src961="assets/pui_1_hi.png" alt="pui project 1">
+						<img src="assets/pui_2.png" data-src0="assets/pui_2.png" data-src961="assets/pui_2_hi.png" alt="pui project 2">
+						<img src="assets/pui_3.jpg" data-src0="assets/pui_3.jpg" data-src961="assets/pui_3_hi.jpg" alt="pui project 3">						
 					</article>
 
 					<article id="generative">
@@ -45,9 +52,10 @@
 						<h1><span class="highLighterShadow"></span><span class="highLighter"></span>Generative Art</h1>
 						<h2>Summary : generative algorithm, Processing.</h2>						
 						<br/>
-						<img src="assets/generative_1.jpg" alt="generative art 1">
-						<img src="assets/generative_2.png" alt="generative art 2">
-						<img src="assets/generative_3.png" alt="generative art 3">						
+						<img src="assets/generative_1.jpg" data-src0="assets/generative_1.jpg" data-src961="assets/generative_1_hi.jpg" alt="generative art 1">
+						<img src="assets/generative_2.png" data-src0="assets/generative_2.png" data-src961="assets/generative_2_hi.png" alt="generative art 2">
+						
+						<img src="assets/generative_3.png" data-src0="assets/generative_3.png" data-src961="assets/generative_3_hi.png" alt="generative art 3">						
 					</article>
 
 					<article id="portfolio2012">
@@ -55,35 +63,53 @@
 						<h1><span class="highLighterShadow"></span><span class="highLighter"></span>Portfolio 2012</h1>
 						<h2>Summary : flash website design.</h2>						
 						<br/>
-						<img src="assets/web2012_1.jpg" alt="portfolio2012 1">
-						<img src="assets/web2012_2.jpg" alt="portfolio2012 2">
-						<img src="assets/web2012_3.jpg" alt="portfolio2012 3">						
+						<img src="assets/web2012_1.jpg" data-src0="assets/web2012_1.jpg" data-src961="assets/web2012_1_hi.jpg" alt="portfolio2012 1">
+						<img src="assets/web2012_2.jpg" data-src0="assets/web2012_2.jpg" data-src961="assets/web2012_2_hi.jpg" alt="portfolio2012 2">
+						<img src="assets/web2012_3.jpg" data-src0="assets/web2012_3.jpg" data-src961="assets/web2012_3_hi.jpg" alt="portfolio2012 3">						
 					</article>						
 				</div>
 			</div>
 		</section>	
 		
-		<section id="workList" class="scrollsections autoHeight gridBackground">
+		<section id="workList" class="scrollsections autoHeight">
 			<div class="verticalSectionContainer">
 				<div class="verticalAlignCell">
 					<article>
-						<a href="#pui">
-							<img src="assets/puiIcon.png" alt="PUI projects">
-							<p>UX / UI</p>
+						<a href="work.html#pui">
+							<img src="assets/puiIcon.png" data-src0="assets/puiIcon.png" data-src961="assets/puiIcon_hi.png" alt="PUI projects">
+							<p>PUI IxD</p>
 						</a>
-						<a href="#generative">
-							<img src="assets/generativeIcon.png" alt="Cheer Jewellery">
+						<a href="work.html#generative">
+							<img src="assets/generativeIcon.png" data-src0="assets/generativeIcon.png" data-src961="assets/generativeIcon_hi.png" alt="Cheer Jewellery">
 							<p>Generative</p>
 						</a>
-						<a href="#portfolio2012">
-							<img src="assets/web2012Icon.png" alt="Portfolio 2012">
-							<p>Web</p>
-						</a>
+						<a href="work.html#portfolio2012">
+							<img src="assets/web2012Icon.png" data-src0="assets/web2012Icon.png" data-src961="assets/web2012Icon_hi.png" alt="Portfolio 2012">
+							<p>Portfolio 2012</p>
+						</a>		
 					</article>
 				</div>
 			</div>	
 		</section>
-		<section class="quarterHeight gridBackground"></section>
+
+		<section id="contact" class="scrollsections">
+			<div class="verticalSectionContainer">
+				<div class="verticalAlignCell">
+					<article>
+						<a href="mailto:licaschiou@gmail.com"><h2>licaschiou@gmail.com</h2></a>
+						<div id="linkGroup">
+							<a href="http://www.facebook.com/licaschiou" title="facebook" target="_blank"><div class="socialIcon">f</div></a>
+							<a href="http://twitter.com/licaschou" title="Twitter" target="_blank"><div class="socialIcon">T</div></a>
+							<a href="http://plus.google.com/109452047978552639658/posts" title="Google+" target="_blank"><div class="socialIcon">g<span>+</span></div></a>
+							<a href="http://www.linkedin.com/pub/licas-chiou/86/782/bb0" title="LinkedIn+" target="_blank"><div class="socialIcon">in</div></a>
+							<a href="http://www.pinterest.com/licaschiou/" title="Pinterest" target="_blank"><div class="socialIcon">P</div></a>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>	
+
+
 		<footer>
 			<div id="goTop">
 				<a href="#workPageTop"><span class="triangle-up"></span>TOP</a>
@@ -91,10 +117,8 @@
 			<h1>Chiu Wei-Chieh 2013</h1>
 		</footer>
 
-	    <script type="text/javascript" src="scripts/jquery-1.7.2.min.js"></script>
-	    <script src="scripts/plugins.js"></script>
-		<script src="scripts/jquery.scrollSections.js"></script>
-		<script src="scripts/mdetect.js"></script>
+	    <script type="text/javascript" src="scripts/jquery-1.7.2.min.js"></script>	    
+	    <script type="text/javascript" src="scripts/response.min.js"></script>
 	    <script type="text/javascript" src="scripts/processing-1.4.1.min.js"></script>
 	</div>
 </body>

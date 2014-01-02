@@ -352,7 +352,7 @@ section#workList article {
 }
 /* line 304, ../sass/screen.scss */
 section#workList article a {
-  width: 33.33333%;
+  width: 25%;
   float: left;
   margin-right: 0%;
   display: inline;
@@ -361,7 +361,7 @@ section#workList article a {
   color: #4f4f48;
 }
 /* line 306, ../sass/screen.scss */
-section#workList article a:nth-child(3n) {
+section#workList article a:nth-child(4n) {
   float: right;
   margin-right: 0;
   *margin-left: 0px;
@@ -791,8 +791,8 @@ footer h1 {
     width: 100%;
     float: right;
     margin-right: 0;
-    padding-left: 16.66667%;
-    padding-right: 16.66667%;
+    padding-left: 8.33333%;
+    padding-right: 8.33333%;
   }
   /* line 651, ../sass/screen.scss */
   section#workDetail article h1 {

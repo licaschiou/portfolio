@@ -302,8 +302,8 @@ section#workList{
 		text-align:center;
 		margin-bottom: 80px;
 		a{
-			@include span-columns(3, 9);
-			&:nth-child(3n) { @include omega; }
+			@include span-columns(2, 8);
+			&:nth-child(4n) { @include omega; }
 			text-decoration: none;
 			font-weight: normal;
 			color: $darkGrey;			
@@ -647,7 +647,7 @@ footer{
 	section#workDetail{
 		article{
 			@include span-columns(12 omega,12);
-			@include pad(2,2);
+			@include pad(1,1);
 			h1{
 				margin: 40px 0 4px;
 				text-align: left;

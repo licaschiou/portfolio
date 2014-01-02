@@ -12,7 +12,14 @@
 	<link href='http://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
 	<link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
 </head>
-<body class="gridBackground">
+
+<body class="gridBackground" data-responsejs='{ 
+        "create": [
+            { "prop": "width"
+            , "prefix": "data-min-width- r src"
+            , "lazy": true
+            , "breakpoints": [961, 0] }
+        ]}'>
 	<div class="container">
 
 		<div class="siteInfo fixedLeft">Chiu Wei-Chieh 2013 Portfolio</div>
@@ -137,17 +144,17 @@
 				<div class="verticalAlignCell">
 					<article>
 						<a href="work.html#pui">
-							<img src="assets/puiIcon.png" alt="PUI projects">
+							<img src="assets/puiIcon.png" data-src0="assets/puiIcon.png" data-src961="assets/puiIcon_hi.png" alt="PUI projects">
 							<p>PUI IxD</p>
 						</a>
 						<a href="work.html#generative">
-							<img src="assets/generativeIcon.png" alt="Cheer Jewellery">
+							<img src="assets/generativeIcon.png" data-src0="assets/generativeIcon.png" data-src961="assets/generativeIcon_hi.png" alt="Cheer Jewellery">
 							<p>Generative</p>
 						</a>
 						<a href="work.html#portfolio2012">
-							<img src="assets/web2012Icon.png" alt="Portfolio 2012">
+							<img src="assets/web2012Icon.png" data-src0="assets/web2012Icon.png" data-src961="assets/web2012Icon_hi.png" alt="Portfolio 2012">
 							<p>Portfolio 2012</p>
-						</a>					
+						</a>											
 					</article>
 					<div id="moreWork">
 						<a href="work.html#workList">more</a>						
@@ -182,9 +189,7 @@
 		</footer>
 
 	    <script type="text/javascript" src="scripts/jquery-1.7.2.min.js"></script>
-	    <script src="scripts/plugins.js"></script>
-		<script src="scripts/jquery.scrollSections.js"></script>
-		<script src="scripts/mdetect.js"></script>
+	    <script type="text/javascript" src="scripts/response.min.js"></script>
 	    <script type="text/javascript" src="scripts/processing-1.4.1.min.js"></script>
 		<script type="text/javascript" src="scripts/myScript.js"></script>
 	</div>
