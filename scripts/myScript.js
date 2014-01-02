@@ -74,7 +74,7 @@ function mySketch(processing){
 		p5.smooth();
 		p5.fill(0);
 		p5.stroke(0);
-		//myVars.p5Font=p5.createFont('Oxygen:700', myVars.p5FontSize, true);
+		
 		myVars.p5Font=p5.createFont('Oxygen', myVars.p5FontSize, true);
 		p5.textSize(myVars.p5FontSize);
 		p5.textFont(myVars.p5Font);
@@ -111,16 +111,15 @@ function mySketch(processing){
 				nodeArray[i].attractArray(nodeArray);
 				nodeArray[i].update();
 				nodeArray[i].render();
+				nodeArray[i].renderText();
 			}			
 		}
 
 		if(seletecNodeId>-1){
-			nodeArray[seletecNodeId].render();		
+			nodeArray[seletecNodeId].render();	
+			nodeArray[seletecNodeId].renderText();		
 		}
-
-		for(i=0; i<nodeArray.length; i++){
-			nodeArray[i].renderText();
-		}		
+	
 	}
 
 	p5.mousePressed=function(){
@@ -570,7 +569,11 @@ function p5Spring(processing){
 		p5.vertex(endNodeConnectDown.x, endNodeConnectDown.y);
 		p5.bezierVertex(anchorD2.x, anchorD2.y, anchorD1.x, anchorD1.y, startNodeConnectDown.x, startNodeConnectDown.y);
 		p5.vertex(startNodeConnectDown.x, startNodeConnectDown.y);
-		p5.endShape();		
+		p5.endShape();	
+		p5.ellipse(spring.startNode.location.x, spring.startNode.location.y , 
+			spring.startNode.radius + 6, spring.startNode.radius + 6);
+		p5.ellipse(spring.endNode.location.x, spring.endNode.location.y , 
+			spring.endNode.radius + 6, spring.endNode.radius + 6);	
 	}
 
 	spring.debugGraph=function(){
