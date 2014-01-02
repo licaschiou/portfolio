@@ -251,8 +251,11 @@ section#top{
 		padding-right: 0px;
 	}
 }
+
 section#skillSet{	
-	article{
+	article#p5Parent{
+		@include span-columns(12 omega,12);
+		@include pad(1,1);
 		text-align: center;
 		canvas{
 			height:95%; 
@@ -268,6 +271,57 @@ section#skillSet{
 
 section#skillSetMobile{
 	display:none;
+	height: auto;
+	padding:0 20px;
+	margin-bottom: 20px;
+	article{
+		@include span-columns(6 omega,6);
+		@include pad(0,0);
+		text-align: left;			
+		ul{
+			list-style-type:none;
+			list-style-position:inside;
+			width:100%;
+			margin: 0 0 2px;
+			padding: 0;
+			li{
+				color: $pale;
+				margin: 4px 0;
+				padding: 2px 4px;
+			}
+		}			
+		li.graphicSkill{				
+			background-color: $yellow;
+		}
+		li.ixdSkill{
+			background-color: $red;
+		}
+		li.techSkill{
+			background-color: $deepRed;
+		}
+		li.graphicSkill:nth-child(4){
+			width:50%;
+		}
+		li.ixdSkill:nth-child(3){
+			width:75%;
+		}
+		li.ixdSkill:nth-child(4){
+			width:50%;
+		}
+		li.ixdSkill:nth-child(5){
+			width:75%;
+		}
+		li.techSkill:nth-child(3){
+			width:75%;
+		}
+		li.techSkill:nth-child(4){
+			width:75%;
+		}
+		li.techSkill:nth-child(5){
+			width:25%;
+		}
+		
+	}
 }
 
 section#about{	
@@ -602,9 +656,9 @@ footer{
 		}
 	}
 	section#skillSet{
-		#p5Parent{
+		article#p5Parent{
 			@include span-columns(12 omega,12);
-			@include pad(1,1);
+			@include pad(2,2);
 		}	
 	}
 	section#about{	
@@ -1047,57 +1101,6 @@ footer{
 
 	section#skillSetMobile{
 		display: inline;
-		height: auto;
-		padding:0 20px;
-		margin-bottom: 20px;
-		article{
-			@include span-columns(6 omega,6);
-			@include pad(0,0);
-			text-align: left;			
-			ul{
-				list-style-type:none;
-				list-style-position:inside;
-				width:100%;
-				margin: 0 0 2px;
-				padding: 0;
-				li{
-					color: $pale;
-					margin: 4px 0;
-					padding: 2px 4px;
-				}
-			}			
-			li.graphicSkill{				
-				background-color: $yellow;
-			}
-			li.ixdSkill{
-				background-color: $red;
-			}
-			li.techSkill{
-				background-color: $deepRed;
-			}
-			li.graphicSkill:nth-child(4){
-				width:50%;
-			}
-			li.ixdSkill:nth-child(3){
-				width:75%;
-			}
-			li.ixdSkill:nth-child(4){
-				width:50%;
-			}
-			li.ixdSkill:nth-child(5){
-				width:75%;
-			}
-			li.techSkill:nth-child(3){
-				width:75%;
-			}
-			li.techSkill:nth-child(4){
-				width:75%;
-			}
-			li.techSkill:nth-child(5){
-				width:25%;
-			}
-			
-		}
 	}
 
 	section#about{		
@@ -1140,6 +1143,7 @@ footer{
 			}
 		}
 	}
+	
 	section#workDetail{
 		article{
 			@include span-columns(6 omega,6);

@@ -11,8 +11,11 @@ $(document).ready(function(){
 		myVars.canvasWidth=$("#p5Parent").width();
 		myVars.canvasHeight=$( window ).height() * 0.9;
 		myVars.screenSizeRatio=myVars.canvasWidth/960;
-		if(myVars.canvasWidth>640)myVars.p5FontSize=20;
-		else if(myVars.canvasWidth<640)myVars.p5FontSize=12;
+		
+		if(myVars.canvasWidth > 960)myVars.p5FontSize=20;
+		else if(myVars.canvasWidth > 640 && myVars.canvasWidth < 960)myVars.p5FontSize=16;
+		else if(myVars.canvasWidth < 640 )myVars.p5FontSize=12;
+
 		myVars.p5Engine=new Processing(myVars.$p5Canvas,mySketch);
 
 		$('#p5Canvas').mouseleave(function(event){
@@ -219,11 +222,11 @@ function mySketch(processing){
 	}
 
 	var initializeGraphic=function(){
-		var regNodeRadius=50 * myVars.screenSizeRatio;
-		var largeNodeRadius=80 * myVars.screenSizeRatio;
-		var regSpringLength=160 * myVars.screenSizeRatio;
+		var regNodeRadius=40 * myVars.screenSizeRatio;
+		var largeNodeRadius=60 * myVars.screenSizeRatio;
+		var regSpringLength=100 * myVars.screenSizeRatio;
 		var randLength= 0; //100 * myVars.screenSizeRatio;	
-		var longSpringLength= 300 * myVars.screenSizeRatio;//240 * myVars.screenSizeRatio;
+		var longSpringLength= 200 * myVars.screenSizeRatio;//240 * myVars.screenSizeRatio;
 		// var cGraphic="ff90b44b";
 		// var cInteractive="ff00aa90";
 		// var cTechnical="ff2ea9df";
@@ -415,7 +418,7 @@ function p5Node(processing){
 	node.renderText=function(){
 		p5.fill(79,79,72);
 		var textWidth=p5.textWidth(node.name);
-		p5.text(node.name,node.location.x-textWidth/2,node.location.y-6-node.radius/2);
+		p5.text(node.name,node.location.x-textWidth/2, node.location.y - 8 * myVars.screenSizeRatio-node.radius/2);
 	}
 }
 
@@ -439,6 +442,7 @@ function p5Spring(processing){
 	spring.curveRatio=20.0;
 	spring.springFactor=1.2;
 	spring.tension=189;
+	spring.alpha=120;
 
 	spring.setupNode=function(start, end){
 		spring.startNode=start;
@@ -460,11 +464,11 @@ function p5Spring(processing){
 		}
 		springDir = p5.PVector.sub(spring.endNode.location, spring.startNode.location);
 		springDir.normalize();
-		springDir.mult(spring.startNode.radius * 0.9 / 2);
+		springDir.mult((spring.startNode.radius + 6) / 2);
 
 		springDirInverse = p5.PVector.sub(spring.startNode.location, spring.endNode.location);
 		springDirInverse.normalize();
-		springDirInverse.mult(spring.endNode.radius * 0.9 / 2);
+		springDirInverse.mult((spring.endNode.radius + 6) / 2);
 
 
 		startNodeConnectUp = spring.calVectorRotation(springDir.x, springDir.y, -1 * startRotateAngle).get();
@@ -527,13 +531,15 @@ function p5Spring(processing){
 		spring.startNode.velocity.add(force);
 		spring.endNode.velocity.add(p5.PVector.mult(force,-1));
 		spring.tension=189 * spring.currentLength/ spring.naturalLength;
+		spring.alpha = 120.0 * spring.naturalLength / spring.currentLength;
+		spring.alpha = p5.constrain(spring.alpha, 0, 240);
 		spring.curveRatio = 20.0 * spring.currentLength / spring.naturalLength;
 		spring.curveRatio = p5.constrain(spring.curveRatio, 5, 30 * myVars.screenSizeRatio);
+
 		spring.calculateConnecting();
 	}
 
-	spring.render=function(){
-		
+	spring.render=function(){		
 		spring.renderCurveConnection();
 		//spring.debugGraph();
 	}
@@ -545,20 +551,20 @@ function p5Spring(processing){
 		p5.stroke(145,152,159,200);
 		p5.line(spring.startNode.location.x + myVars.shadowDisplacement/2, spring.startNode.location.y + myVars.shadowDisplacement/2,
 				spring.endNode.location.x + myVars.shadowDisplacement/2, spring.endNode.location.y + myVars.shadowDisplacement/2);
-		p5.stroke(spring.tension,192,186);		
+		p5.stroke(spring.tension,192,186);
 		p5.line(spring.startNode.location.x, spring.startNode.location.y,
 				spring.endNode.location.x, spring.endNode.location.y);
 	}
 
 	spring.renderCurveConnection=function(){
 		p5.noStroke();
-		p5.fill(145,152,159,60);
+		p5.fill(145,152,159,spring.alpha / 2);
 		p5.pushMatrix();
 		p5.translate(myVars.shadowDisplacement, myVars.shadowDisplacement);
 		spring.renderCurveShape();
 		p5.popMatrix();
-		p5.stroke(145, 152, 159, 80);
-		p5.fill(252, 250, 242, 120);
+		p5.stroke(145, 152, 159, spring.alpha * 2 / 3);
+		p5.fill(252, 250, 242, spring.alpha);
 		spring.renderCurveShape();
 	}
 
