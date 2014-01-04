@@ -358,41 +358,44 @@ section#workList{
 		margin-bottom: 80px;
 		a{
 			@include span-columns(2, 8);
-			&:nth-child(4n) { @include omega; }
+			//&:nth-child(4n) { @include omega; }
 			text-decoration: none;
-			font-weight: normal;
-			color: $darkGrey;			
+			font-weight: normal;				
 			img{
 				width: 100%;
 			}
+			h2{
+				color: $darkGrey;	
+				font-size: 20px;
+				margin: 2px 0 13px;
+			}
 			p{
-				font-size: 22px;
-				margin: 10px 0 20px;
+				color: $grey;		
+				font-size: 16px;
+				margin: 2px 0 0;
 			}			
 		}
 		a:hover{
 			color: $orange;	
 			border:6px solid $orange;
-		}	
-		a:hover p{
-			margin: 16px 0 14px;
-		}	
-
-	}
-	#moreWork{	
-		text-align:center;	
-		a{
-			text-decoration: none;
-			font-size: 24px;
-			font-weight: normal;
-			background-color:$darkGrey;
-			color: $pale;
-			margin:0 auto;
-			padding: 10px 40px;
 		}
-		a:hover{
-			background-color:$orange;
-			color: $pale;
+		a:hover p{
+			margin: 8px 0 1px;
+		}	
+		a:hover h2{
+			margin:2px 0 7px;
+		}
+	}
+	#workFilter{
+		text-align:center;
+		margin-bottom: 40px;
+		h1{
+			display: inline-block;
+			color: $grey;	
+			margin:0 auto;
+			font-size: 20px;
+			
+			padding: 10px 40px;
 		}
 	}		
 }
@@ -402,6 +405,7 @@ section#workDetail{
 		@include span-columns(12 omega,12);
 		@include pad(2, 2);
 		text-align: left;
+		margin-bottom: 40px;
 		.path{
 			letter-spacing: 1px;
 			color:$grey;
@@ -427,9 +431,10 @@ section#workDetail{
 			line-height: 24px;
 		}
 		img{
-			outline: $grey solid 6px;
+			//outline: $grey solid 6px;
+			display:block;
 			width: 100%;
-			margin-bottom: 40px;
+			margin: 0;
 			padding: 0;
 		}
 	}
@@ -686,23 +691,39 @@ footer{
 			@include pad(1,1);
 			margin-bottom: 40px;
 			a{
-				p{
-					font-size: 18px;
-					margin: 10px 0 20px;
-				}	
+				h2{
+					font-size: 16px;
+					margin: 2px 0 13px;
+				}
+				p{	
+					font-size: 14px;
+					margin: 2px 0 0;
+				}			
+			}
+			a:hover{
+				color: $orange;	
+				border:6px solid $orange;
+			}
+			a:hover p{
+				margin: 8px 0 1px;
+			}	
+			a:hover h2{
+				margin:2px 0 7px;
 			}
 		}
-		#moreWork{		
-			a{		
-				font-size: 14px;
+		#workFilter{		
+			margin-bottom: 20px;
+			h1{
+				font-size: 20px;				
 				padding: 10px 20px;
 			}
-		}
+		}		
 	}
 	section#workDetail{
 		article{
 			@include span-columns(12 omega,12);
 			@include pad(1,1);
+
 			h1{
 				margin: 40px 0 4px;
 				text-align: left;
@@ -894,25 +915,43 @@ footer{
 			}
 		}
 	}
+
 	section#workList{
 		article{
 			@include span-columns(12 omega,12);
 			@include pad(1,1);
 			margin-bottom: 40px;
-			a{
-				p{
-					font-size: 18px;
-					margin: 10px 0 20px;
-				}	
-			}
-		}
-		#moreWork{		
 			a{		
-				font-size: 14px;
+				h2{
+					font-size: 14px;
+					margin: 2px 0 13px;
+				}
+				p{	
+					font-size: 14px;
+					margin: 2px 0 0;
+				}			
+			}
+			a:hover{
+				color: $orange;	
+				border:6px solid $orange;
+			}
+			a:hover p{
+				margin: 8px 0 1px;
+			}	
+			a:hover h2{
+				margin:2px 0 7px;
+			}
+
+		}
+		#workFilter{		
+			margin-bottom: 10px;
+			h1{
+				font-size: 16px;				
 				padding: 10px 20px;
 			}
-		}
+		}		
 	}
+
 	section#workDetail{
 		article{
 			@include span-columns(12 omega,12);
@@ -1123,7 +1162,7 @@ footer{
 	}
 
 	section#workList{
-		padding:0 20px;		
+		padding:0;		
 		article{
 			@include span-columns(6 omega,6);
 			@include pad(0,0);
@@ -1131,24 +1170,32 @@ footer{
 			a{
 				@include span-columns(6 omega,6);
 				@include pad(0,0);
-				p{
-					font-size: 18px;
-					margin: 10px 0 20px;
+				h2{
+					font-size: 20px;
+					margin: 2px 0 13px;
+				}
+				p{	
+					font-size: 16px;
+					margin: 2px 0 0;
 				}	
 			}
+			
 		}
-		#moreWork{		
-			a{		
-				font-size: 14px;
-				padding: 10px 20px;
-			}
+		#workFilter{
+		margin-bottom: 20px;
+		h1{
+			display: block;
+			font-size: 16px;			
+			padding: 10px 40px;
 		}
+	}	
 	}
 	
 	section#workDetail{
 		article{
 			@include span-columns(6 omega,6);
 			@include pad(0,0);
+			margin-bottom: 20px;
 			h1{
 				margin: 20px 0 4px;
 				text-align: left;
@@ -1168,9 +1215,10 @@ footer{
 				text-align: justify;
 			}
 			img{
-				outline: $grey solid 3px;
+				//outline: $grey solid 3px;
 				width: 100%;
-				margin-bottom: 20px;
+				margin: 0px;
+				padding: 0px;
 			}
 		}
 	}

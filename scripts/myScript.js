@@ -2,7 +2,8 @@ var myVars={
 	p5FontSize: 18,
 	nodeCount: 0,
 	springCount: 0,
-	shadowDisplacement: 3
+	shadowDisplacement: 3,
+	selectedFilter: "all"
 };
 
 $(document).ready(function(){
@@ -26,18 +27,39 @@ $(document).ready(function(){
 		});
 	}
 
-	// if(!MobileEsp.DetectTierIphone() && $( window ).width() > 600){
-	// 	$('section.scrollsections').scrollSections({
-	// 		createNavigation: false,
-	// 		navigation: true,
-	// 		touch: true,
-	// 		mousewheel: true,
-	// 		scrollbar: true,			
-	// 		after: function($currentSection, $previousSection){
-	// 			window.location.hash=$currentSection.attr('id');
-	// 		}
-	// 	});
-	// }
+	$('#workFilter h1').each(function(){
+		$(this).mouseenter(function(){
+			$(this).css('cursor','pointer').css('color','#4f4f48');
+		});
+		$(this).mouseleave(function(){
+			if( $(this).html() != myVars.selectedFilter)$(this).css('color','#bdc0ba');	
+		});
+		$(this).click(function(){
+			myVars.selectedFilter = $(this).html();
+			if(myVars.selectedFilter == "all"){
+				$("#workListContainer a[workType]").each(function(){
+					$(this).css('display','inline');
+				});
+			}else{
+				$("#workListContainer a[workType]").each(function(){
+					if($(this).attr("workType") != myVars.selectedFilter){
+						$(this).css('display','none');
+					}else{
+						$(this).css('display','inline');
+					}
+				});
+			}
+			$('#workFilter h1').each(function(){
+				$(this).css('color','#bdc0ba');	
+			});
+			$(this).css('color','#4f4f48');
+		});
+	});
+
+	$("a[workType='IxD']").each(function(){
+		console.log($(this).text());
+	});
+
 });
 
 $(window).resize(function() {
