@@ -37,12 +37,12 @@ $(document).ready(function(){
 		$(this).click(function(){
 			myVars.selectedFilter = $(this).html();
 			if(myVars.selectedFilter == "all"){
-				$("#workListContainer a[workType]").each(function(){
+				$("#workListContainer a[class]").each(function(){
 					$(this).css('display','inline');
 				});
 			}else{
-				$("#workListContainer a[workType]").each(function(){
-					if($(this).attr("workType") != myVars.selectedFilter){
+				$("#workListContainer a[class]").each(function(){
+					if($(this).attr("class") != myVars.selectedFilter){
 						$(this).css('display','none');
 					}else{
 						$(this).css('display','inline');
@@ -56,7 +56,7 @@ $(document).ready(function(){
 		});
 	});
 
-	$("a[workType='IxD']").each(function(){
+	$("a[class='IxD']").each(function(){
 		console.log($(this).text());
 	});
 
