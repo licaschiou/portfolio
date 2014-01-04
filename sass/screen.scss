@@ -406,7 +406,7 @@ section#workDetail{
 		@include pad(2, 2);
 		text-align: left;
 		margin-bottom: 40px;
-		.path{
+		p.path{
 			letter-spacing: 1px;
 			color:$grey;
 			a, a:active{ 
@@ -1196,6 +1196,18 @@ footer{
 			@include span-columns(6 omega,6);
 			@include pad(0,0);
 			margin-bottom: 20px;
+			p.path{
+				letter-spacing: 0px;
+				font-size: 12px;
+				text-align: left;
+				a, a:active{ 
+					color:$grey; 
+					font-weight: normal;
+				}
+				a:hover, a:focus{
+					color:$orange;
+				}
+			}		
 			h1{
 				margin: 20px 0 4px;
 				text-align: left;

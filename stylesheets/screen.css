@@ -491,17 +491,17 @@ section#workDetail article {
   margin-bottom: 40px;
 }
 /* line 409, ../sass/screen.scss */
-section#workDetail article .path {
+section#workDetail article p.path {
   letter-spacing: 1px;
   color: #bdc0ba;
 }
 /* line 412, ../sass/screen.scss */
-section#workDetail article .path a, section#workDetail article .path a:active {
+section#workDetail article p.path a, section#workDetail article p.path a:active {
   color: #bdc0ba;
   font-weight: normal;
 }
 /* line 416, ../sass/screen.scss */
-section#workDetail article .path a:hover, section#workDetail article .path a:focus {
+section#workDetail article p.path a:hover, section#workDetail article p.path a:focus {
   color: #f75c2f;
 }
 /* line 420, ../sass/screen.scss */
@@ -1477,18 +1477,33 @@ footer h1 {
     margin-bottom: 20px;
   }
   /* line 1199, ../sass/screen.scss */
+  section#workDetail article p.path {
+    letter-spacing: 0px;
+    font-size: 12px;
+    text-align: left;
+  }
+  /* line 1203, ../sass/screen.scss */
+  section#workDetail article p.path a, section#workDetail article p.path a:active {
+    color: #bdc0ba;
+    font-weight: normal;
+  }
+  /* line 1207, ../sass/screen.scss */
+  section#workDetail article p.path a:hover, section#workDetail article p.path a:focus {
+    color: #f75c2f;
+  }
+  /* line 1211, ../sass/screen.scss */
   section#workDetail article h1 {
     margin: 20px 0 4px;
     text-align: left;
     padding: 0 20px;
   }
-  /* line 1204, ../sass/screen.scss */
+  /* line 1216, ../sass/screen.scss */
   section#workDetail article h2 {
     font-size: 14px;
     margin-bottom: 20px;
     padding: 0 20px;
   }
-  /* line 1209, ../sass/screen.scss */
+  /* line 1221, ../sass/screen.scss */
   section#workDetail article p {
     padding: 0 20px;
     font-size: 12px;
@@ -1497,18 +1512,18 @@ footer h1 {
     line-height: 16px;
     text-align: justify;
   }
-  /* line 1217, ../sass/screen.scss */
+  /* line 1229, ../sass/screen.scss */
   section#workDetail article img {
     width: 100%;
     margin: 0px;
     padding: 0px;
   }
 
-  /* line 1226, ../sass/screen.scss */
+  /* line 1238, ../sass/screen.scss */
   section#contact {
     height: 60%;
   }
-  /* line 1228, ../sass/screen.scss */
+  /* line 1240, ../sass/screen.scss */
   section#contact article {
     width: 100%;
     float: right;
@@ -1516,17 +1531,17 @@ footer h1 {
     padding-left: 0%;
     padding-right: 0%;
   }
-  /* line 1232, ../sass/screen.scss */
+  /* line 1244, ../sass/screen.scss */
   section#contact article h2 {
     margin: 20px 0 4px;
     font-size: 18px;
     letter-spacing: 1px;
   }
-  /* line 1238, ../sass/screen.scss */
+  /* line 1250, ../sass/screen.scss */
   section#contact #linkGroup {
     margin-top: 4px;
   }
-  /* line 1240, ../sass/screen.scss */
+  /* line 1252, ../sass/screen.scss */
   section#contact #linkGroup .socialIcon {
     font-size: 18px;
     width: 32px;
@@ -1536,7 +1551,7 @@ footer h1 {
     border-radius: 16px;
     padding-top: 5px;
   }
-  /* line 1248, ../sass/screen.scss */
+  /* line 1260, ../sass/screen.scss */
   section#contact #linkGroup .socialIcon span {
     display: inline-block;
     font-size: 16px;
@@ -1546,7 +1561,7 @@ footer h1 {
     -o-transform: translateY(-4px);
   }
 
-  /* line 1259, ../sass/screen.scss */
+  /* line 1271, ../sass/screen.scss */
   #goTop {
     width: 100%;
     float: right;
@@ -1560,25 +1575,25 @@ footer h1 {
     -moz-transform: translateY(1px);
     -ms-transform: translateY(1px);
   }
-  /* line 1269, ../sass/screen.scss */
+  /* line 1281, ../sass/screen.scss */
   #goTop a:hover .triangle-up {
     border-bottom: 18px solid #f75c2f;
   }
-  /* line 1273, ../sass/screen.scss */
+  /* line 1285, ../sass/screen.scss */
   #goTop .triangle-up {
     border-left: 9px solid transparent;
     border-right: 9px solid transparent;
     border-bottom: 18px solid #0c0c0c;
   }
 
-  /* line 1279, ../sass/screen.scss */
+  /* line 1291, ../sass/screen.scss */
   footer {
     width: 100%;
     float: right;
     margin-right: 0;
     height: 30%;
   }
-  /* line 1282, ../sass/screen.scss */
+  /* line 1294, ../sass/screen.scss */
   footer h1 {
     font-size: 14px;
     letter-spacing: 0px;
@@ -1586,37 +1601,37 @@ footer h1 {
   }
 }
 @media (max-width: 15em) {
-  /* line 1292, ../sass/screen.scss */
+  /* line 1304, ../sass/screen.scss */
   .triangle-left {
     display: none;
   }
 
-  /* line 1295, ../sass/screen.scss */
+  /* line 1307, ../sass/screen.scss */
   .siteInfo {
     display: none;
   }
 
-  /* line 1298, ../sass/screen.scss */
+  /* line 1310, ../sass/screen.scss */
   nav {
     display: none;
   }
 
-  /* line 1301, ../sass/screen.scss */
+  /* line 1313, ../sass/screen.scss */
   header {
     display: none;
   }
 
-  /* line 1304, ../sass/screen.scss */
+  /* line 1316, ../sass/screen.scss */
   section {
     display: none;
   }
 
-  /* line 1307, ../sass/screen.scss */
+  /* line 1319, ../sass/screen.scss */
   section#contact {
     display: block;
     height: 70%;
   }
-  /* line 1310, ../sass/screen.scss */
+  /* line 1322, ../sass/screen.scss */
   section#contact article {
     width: 100%;
     float: right;
@@ -1624,23 +1639,23 @@ footer h1 {
     padding-left: 0%;
     padding-right: 0%;
   }
-  /* line 1314, ../sass/screen.scss */
+  /* line 1326, ../sass/screen.scss */
   section#contact article h2 {
     margin: 20px 0 4px;
     font-size: 16px;
     letter-spacing: 1px;
   }
-  /* line 1320, ../sass/screen.scss */
+  /* line 1332, ../sass/screen.scss */
   section#contact #linkGroup {
     margin-top: 4px;
   }
-  /* line 1322, ../sass/screen.scss */
+  /* line 1334, ../sass/screen.scss */
   section#contact #linkGroup .socialIcon {
     font-size: 18px;
     width: 32px;
     height: 28px;
   }
-  /* line 1326, ../sass/screen.scss */
+  /* line 1338, ../sass/screen.scss */
   section#contact #linkGroup .socialIcon span {
     display: inline-block;
     font-size: 16px;
@@ -1650,19 +1665,19 @@ footer h1 {
     -o-transform: translateY(-4px);
   }
 
-  /* line 1337, ../sass/screen.scss */
+  /* line 1349, ../sass/screen.scss */
   #goTop {
     display: none;
   }
 
-  /* line 1340, ../sass/screen.scss */
+  /* line 1352, ../sass/screen.scss */
   footer {
     width: 100%;
     float: right;
     margin-right: 0;
     height: 30%;
   }
-  /* line 1343, ../sass/screen.scss */
+  /* line 1355, ../sass/screen.scss */
   footer h1 {
     font-size: 14px;
     letter-spacing: 0px;
