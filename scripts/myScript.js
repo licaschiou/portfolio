@@ -1,4 +1,14 @@
 var myVars={
+	titleString: "",
+	pageMouseX: 0.0,
+	pageMouseY: 0.0,
+	titleCharColors:['fff75c2f','ffeb3015','ffcb1b45'],
+	charForC:['creative', 'credible', 'capable', 'classy'],
+	charForH:['honest', 'humour', 'humane', 'heuristic'],
+	charForI:['initiative', 'inspiration', 'innovate', 'interesting'],
+	charForU:['useful', 'unique', 'upbeat', 'understanding'],
+	charForW:['willing', 'warmth', 'wow!', 'worthy'],
+	charForE:['efficient', 'engaging', 'ecstasy', 'empathy'],
 	p5FontSize: 18,
 	nodeCount: 0,
 	springCount: 0,
@@ -7,22 +17,54 @@ var myVars={
 };
 
 $(document).ready(function(){
-	myVars.$p5Canvas=$('#p5Canvas').get(0);
-	if(myVars.$p5Canvas!=undefined){
-		myVars.canvasWidth=$("#p5Parent").width();
+	
+	$("#top .verticalAlignContainer .verticalAlignCell h2").each(function(){
+		//tweenTitleColor($(this));
+		$(this).mouseenter(function(){
+			$(this).css('cursor','pointer');
+			// myVars.pageMouseX = event.pageX;
+			// myVars.pageMouseY = event.pageY;
+			// var clickOnChar = $(this).text().toLowerCase();
+			// createTextFirework(clickOnChar);
+		});
+		$(this).click(function(event){
+			myVars.pageMouseX = event.pageX;
+			myVars.pageMouseY = event.pageY;
+			var clickOnChar = $(this).text().toLowerCase();
+			createTextFirework(clickOnChar);			
+		});
+		
+	});
+
+	if(myVars.canvasWidth > 960)myVars.p5FontSize=20;
+	else if(myVars.canvasWidth > 640 && myVars.canvasWidth < 960)myVars.p5FontSize=16;
+	else if(myVars.canvasWidth < 640 )myVars.p5FontSize=12;
+
+	myVars.$titleBackgroundCanvas = $('#titleBackgroundCanvas').get(0);
+	if(myVars.$titleBackgroundCanvas != undefined){
+		myVars.canvasWidth=$("#titleBackgroundCanvas").width();
 		myVars.canvasHeight=$( window ).height() * 0.9;
 		myVars.screenSizeRatio=myVars.canvasWidth/960;
-		
 		if(myVars.canvasWidth > 960)myVars.p5FontSize=20;
 		else if(myVars.canvasWidth > 640 && myVars.canvasWidth < 960)myVars.p5FontSize=16;
 		else if(myVars.canvasWidth < 640 )myVars.p5FontSize=12;
+		myVars.titleBackgroundEngine=new Processing(myVars.$titleBackgroundCanvas, titleBackgroundSketch);
+	}
 
-		myVars.p5Engine=new Processing(myVars.$p5Canvas,mySketch);
+	myVars.$skillSetCanvas=$('#skillSetCanvas').get(0);
+	if(myVars.$skillSetCanvas!=undefined){
+		myVars.canvasWidth=$("#p5Parent").width();
+		myVars.canvasHeight=$( window ).height() * 0.9;
+		myVars.screenSizeRatio=myVars.canvasWidth/960;
+		if(myVars.canvasWidth > 960)myVars.p5FontSize=22;
+		else if(myVars.canvasWidth > 640 && myVars.canvasWidth < 960)myVars.p5FontSize=16;
+		else if(myVars.canvasWidth < 640 )myVars.p5FontSize=12;
+		myVars.skillSetSketchEngine=new Processing(myVars.$skillSetCanvas, skillSetSketch);
 
-		$('#p5Canvas').mouseleave(function(event){
+		$('#skillSetCanvas').mouseleave(function(event){
 			myVars.mouseOutOfCanvas = 1;
 		});
-		$('#p5Canvas').mouseenter(function(event){
+		$('#skillSetCanvas').mouseenter(function(event){
 			myVars.mouseOutOfCanvas = 0;
 		});
 	}
@@ -56,35 +98,107 @@ $(document).ready(function(){
 		});
 	});
 
-	$("a[class='IxD']").each(function(){
-		console.log($(this).text());
-	});
-
 });
 
 $(window).resize(function() {
-	myVars.$p5Canvas=$('#p5Canvas').get(0);
+	myVars.$skillSetCanvas=$('#skillSetCanvas').get(0);
 	myVars.canvasWidth=$("#p5Parent").width();
 	myVars.canvasHeight=$( window ).height() * 0.9;
 	myVars.screenSizeRatio=myVars.canvasWidth/960;
-	myVars.p5Engine.resize();
-
-	//myVars.p5Engine.stopDrawing();
-	//myVars.p5Engine=null;
-	//myVars.p5Engine = new Processing(myVars.$p5Canvas, mySketch);
+	myVars.skillSetSketchEngine.resize();
+	//myVars.skillSetSketchEngine.stopDrawing();
+	//myVars.skillSetSketchEngine=null;
+	//myVars.skillSetSketchEngine=new Processing(myVars.$skillSetCanvas, skillSetSketch);
 });
 
-function showMyName(){
-	$('*').each(function(){
-		var current=this;
-		this.onclick=function(event){
-			if(!event) event=window.event;
-			var target=(event.target)?event.target:event.srcElement;
-		}
-	});	
+var createTextFirework = function(clickOnChar){
+	switch (clickOnChar)
+	{
+		case 'c':
+			myVars.titleString = myVars.charForC[Math.floor(myVars.charForC.length * Math.random())];
+			break;
+		case 'h':
+			myVars.titleString = myVars.charForH[Math.floor(myVars.charForH.length * Math.random())];
+			break;
+		case 'i':
+			myVars.titleString = myVars.charForI[Math.floor(myVars.charForI.length * Math.random())];
+			break;
+		case 'u':
+			myVars.titleString = myVars.charForU[Math.floor(myVars.charForU.length * Math.random())];
+			break;
+		case 'w':
+			myVars.titleString = myVars.charForW[Math.floor(myVars.charForW.length * Math.random())];
+			break;
+		case 'e':
+			myVars.titleString = myVars.charForE[Math.floor(myVars.charForE.length * Math.random())];
+			break;
+	}
 }
 
-function mySketch(processing){
+function titleBackgroundSketch(processing){
+	var p5=processing;
+	var popLocation = new p5.PVector();
+	var nodes = new p5.ArrayList();
+
+	p5.setup=function(){
+		p5.size(myVars.canvasWidth, myVars.canvasHeight);
+		p5.background(252,250,242,0);
+		myVars.p5Font=p5.createFont('Nunito', myVars.p5FontSize * 2, true);
+		p5.textFont(myVars.p5Font);
+		popLocation.set(p5.width / 2, p5.height / 2);
+		p5.fill(0);
+	}
+
+	p5.draw=function(){
+		if(myVars.titleString.length > 0){			
+			createFirework(myVars.titleString);
+			myVars.titleString = "";
+		}
+		if(nodes.size() > 0){
+			p5.background(252,250,242,0);
+			updateNodes();
+		}		
+	}
+
+	var createFirework = function(msgString){
+		if(myVars.screenSizeRatio > 0.2)popLocation.set(myVars.pageMouseX, myVars.pageMouseY);
+		else popLocation.set(p5.width / 2, myVars.pageMouseY);
+		var xOffset = -1 * ( p5.textWidth(msgString) ) / 2;
+		var newColor = myVars.titleCharColors[p5.floor(myVars.titleCharColors.length * p5.random())];
+		for(var i = 0; i < msgString.length; i++){
+			var nodeIniLocation = new p5.PVector(xOffset + popLocation.x + p5.textWidth(msgString.substring(0, i)), popLocation.y);
+			var newNode = new p5Node(p5);
+			newNode.setLocation(nodeIniLocation.x, nodeIniLocation.y);
+			newNode.setChar(msgString.charAt(i));
+			var minVelY = -15.0 * myVars.screenSizeRatio;
+			minVelY = p5.min(-2.5, minVelY);
+			newNode.setVelocity(0, minVelY);
+			newNode.setGravity(0.5 * myVars.screenSizeRatio);
+			newNode.setMass(8.0);
+			newNode.setMaxSpeed(p5.abs(minVelY));
+			newNode.setMinAttractDistance(myVars.p5FontSize * 2);
+			newNode.setColor(newColor);
+			nodes.add(newNode);
+		}
+	}
+
+	var updateNodes = function(){
+		for(var i = nodes.size() - 1; i >= 0; i--){
+			var getNode = nodes.get(i);
+		 if(getNode.life <= 0.0){
+				nodes.remove(i);
+		    }else{
+				if( getNode.reachTop ){
+					getNode.attractArrayList(nodes);
+				}
+				getNode.update();
+				getNode.renderChar();
+		    }   		
+		}
+	}
+}
+
+function skillSetSketch(processing){
 	var p5=processing;
 	var numNodes=20;
 	var seletecNodeId=-1;
@@ -98,17 +212,15 @@ function mySketch(processing){
 		p5.frameRate(30);
 		p5.smooth();
 		p5.fill(0);
-		p5.stroke(0);
-		
+		p5.stroke(0);		
 		myVars.p5Font=p5.createFont('Oxygen', myVars.p5FontSize, true);
 		p5.textSize(myVars.p5FontSize);
 		p5.textFont(myVars.p5Font);
-
 		initializeGraphic();
 	}
 
 	p5.draw=function(){
-		p5.background(252,250,242,0);
+		p5.background(252, 250, 242, 0);
 		createReadme();
 
 		if(myVars.mouseOutOfCanvas > 0){
@@ -121,8 +233,9 @@ function mySketch(processing){
 		}
 
 		if(seletecNodeId>-1){
-			nodeArray[seletecNodeId].location.x=p5.mouseX;
-			nodeArray[seletecNodeId].location.y=p5.mouseY;
+			nodeArray[seletecNodeId].location.x=p5.mouseX;			
+			if ( $.browser.webkit ) nodeArray[seletecNodeId].location.y = p5.mouseY - $(window).scrollTop();
+			else nodeArray[seletecNodeId].location.y=p5.mouseY;
 		}
 
 		for(var i=0; i<springArray.length; i++){
@@ -148,12 +261,12 @@ function mySketch(processing){
 	}
 
 	p5.mousePressed=function(){
-		var mouseLoc=new p5.PVector(p5.mouseX, p5.mouseY);
-		console.log(mouseLoc);
+		var mouseLoc;
+		if ( $.browser.webkit ) mouseLoc=new p5.PVector(p5.mouseX, p5.mouseY - $(window).scrollTop());
+		else mouseLoc = new p5.PVector(p5.mouseX, p5.mouseY);
 		for(var i=0; i<nodeArray.length; i++){
 			var distToCurosr=p5.PVector.sub(nodeArray[i].location, mouseLoc);
 			if(distToCurosr.mag()<10){
-				//TODO: onPress : Show skill level/ experience effect
 				seletecNodeId=i;				
 				nodeArray[seletecNodeId].setSelected(1);
 				nodeArray[seletecNodeId].pieChartAngle=0;
@@ -175,11 +288,9 @@ function mySketch(processing){
 
 	p5.resize=function(){		
 		p5.size(myVars.canvasWidth, myVars.canvasHeight);
-		//resize node.
 	}
 
 	p5.stopDrawing=function(){
-		/* Stop all the drawing before reset pjs.*/
 		p5.background(252,250,242,0);
 		this.draw=function(){}
 	}
@@ -194,13 +305,8 @@ function mySketch(processing){
 		p5.ellipse(pieX,pieY,24,24);
 		p5.fill(189,192,186);		
 		createReadmePie(pieX, pieY);
-		// p5.fill(252,250,242);
-		// p5.ellipse(pieX,pieY,16,16);
 		p5.fill(79,79,72);
-		//p5.fill(145,152,159);		
 		p5.text("Click / Drag",pieX+26, pieY+6);
-		//var sectionFontSize=p5.max(36 * myVars.screenSizeRatio, 18);
-		//p5.textSize(sectionFontSize);
 		var textWidth=p5.textWidth("My Skill Set");
 		p5.text("My Skill Set",pieX - textWidth - 26, pieY+6);
 		p5.textSize(myVars.p5FontSize);
@@ -245,13 +351,11 @@ function mySketch(processing){
 
 	var initializeGraphic=function(){
 		var regNodeRadius=40 * myVars.screenSizeRatio;
-		var largeNodeRadius=60 * myVars.screenSizeRatio;
-		var regSpringLength=100 * myVars.screenSizeRatio;
+		var largeNodeRadius=80 * myVars.screenSizeRatio;
+		var regSpringLength=120 * myVars.screenSizeRatio;
 		var randLength= 0; //100 * myVars.screenSizeRatio;	
 		var longSpringLength= 200 * myVars.screenSizeRatio;//240 * myVars.screenSizeRatio;
-		// var cGraphic="ff90b44b";
-		// var cInteractive="ff00aa90";
-		// var cTechnical="ff2ea9df";
+
 		var cGraphic="ffffb11b";
 		var cInteractive="ffcb1b45";
 		var cTechnical="ffeb3015";
@@ -318,14 +422,19 @@ function mySketch(processing){
 
 function p5Node(processing){
 	var p5=processing;
-	var node=this;	
-	node.location=new p5.PVector();
-	node.velocity=new p5.PVector();
-	node.minAttractDistance=160.0;
-	node.gravity=2*9.8;
+	var node=this;
+
+	node.noGravity = 1;
+	node.gravityMag=2 * 9.8;
+	node.location = new p5.PVector();
+	node.velocity = new p5.PVector();
+	node.gravity = new p5.PVector(0, node.gravityMag);
+	node.orientation = 0.0;
+	node.minAttractDistance=160.0;	
 	node.maxSpeed=15.0;
 	node.damping=0.75;
 	node.mass = 1.0;
+	node.life = 255.0;
 	node.attractDirection=-1;
 	node.attracting=false;
 	node.radius=30;
@@ -334,11 +443,37 @@ function p5Node(processing){
 	node.name="interactive design";
 	node.selected=0;
 	node.showSkill=0;
-	node.color="ffbdc0ba";
+	node.attracting=0;
+	node.reachTop=0;
+	node.myColor="ffbdc0ba";
+	node.myChar = 'A';
 
 	node.setLocation=function(inputX, inputY){
 		node.location.x=inputX;
 		node.location.y=inputY;
+	}
+
+	node.setVelocity=function(inputX, inputY){
+		node.velocity.x=inputX;
+		node.velocity.y=inputY;
+	}
+
+	node.setGravity = function(newGravity){
+		node.noGravity = 0;
+		node.gravityMag = newGravity;
+		node.gravity = new p5.PVector(0, node.gravityMag);
+	}
+
+	node.setMaxSpeed = function(newMaxSpeed){
+		node.maxSpeed = newMaxSpeed;		
+	}
+
+	node.setMass = function(newMass){
+		node.mass = newMass;		
+	}
+
+	node.setMinAttractDistance = function(attrDistance){
+		node.minAttractDistance = attrDistance;		
 	}
 
 	node.setSelected=function(flag){
@@ -358,8 +493,13 @@ function p5Node(processing){
 	}
 
 	node.setColor=function(color){
-		node.color=color;
+		node.myColor=color;
 	}
+
+	node.setChar = function(newChar){
+		node.myChar = newChar;
+	}
+
 	node.setSkillLevel=function(level){
 		node.targetAngle=level;
 	}
@@ -381,21 +521,47 @@ function p5Node(processing){
 		}
 	}
 
+	node.attractArrayList=function(arrayList){
+		for(var i = 0; i < arrayList.size(); i++){
+			var otherNode=arrayList.get(i);
+			if(otherNode == null) break;
+      		if(otherNode == node) continue;
+      		node.attractOther(otherNode);
+		}
+	}
+
 	node.attractOther=function(otherNode){
    		var centralDiff=p5.PVector.sub(node.location,otherNode.location);
 	    var centralDist=centralDiff.mag();    
-	    if(centralDist>0 && centralDist < node.minAttractDistance){
+	    if(centralDist > 0 && centralDist < node.minAttractDistance){
 	      var distRatio = p5.pow(centralDist/node.minAttractDistance, 1);
-	      var force = node.mass * node.mass * node.gravity * node.attractDirection /(centralDist*centralDist);
+	      var force = node.mass * node.mass * node.gravityMag * node.attractDirection /(centralDist*centralDist);
 	      centralDiff.mult(force); 
 	      otherNode.velocity.add(centralDiff);
 	    }
 	}
 
-	node.update=function(){
+	node.update = function(){
+		if( node.noGravity == 1 ){
+			node.velocity.mult(node.damping);
+		}else{
+		    node.velocity.add(node.gravity);
+		    node.border();
+		    if(node.velocity.y > 0) node.reachTop = 1;
+		    node.orientation += 0.01 * node.velocity.x;
+		}
 		node.velocity.limit(node.maxSpeed);
 		node.location.add(node.velocity);
-		node.velocity.mult(node.damping);
+		node.life -= 2.0;
+	}
+
+	node.border = function(){
+	    if(node.location.x < 0 || node.location.x > p5.width) node.velocity.x *= -1;
+	    if(node.location.y > p5.height){
+	    	node.location.y = p5.height;
+	    	node.velocity.y *= -1;
+	    	node.velocity.mult(node.damping);
+	    } 
 	}
 
 	node.render=function(){
@@ -409,7 +575,7 @@ function p5Node(processing){
 			p5.fill(145,152,159,150);
 			p5.ellipse(node.location.x + myVars.shadowDisplacement, node.location.y + myVars.shadowDisplacement, node.radius,node.radius);
 		}
-		p5.fill(p5.unhex(node.color));
+		p5.fill(p5.unhex(node.myColor));
 		p5.ellipse(node.location.x, node.location.y, node.radius,node.radius);
 		p5.fill(255);		
 		p5.ellipse(node.location.x, node.location.y, node.radius-node.radius/5,node.radius-node.radius/5);
@@ -426,7 +592,7 @@ function p5Node(processing){
 		var radTarget=p5.radians(node.targetAngle);
 		var radPieChart=p5.radians(node.pieChartAngle + 1);
 		p5.beginShape();
-		p5.vertex(node.location.x,node.location.y);
+		p5.vertex(node.location.x, node.location.y);
 		for(var i=0; i<=radPieChart; i+=0.01){
 			var rotateAngle=i-p5.PI/2;
 			p5.vertex(node.location.x + pieRadius*p5.cos(rotateAngle),node.location.y + pieRadius*p5.sin(rotateAngle));
@@ -440,7 +606,18 @@ function p5Node(processing){
 	node.renderText=function(){
 		p5.fill(79,79,72);
 		var textWidth=p5.textWidth(node.name);
-		p5.text(node.name,node.location.x-textWidth/2, node.location.y - 8 * myVars.screenSizeRatio-node.radius/2);
+		p5.text(node.name, node.location.x-textWidth/2, node.location.y - 8 * myVars.screenSizeRatio-node.radius/2);
+	}
+
+	node.renderChar = function(){
+		p5.fill(p5.unhex(node.myColor), node.life);
+		p5.pushMatrix();
+	    p5.translate(node.location.x, node.location.y);
+		    p5.pushMatrix();
+		    p5.rotate(node.orientation);
+		    p5.text(node.myChar, 0, 0);
+		    p5.popMatrix();
+	    p5.popMatrix();
 	}
 }
 
