@@ -378,7 +378,7 @@ function skillSetSketch(processing){
 	var initializeGraphic=function(){
 		var regNodeRadius=40 * myVars.screenSizeRatio;
 		var largeNodeRadius=60 * myVars.screenSizeRatio;
-		var regSpringLength=100 * myVars.screenSizeRatio;
+		var regSpringLength=120 * myVars.screenSizeRatio;
 		var randLength= 0; //100 * myVars.screenSizeRatio;	
 		var longSpringLength= 160 * myVars.screenSizeRatio;//240 * myVars.screenSizeRatio;
 

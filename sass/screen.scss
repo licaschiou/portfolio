@@ -79,7 +79,7 @@ body{
 	-o-transform: rotate(90deg);		
 }
 .fixedLeft{	left:-70px;	}
-.fixedRight{ right:-100px; }
+.fixedRight{ right:-70px; }
 
 .workMenu{
 	color:$pale;
@@ -290,6 +290,7 @@ section#top{
 		font-family: 'Nunito', sans-serif;
 		font-size: 42px;
 		color: $grey;
+		text-align: right;
 		letter-spacing: 0px;
 	}
 }
@@ -404,6 +405,7 @@ section#workList{
 			text-decoration: none;
 			font-weight: normal;				
 			img{
+				padding: 6px;
 				width: 100%;
 			}
 			h2{
@@ -423,6 +425,9 @@ section#workList{
 		a:hover{
 			color: $orange;	
 			border:6px solid $orange;
+		}
+		a:hover img{
+			padding: 0px;
 		}
 		a:hover p{
 			margin: 8px 0 1px;
