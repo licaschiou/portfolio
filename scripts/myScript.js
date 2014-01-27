@@ -16,16 +16,11 @@ var myVars={
 	selectedFilter: "all"
 };
 
-$(document).ready(function(){
-	
+$(document).ready(function(){	
 	$("#top .verticalAlignContainer .verticalAlignCell h2").each(function(){
 		//tweenTitleColor($(this));
 		$(this).mouseenter(function(){
 			$(this).css('cursor','pointer');
-			// myVars.pageMouseX = event.pageX;
-			// myVars.pageMouseY = event.pageY;
-			// var clickOnChar = $(this).text().toLowerCase();
-			// createTextFirework(clickOnChar);
 		});
 		$(this).click(function(event){
 			myVars.pageMouseX = event.pageX;
@@ -205,6 +200,8 @@ function skillSetSketch(processing){
 	var nodeArray=new Array();
 	var springArray=new Array();
 	var readmePieAngle=0;
+	var readMeButtonLocation = new p5.PVector();
+	var showSkillHint = -1;
 
 	p5.setup=function(){
 		p5.size(myVars.canvasWidth, myVars.canvasHeight);		
@@ -212,10 +209,12 @@ function skillSetSketch(processing){
 		p5.frameRate(30);
 		p5.smooth();
 		p5.fill(0);
-		p5.stroke(0);		
+		p5.stroke(0);
+
 		myVars.p5Font=p5.createFont('Oxygen', myVars.p5FontSize, true);
 		p5.textSize(myVars.p5FontSize);
 		p5.textFont(myVars.p5Font);
+		readMeButtonLocation.set(p5.width / 2, 60);
 		initializeGraphic();
 	}
 
@@ -259,14 +258,39 @@ function skillSetSketch(processing){
 		}
 	
 	}
+	p5.mouseMoved = function(){
+		var mouseLoc;
+		if ( $.browser.webkit ) mouseLoc=new p5.PVector(p5.mouseX, p5.mouseY - $(window).scrollTop());
+		else mouseLoc = new p5.PVector(p5.mouseX, p5.mouseY);
+		
+
+		var distToHint=p5.PVector.sub(readMeButtonLocation, mouseLoc);
+		if(distToHint.mag() < 40){
+			p5.cursor(p5.HAND);
+		}else{
+			for(var i=0; i<nodeArray.length; i++){
+				var distToNode=p5.PVector.sub(nodeArray[i].location, mouseLoc);
+				if(distToNode.mag() < nodeArray[i].radius){
+					p5.cursor(p5.HAND);
+					break;
+				}else p5.cursor(p5.ARROW);
+			}
+		}
+	}
 
 	p5.mousePressed=function(){
 		var mouseLoc;
 		if ( $.browser.webkit ) mouseLoc=new p5.PVector(p5.mouseX, p5.mouseY - $(window).scrollTop());
 		else mouseLoc = new p5.PVector(p5.mouseX, p5.mouseY);
+		var distToCurosr=p5.PVector.sub(readMeButtonLocation, mouseLoc);
+		if(distToCurosr.mag() < 40){
+			if(showSkillHint == -1)showSkillHint = 1;
+			else showSkillHint = -1;
+		} 
+
 		for(var i=0; i<nodeArray.length; i++){
 			var distToCurosr=p5.PVector.sub(nodeArray[i].location, mouseLoc);
-			if(distToCurosr.mag()<10){
+			if(distToCurosr.mag() < nodeArray[i].radius){
 				seletecNodeId=i;				
 				nodeArray[seletecNodeId].setSelected(1);
 				nodeArray[seletecNodeId].pieChartAngle=0;
@@ -274,7 +298,7 @@ function skillSetSketch(processing){
 				nodeArray[seletecNodeId].enlarge();
 				break;
 			}
-		}	
+		}
 	}
 
 	p5.mouseReleased=function(){
@@ -284,6 +308,7 @@ function skillSetSketch(processing){
 			nodeArray[seletecNodeId].shrink();
 		}		
 		seletecNodeId=-1;
+
 	}
 
 	p5.resize=function(){		
@@ -297,36 +322,37 @@ function skillSetSketch(processing){
 
 	var createReadme=function(){
 		var readmePieRadius=24;
-		var pieX=p5.width / 2;
-		var pieY=40;
+		p5.fill(145,152,159,150);
+		p5.ellipse(readMeButtonLocation.x + myVars.shadowDisplacement, readMeButtonLocation.y + myVars.shadowDisplacement, 40, 40);
 		p5.fill(79,79,72);
-		p5.ellipse(pieX,pieY,30,30);
+		p5.ellipse(readMeButtonLocation.x, readMeButtonLocation.y, 40, 40);
 		p5.fill(252,250,242);
-		p5.ellipse(pieX,pieY,24,24);
-		p5.fill(189,192,186);		
-		createReadmePie(pieX, pieY);
+		p5.ellipse(readMeButtonLocation.x, readMeButtonLocation.y, 32, 32);
+		p5.fill(189,192,186);
 		p5.fill(79,79,72);
-		p5.text("Click / Drag",pieX+26, pieY+6);
-		var textWidth=p5.textWidth("My Skill Set");
-		p5.text("My Skill Set",pieX - textWidth - 26, pieY+6);
+		p5.textSize(22);
+		var textWidth = p5.textWidth("?");
+		p5.text("?", readMeButtonLocation.x - textWidth / 2, readMeButtonLocation.y + 8);
+		textWidth=p5.textWidth("Click on circles to show skill levels");
+		if(showSkillHint == 1) p5.text("Click on circles to show skill levels", readMeButtonLocation.x - (textWidth / 2), readMeButtonLocation.y - 32);
 		p5.textSize(myVars.p5FontSize);
 	}
 
-	var createReadmePie=function(initX, initY){
-		var pieRadius=12;
-		var radTarget=720;
-		var radPieChart=p5.radians(readmePieAngle);
-		p5.beginShape();
-		p5.vertex(initX,initY);
-		for(var i=0; i<radPieChart; i+=0.01){
-			var rotateAngle=i-p5.PI/2;
-			p5.vertex(initX + pieRadius*p5.cos(rotateAngle),initY + pieRadius*p5.sin(rotateAngle));
-		}
-		p5.vertex(initX,initY);
-		p5.endShape(p5.CLOSE);
-		if(readmePieAngle<radTarget)readmePieAngle+=2;
-		if(readmePieAngle>=radTarget)readmePieAngle=0;
-	}
+	// var createReadmePie=function(initX, initY){
+	// 	var pieRadius=12;
+	// 	var radTarget=720;
+	// 	var radPieChart=p5.radians(readmePieAngle);
+	// 	p5.beginShape();
+	// 	p5.vertex(initX,initY);
+	// 	for(var i=0; i<radPieChart; i+=0.01){
+	// 		var rotateAngle=i-p5.PI/2;
+	// 		p5.vertex(initX + pieRadius*p5.cos(rotateAngle),initY + pieRadius*p5.sin(rotateAngle));
+	// 	}
+	// 	p5.vertex(initX,initY);
+	// 	p5.endShape(p5.CLOSE);
+	// 	if(readmePieAngle<radTarget)readmePieAngle+=2;
+	// 	if(readmePieAngle>=radTarget)readmePieAngle=0;
+	// }
 
 	var initializeSprings=function(){
 		var i=0;
@@ -338,7 +364,7 @@ function skillSetSketch(processing){
 		nodeArray[index].setRadius(size);
 		nodeArray[index].setColor(color);
 		nodeArray[index].setName(name);		
-		nodeArray[index].setLocation(p5.width/2+p5.random(-100,100), p5.height/2+p5.random(-100,100));
+		nodeArray[index].setLocation(p5.width/2+p5.random(-100,100), p5.height/2+p5.random(0,100));
 		myVars.nodeCount++;
 	}
 
@@ -351,14 +377,14 @@ function skillSetSketch(processing){
 
 	var initializeGraphic=function(){
 		var regNodeRadius=40 * myVars.screenSizeRatio;
-		var largeNodeRadius=80 * myVars.screenSizeRatio;
-		var regSpringLength=120 * myVars.screenSizeRatio;
+		var largeNodeRadius=60 * myVars.screenSizeRatio;
+		var regSpringLength=100 * myVars.screenSizeRatio;
 		var randLength= 0; //100 * myVars.screenSizeRatio;	
-		var longSpringLength= 200 * myVars.screenSizeRatio;//240 * myVars.screenSizeRatio;
+		var longSpringLength= 160 * myVars.screenSizeRatio;//240 * myVars.screenSizeRatio;
 
 		var cGraphic="ffffb11b";
-		var cInteractive="ffcb1b45";
-		var cTechnical="ffeb3015";
+		var cInteractive="ffeb3015";
+		var cTechnical="ffddd23b"; //eb3015
 		var cUI="fff75c2f";
 		createNodeArrayItem(myVars.nodeCount, largeNodeRadius, cGraphic, "Graphic");
 		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
