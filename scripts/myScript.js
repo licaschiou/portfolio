@@ -592,12 +592,12 @@ function p5Node(processing){
 
 	node.render=function(){
 		if(Boolean(node.showSkill)){
-			p5.fill(145,152,159,60);
+			p5.fill(145,152,159,150);
 			// p5.ellipse(node.location.x + myVars.shadowDisplacement * 3 * myVars.screenSizeRatio, 
 			// 		   node.location.y + myVars.shadowDisplacement * 3 * myVars.screenSizeRatio, 
 			// 		   node.radius - myVars.shadowDisplacement * 2 * myVars.screenSizeRatio, 
 			// 		   node.radius - myVars.shadowDisplacement * 2 * myVars.screenSizeRatio);	
-		    p5.ellipse(node.location.x, node.location.y, node.radius, node.radius);			
+		    p5.ellipse(node.location.x + myVars.shadowDisplacement, node.location.y + myVars.shadowDisplacement, node.radius,node.radius);
 		}else{
 			p5.fill(145,152,159,150);
 			p5.ellipse(node.location.x + myVars.shadowDisplacement, node.location.y + myVars.shadowDisplacement, node.radius,node.radius);
