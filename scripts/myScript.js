@@ -111,7 +111,7 @@ $(window).resize(function() {
 	myVars.canvasWidth=$("#p5Parent").width();
 	myVars.canvasHeight=$( window ).height() * 0.9;
 	myVars.screenSizeRatio=myVars.canvasWidth/960;
-	myVars.skillSetSketchEngine.resize();
+	//myVars.skillSetSketchEngine.resize();
 	//myVars.skillSetSketchEngine.stopDrawing();
 	//myVars.skillSetSketchEngine=null;
 	//myVars.skillSetSketchEngine=new Processing(myVars.$skillSetCanvas, skillSetSketch);
