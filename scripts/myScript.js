@@ -17,8 +17,10 @@ var myVars={
 };
 
 $(document).ready(function(){
-	$('#workList a').css({'height': $('#workList a img').height()});
-	initWorkGrid();
+	$(window).load(function(){
+		$('#workList a').css({'height': $('#workList a img').height()});
+		initWorkGrid();
+	});	
 
 	$("#top .verticalAlignContainer .verticalAlignCell h2").each(function(){
 		$(this).mouseenter(function(){
@@ -99,7 +101,7 @@ $(document).ready(function(){
 });
 
 $(window).scroll(function() {
-	//$('#workList a').css({'height': $('#workList a img').height()});
+	$('#workList a').css({'height': $('#workList a img').height()});
 	resetWorkGrid();
 });
 
