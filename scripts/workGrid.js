@@ -2,10 +2,9 @@ function resetWorkGrid(){
 	$(".canvasBox").each(function(){
 		var box = $(this)[0];	
 		var canvasObject = $(this);
-		console.log($(this).offset().top - $(window).scrollTop());
 		var topToWindow = $(this).offset().top - $(window).scrollTop();
-		canvasObject.data( "midX", box.offsetLeft + box.offsetWidth * 0.5);
-		canvasObject.data( "midY", topToWindow + box.offsetHeight * 0.5);
+		canvasObject.data().midX = box.offsetLeft + box.offsetWidth * 0.5;
+		canvasObject.data().midY = topToWindow + box.offsetHeight * 0.5;
 	});
 }
 
@@ -189,6 +188,11 @@ function initWorkGrid(){
 			ctx.fill();
 		});
 
+		canvasObject.data( "cleanCanvas", function(boxObj){
+			var ctx = boxObj.find('canvas')[0].getContext("2d");
+			ctx.clearRect(0, 0, boxObj[0].offsetWidth, boxObj[0].offsetHeight);
+		});
+
 		//Attach mouseEvent
 		$(this).mouseenter(function(event){
 			var mouseEnterPosition;			
@@ -196,8 +200,7 @@ function initWorkGrid(){
 			else if( event.clientX > canvasObject.data().midX && event.clientY < canvasObject.data().midY ) mouseEnterPosition = "RT";
 			else if( event.clientX < canvasObject.data().midX && event.clientY > canvasObject.data().midY ) mouseEnterPosition = "LB";
 			else if( event.clientX > canvasObject.data().midX && event.clientY > canvasObject.data().midY ) mouseEnterPosition = "RB";
-			console.log(canvasObject.data().midY);
-			console.log("clientY= " + event.clientY);
+		
 			canvasObject.data().setEnterPoints(mouseEnterPosition, canvasObject);
 			clearInterval(canvasObject.data().fadeOutInterval);			
 			canvasObject.data().finish = 0;
