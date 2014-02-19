@@ -16,9 +16,11 @@ var myVars={
 	selectedFilter: "all"
 };
 
-$(document).ready(function(){	
+$(document).ready(function(){
+	$('#workList a').css({'height': $('#workList a img').height()});
+	initWorkGrid();
+
 	$("#top .verticalAlignContainer .verticalAlignCell h2").each(function(){
-		//tweenTitleColor($(this));
 		$(this).mouseenter(function(){
 			$(this).css('cursor','pointer');
 		});
@@ -79,13 +81,14 @@ $(document).ready(function(){
 				});
 			}else{
 				$("#workListContainer a[class]").each(function(){
-					if($(this).attr("class") != myVars.selectedFilter){
+					if($(this).attr("class") != myVars.selectedFilter + " canvasBox"){
 						$(this).css('display','none');
 					}else{
 						$(this).css('display','inline');
 					}
 				});
 			}
+			resetWorkGrid();
 			$('#workFilter h1').each(function(){
 				$(this).css('color','#bdc0ba');	
 			});
@@ -95,7 +98,13 @@ $(document).ready(function(){
 
 });
 
+$(window).scroll(function() {
+	$('#workList a').css({'height': $('#workList a img').height()});
+	resetWorkGrid();
+});
+
 $(window).resize(function() {
+	$('#workList a').css({'height': $('#workList a img').height()});
 	myVars.$skillSetCanvas=$('#skillSetCanvas').get(0);
 	myVars.canvasWidth=$("#p5Parent").width();
 	myVars.canvasHeight=$( window ).height() * 0.9;
@@ -337,22 +346,6 @@ function skillSetSketch(processing){
 		if(showSkillHint == 1) p5.text("Click on circles to show skill levels", readMeButtonLocation.x - (textWidth / 2), readMeButtonLocation.y - 32);
 		p5.textSize(myVars.p5FontSize);
 	}
-
-	// var createReadmePie=function(initX, initY){
-	// 	var pieRadius=12;
-	// 	var radTarget=720;
-	// 	var radPieChart=p5.radians(readmePieAngle);
-	// 	p5.beginShape();
-	// 	p5.vertex(initX,initY);
-	// 	for(var i=0; i<radPieChart; i+=0.01){
-	// 		var rotateAngle=i-p5.PI/2;
-	// 		p5.vertex(initX + pieRadius*p5.cos(rotateAngle),initY + pieRadius*p5.sin(rotateAngle));
-	// 	}
-	// 	p5.vertex(initX,initY);
-	// 	p5.endShape(p5.CLOSE);
-	// 	if(readmePieAngle<radTarget)readmePieAngle+=2;
-	// 	if(readmePieAngle>=radTarget)readmePieAngle=0;
-	// }
 
 	var initializeSprings=function(){
 		var i=0;
@@ -739,10 +732,6 @@ function p5Spring(processing){
 		resultVector.x = iniX * p5.cos(p5.radians(angle)) - iniY * p5.sin(p5.radians(angle));
 		resultVector.y = iniX * p5.sin(p5.radians(angle)) + iniY * p5.cos(p5.radians(angle));
 		return resultVector;
-	}
-
-	spring.calculateShape=function(){
-		//calculate connection
 	}
 
 	spring.update=function(){
