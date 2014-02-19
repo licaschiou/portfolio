@@ -11,8 +11,8 @@ function resetWorkGrid(){
 
 function initWorkGrid(){
 	// Define the pixel ratio of each canvas element. Without this step, canvas will automatically stretch.
-	$("canvas").attr('width', $(".canvasBox")[0].offsetWidth);
-	$("canvas").attr('height', $(".canvasBox")[0].offsetHeight);
+	$(".canvasBox canvas").attr('width', $(".canvasBox")[0].offsetWidth);
+	$(".canvasBox canvas").attr('height', $(".canvasBox")[0].offsetHeight);
 
 	$(".canvasBox").each(function(){
 		var box = $(this)[0];		
@@ -176,7 +176,7 @@ function initWorkGrid(){
 		});
 
 		canvasObject.data( "render", function(boxObj){
-			var ctx = boxObj.find('canvas')[0].getContext("2d");
+			var ctx = boxObj.find('.canvasBox canvas')[0].getContext("2d");
 			ctx.clearRect(0, 0, boxObj[0].offsetWidth, boxObj[0].offsetHeight);
 			ctx.beginPath();	
 			ctx.moveTo(boxObj.data().p1.x, boxObj.data().p1.y);
@@ -189,7 +189,7 @@ function initWorkGrid(){
 		});
 
 		canvasObject.data( "cleanCanvas", function(boxObj){
-			var ctx = boxObj.find('canvas')[0].getContext("2d");
+			var ctx = boxObj.find('.canvasBox canvas')[0].getContext("2d");
 			ctx.clearRect(0, 0, boxObj[0].offsetWidth, boxObj[0].offsetHeight);
 		});
 
