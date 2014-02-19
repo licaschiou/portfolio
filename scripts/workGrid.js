@@ -176,7 +176,7 @@ function initWorkGrid(){
 		});
 
 		canvasObject.data( "render", function(boxObj){
-			var ctx = boxObj.find('.canvasBox canvas')[0].getContext("2d");
+			var ctx = boxObj.find('canvas')[0].getContext("2d");
 			ctx.clearRect(0, 0, boxObj[0].offsetWidth, boxObj[0].offsetHeight);
 			ctx.beginPath();	
 			ctx.moveTo(boxObj.data().p1.x, boxObj.data().p1.y);
@@ -189,7 +189,7 @@ function initWorkGrid(){
 		});
 
 		canvasObject.data( "cleanCanvas", function(boxObj){
-			var ctx = boxObj.find('.canvasBox canvas')[0].getContext("2d");
+			var ctx = boxObj.find('canvas')[0].getContext("2d");
 			ctx.clearRect(0, 0, boxObj[0].offsetWidth, boxObj[0].offsetHeight);
 		});
 
