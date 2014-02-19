@@ -99,7 +99,7 @@ $(document).ready(function(){
 });
 
 $(window).scroll(function() {
-	$('#workList a').css({'height': $('#workList a img').height()});
+	//$('#workList a').css({'height': $('#workList a img').height()});
 	resetWorkGrid();
 });
 
