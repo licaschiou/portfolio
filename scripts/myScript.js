@@ -101,12 +101,11 @@ $(document).ready(function(){
 });
 
 $(window).scroll(function() {
-	$('#workList a').css({'height': $('#workList a img').height()});
 	resetWorkGrid();
 });
 
 $(window).resize(function() {
-	$('#workList a').css({'height': $('#workList a img').height()});
+	resetWorkGrid();
 	myVars.$skillSetCanvas=$('#skillSetCanvas').get(0);
 	myVars.canvasWidth=$("#p5Parent").width();
 	myVars.canvasHeight=$( window ).height() * 0.9;
