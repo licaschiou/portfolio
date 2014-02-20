@@ -67,6 +67,7 @@ $(document).ready(function(){
 			myVars.mouseOutOfCanvas = 0;
 		});
 	}
+	detectSketchInViewport();
 
 	$('#workFilter h1').each(function(){
 		$(this).mouseenter(function(){
@@ -100,11 +101,38 @@ $(document).ready(function(){
 
 });
 
+function getViewportSize(w) {
+    var w = w || window;
+    if(w.innerWidth != null) return {w:w.innerWidth, h:w.innerHeight};
+    var d = w.document;
+    if (document.compatMode == "CSS1Compat") {
+        return {
+            w: d.documentElement.clientWidth,
+            h: d.documentElement.clientHeight
+        };
+    }
+    return { w: d.body.clientWidth, h: d.body.clientWidth };
+}
+
+function isViewportVisible(element) {
+    var box = element.getBoundingClientRect();
+    var height = box.height || (box.bottom - box.top);
+    var width = box.width || (box.right - box.left);
+    var viewport = getViewportSize();
+    if(!height || !width) return false;
+    if(box.top > viewport.h || box.bottom < 0) return false;
+    if(box.right < 0 || box.left > viewport.w) return false;
+    return true;    
+}
+
 $(window).scroll(function() {
+	detectSketchInViewport();
 	resetWorkGrid();
+
 });
 
 $(window).resize(function() {
+	detectSketchInViewport();
 	resetWorkGrid();
 	myVars.$skillSetCanvas=$('#skillSetCanvas').get(0);
 	myVars.canvasWidth=$("#p5Parent").width();
@@ -115,6 +143,19 @@ $(window).resize(function() {
 	//myVars.skillSetSketchEngine=null;
 	//myVars.skillSetSketchEngine=new Processing(myVars.$skillSetCanvas, skillSetSketch);
 });
+
+var detectSketchInViewport = function(){
+	if(!isViewportVisible(myVars.$titleBackgroundCanvas)){
+		myVars.titleBackgroundEngine.noLoop();
+	}else{
+		myVars.titleBackgroundEngine.loop();
+	}
+	if(!isViewportVisible(myVars.$skillSetCanvas)){
+		myVars.skillSetSketchEngine.noLoop();
+	}else{
+		myVars.skillSetSketchEngine.loop();
+	}
+}
 
 var createTextFirework = function(clickOnChar){
 	switch (clickOnChar)
@@ -453,7 +494,7 @@ function p5Node(processing){
 	node.minAttractDistance=160.0;	
 	node.maxSpeed=15.0;
 	node.damping=0.75;
-	node.mass = 1.0;
+	node.mass = 1.5;
 	node.life = 255.0;
 	node.attractDirection=-1;
 	node.attracting=false;
