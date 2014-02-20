@@ -1,5 +1,15 @@
 function resetWorkGrid(){
+	// $(".canvasBox canvas").each(function(){
+	// 	$(this).attr('width', $(this)[0].offsetWidth);
+	// 	$(this).attr('height', $(this)[0].offsetHeight);
+	// });
+	$('#workList a img').each(function(){		
+		$(this).parent().css({'height': $(this).width()});
+	});	
 	$(".canvasBox").each(function(){
+		$(this).find('canvas').attr('width', $(this)[0].offsetWidth);
+		$(this).find('canvas').attr('height', $(this)[0].offsetHeight);
+		$(this).attr('height', $(this)[0].offsetHeight);
 		var box = $(this)[0];	
 		var canvasObject = $(this);
 		var topToWindow = $(this).offset().top - $(window).scrollTop();
@@ -200,9 +210,8 @@ function initWorkGrid(){
 			else if( event.clientX > canvasObject.data().midX && event.clientY < canvasObject.data().midY ) mouseEnterPosition = "RT";
 			else if( event.clientX < canvasObject.data().midX && event.clientY > canvasObject.data().midY ) mouseEnterPosition = "LB";
 			else if( event.clientX > canvasObject.data().midX && event.clientY > canvasObject.data().midY ) mouseEnterPosition = "RB";
-		
-			canvasObject.data().setEnterPoints(mouseEnterPosition, canvasObject);
 			clearInterval(canvasObject.data().fadeOutInterval);			
+			canvasObject.data().setEnterPoints(mouseEnterPosition, canvasObject);			
 			canvasObject.data().finish = 0;
 			canvasObject.data().fadeInInterval = setInterval(function(){
 				canvasObject.data().updatePoints(canvasObject);
@@ -219,9 +228,8 @@ function initWorkGrid(){
 			else if( event.clientX > canvasObject.data().midX && event.clientY < canvasObject.data().midY ) mouseEnterPosition = "RT";
 			else if( event.clientX < canvasObject.data().midX && event.clientY > canvasObject.data().midY ) mouseEnterPosition = "LB";
 			else if( event.clientX > canvasObject.data().midX && event.clientY > canvasObject.data().midY ) mouseEnterPosition = "RB";
-			
-			canvasObject.data().setLeavePoints(mouseEnterPosition, canvasObject);
 			clearInterval(canvasObject.data().fadeInInterval);
+			canvasObject.data().setLeavePoints(mouseEnterPosition, canvasObject);
 			canvasObject.data().finish = 0;
 			canvasObject.data().fadeOutInterval = setInterval(function(){	
 				canvasObject.data().updatePoints(canvasObject);

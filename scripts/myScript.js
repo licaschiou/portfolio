@@ -19,6 +19,8 @@ var myVars={
 $(document).ready(function(){
 	$(window).load(function(){
 		$('#workList a').css({'height': $('#workList a img').height()});
+		//$('#workList a img').css({'width': $('#workList a').width()});
+		//$('#workList a img').css({'height': $('#workList a').height()});
 		initWorkGrid();
 	});	
 
@@ -35,29 +37,15 @@ $(document).ready(function(){
 		
 	});
 
-	if(myVars.canvasWidth > 960)myVars.p5FontSize=20;
-	else if(myVars.canvasWidth > 640 && myVars.canvasWidth < 960)myVars.p5FontSize=16;
-	else if(myVars.canvasWidth < 640 )myVars.p5FontSize=12;
-
 	myVars.$titleBackgroundCanvas = $('#titleBackgroundCanvas').get(0);
 	if(myVars.$titleBackgroundCanvas != undefined){
-		myVars.canvasWidth=$("#titleBackgroundCanvas").width();
-		myVars.canvasHeight=$( window ).height() * 0.9;
-		myVars.screenSizeRatio=myVars.canvasWidth/960;
-		if(myVars.canvasWidth > 960)myVars.p5FontSize=20;
-		else if(myVars.canvasWidth > 640 && myVars.canvasWidth < 960)myVars.p5FontSize=16;
-		else if(myVars.canvasWidth < 640 )myVars.p5FontSize=12;
-		myVars.titleBackgroundEngine=new Processing(myVars.$titleBackgroundCanvas, titleBackgroundSketch);
+		calTitleCanvasRatio();
+		myVars.titleBackgroundEngine=new Processing(myVars.$titleBackgroundCanvas, titleBackgroundSketch);		
 	}
 
 	myVars.$skillSetCanvas=$('#skillSetCanvas').get(0);
 	if(myVars.$skillSetCanvas!=undefined){
-		myVars.canvasWidth=$("#p5Parent").width();
-		myVars.canvasHeight=$( window ).height() * 0.9;
-		myVars.screenSizeRatio=myVars.canvasWidth/960;
-		if(myVars.canvasWidth > 960)myVars.p5FontSize=22;
-		else if(myVars.canvasWidth > 640 && myVars.canvasWidth < 960)myVars.p5FontSize=16;
-		else if(myVars.canvasWidth < 640 )myVars.p5FontSize=12;
+		calSkillCanvasRatio();
 		myVars.skillSetSketchEngine=new Processing(myVars.$skillSetCanvas, skillSetSketch);
 
 		$('#skillSetCanvas').mouseleave(function(event){
@@ -70,12 +58,15 @@ $(document).ready(function(){
 	detectSketchInViewport();
 
 	$('#workFilter h1').each(function(){
+		
 		$(this).mouseenter(function(){
 			$(this).css('cursor','pointer').css('color','#4f4f48');
 		});
+
 		$(this).mouseleave(function(){
 			if( $(this).html() != myVars.selectedFilter)$(this).css('color','#bdc0ba');	
 		});
+
 		$(this).click(function(){
 			myVars.selectedFilter = $(this).html();
 			if(myVars.selectedFilter == "all"){
@@ -131,17 +122,46 @@ $(window).scroll(function() {
 
 });
 
-$(window).resize(function() {
-	detectSketchInViewport();
+window.onresize=function(){	
 	resetWorkGrid();
-	myVars.$skillSetCanvas=$('#skillSetCanvas').get(0);
+
+	calTitleCanvasRatio();
+	myVars.titleBackgroundEngine.exit();
+	myVars.titleBackgroundEngine = new Processing(myVars.$titleBackgroundCanvas, titleBackgroundSketch);
+	myVars.titleBackgroundEngine.noLoop();
+	
+	calSkillCanvasRatio();
+	myVars.skillSetSketchEngine.exit();
+	myVars.nodeCount = 0;
+	myVars.springCount = 0;
+	myVars.skillSetSketchEngine=new Processing(myVars.$skillSetCanvas, skillSetSketch);
+	myVars.skillSetSketchEngine.noLoop();
+
+	detectSketchInViewport();
+};
+
+function calTitleCanvasRatio(){
+	myVars.canvasWidth=$("#titleBackgroundCanvas").width();
+	myVars.canvasHeight=$( window ).height() * 0.9;
+	myVars.screenSizeRatio=myVars.canvasWidth/960;
+
+	if(myVars.canvasWidth > 960)myVars.p5FontSize=20;
+	else if(myVars.canvasWidth > 640 && myVars.canvasWidth < 960)myVars.p5FontSize=16;
+	else if(myVars.canvasWidth < 640 )myVars.p5FontSize=12;
+}
+
+function calSkillCanvasRatio(){
 	myVars.canvasWidth=$("#p5Parent").width();
 	myVars.canvasHeight=$( window ).height() * 0.9;
 	myVars.screenSizeRatio=myVars.canvasWidth/960;
-	//myVars.skillSetSketchEngine.resize();
-	//myVars.skillSetSketchEngine.stopDrawing();
-	//myVars.skillSetSketchEngine=null;
-	//myVars.skillSetSketchEngine=new Processing(myVars.$skillSetCanvas, skillSetSketch);
+
+	if(myVars.canvasWidth > 960)myVars.p5FontSize=20;
+	else if(myVars.canvasWidth > 640 && myVars.canvasWidth < 960)myVars.p5FontSize=16;
+	else if(myVars.canvasWidth < 640 )myVars.p5FontSize=12;
+}
+
+$(window).resize(function() {
+	//jQuery's resize() seems won't fire for browser's minimize/maxmize button
 });
 
 var detectSketchInViewport = function(){
@@ -193,9 +213,8 @@ function titleBackgroundSketch(processing){
 	p5.setup=function(){
 		p5.size(myVars.canvasWidth, myVars.canvasHeight);
 		p5.background(252,250,242,0);
-		myVars.p5Font=p5.createFont('Nunito', myVars.p5FontSize * 2, true);
+		myVars.p5Font = p5.createFont('Nunito', myVars.p5FontSize * 2, true);
 		p5.textFont(myVars.p5Font);
-		popLocation.set(p5.width / 2, p5.height / 2);
 		p5.fill(0);
 	}
 
@@ -252,8 +271,8 @@ function skillSetSketch(processing){
 	var p5=processing;
 	var numNodes=20;
 	var seletecNodeId=-1;
-	var nodeArray=new Array();
-	var springArray=new Array();
+	var nodeArray;
+	var springArray;
 	var readmePieAngle=0;
 	var readMeButtonLocation = new p5.PVector();
 	var showSkillHint = -1;
@@ -266,10 +285,12 @@ function skillSetSketch(processing){
 		p5.fill(0);
 		p5.stroke(0);
 
-		myVars.p5Font=p5.createFont('Oxygen', myVars.p5FontSize, true);
+		nodeArray=new Array();
+		springArray=new Array();
+		myVars.p5Font = p5.createFont('Oxygen', myVars.p5FontSize, true);
 		p5.textSize(myVars.p5FontSize);
 		p5.textFont(myVars.p5Font);
-		readMeButtonLocation.set(p5.width / 2, 60);
+		readMeButtonLocation.set(p5.width / 2, 60);		
 		initializeGraphic();
 	}
 
@@ -414,7 +435,7 @@ function skillSetSketch(processing){
 		myVars.springCount++;
 	}
 
-	var initializeGraphic=function(){
+	var initializeGraphic=function(){		
 		var regNodeRadius=40 * myVars.screenSizeRatio;
 		var largeNodeRadius=60 * myVars.screenSizeRatio;
 		var regSpringLength=120 * myVars.screenSizeRatio;
@@ -431,7 +452,7 @@ function skillSetSketch(processing){
 		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
 		createNodeArrayItem(myVars.nodeCount, largeNodeRadius, cTechnical, "Technical");
 		nodeArray[myVars.nodeCount-1].setSkillLevel(270);
-		
+
 		createSpringArrayItem(myVars.springCount, longSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[0], nodeArray[1]);
 		createSpringArrayItem(myVars.springCount, longSpringLength+p5.floor(p5.random(0,randLength)), nodeArray[1], nodeArray[2]);
 		createSpringArrayItem(myVars.springCount, longSpringLength+p5.floor(p5.random(randLength,randLength*2)), nodeArray[0], nodeArray[2]);
