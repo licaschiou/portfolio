@@ -145,15 +145,19 @@ $(window).resize(function() {
 });
 
 var detectSketchInViewport = function(){
-	if(!isViewportVisible(myVars.$titleBackgroundCanvas)){
-		myVars.titleBackgroundEngine.noLoop();
-	}else{
-		myVars.titleBackgroundEngine.loop();
+	if(myVars.$titleBackgroundCanvas != undefined){
+		if(!isViewportVisible(myVars.$titleBackgroundCanvas)){
+			myVars.titleBackgroundEngine.noLoop();
+		}else{
+			myVars.titleBackgroundEngine.loop();
+		}
 	}
-	if(!isViewportVisible(myVars.$skillSetCanvas)){
-		myVars.skillSetSketchEngine.noLoop();
-	}else{
-		myVars.skillSetSketchEngine.loop();
+	if(myVars.$skillSetCanvas != undefined){
+		if(!isViewportVisible(myVars.$skillSetCanvas)){
+			myVars.skillSetSketchEngine.noLoop();
+		}else{
+			myVars.skillSetSketchEngine.loop();
+		}
 	}
 }
 
