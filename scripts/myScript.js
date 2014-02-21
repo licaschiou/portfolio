@@ -56,7 +56,7 @@ $(document).ready(function(){
 		});
 	}
 	detectSketchInViewport();
-
+	/*
 	$('#workFilter h1').each(function(){
 		
 		$(this).mouseenter(function(){
@@ -89,7 +89,7 @@ $(document).ready(function(){
 			$(this).css('color','#4f4f48');
 		});
 	});
-
+	*/
 });
 
 function getViewportSize(w) {
