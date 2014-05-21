@@ -17,10 +17,13 @@ var myVars={
 };
 
 $(document).ready(function(){
+	// To fix pixel gap in FireFox. But since the actual width is controlled by SUSY
+	// forcing width will break all responsive layout. 
+	// var odd = $('body').width() % 2;
+	// if(odd != 0) $('body').css('width', $('body').width() + 1);
+
 	$(window).load(function(){
 		$('#workList a').css({'height': $('#workList a img').height()});
-		//$('#workList a img').css({'width': $('#workList a').width()});
-		//$('#workList a img').css({'height': $('#workList a').height()});
 		initWorkGrid();
 	});	
 

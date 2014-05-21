@@ -200,11 +200,8 @@ body{
 	margin:0 auto;
 }
 
-.verticalSectionContainer{
-	display: table;
-	height:100%;
+.fullWindowWidth{
 	width:100%;
-	margin:0 auto;
 }
 
 .verticalAlignCell{
@@ -398,6 +395,7 @@ section#workList{
 	article{
 		@include span-columns(12 omega, 12);
 		@include pad(2, 2);
+
 		-webkit-transform: translateZ(0);
 		text-align:center;
 		margin-bottom: 80px;
@@ -419,6 +417,8 @@ section#workList{
 			position: relative;		
 			text-decoration: none;
 			font-weight: normal;
+			overflow: visible;
+
 			img{
 				width: 100%;
 				height: 100%;
@@ -450,6 +450,7 @@ section#workList{
 				transition: opacity 0.5s;
 				opacity: 0;
 			}
+
 			canvas{
 				position: absolute;
 				margin: 0;

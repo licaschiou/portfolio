@@ -51,8 +51,8 @@ function initWorkGrid(){
 		//attach methods
 		canvasObject.data( "setEnterPoints", function(dir, boxObj){
 			canvasObject.data( "dest1", new Point(0, 0));
-			canvasObject.data( "dest2", new Point(box.offsetWidth, 0));
-			canvasObject.data( "dest3", new Point(box.offsetWidth, box.offsetHeight));
+			canvasObject.data( "dest2", new Point(box.offsetWidth + 1, 0));
+			canvasObject.data( "dest3", new Point(box.offsetWidth + 1, box.offsetHeight));
 			canvasObject.data( "dest4", new Point(0, box.offsetHeight));
 			switch(dir){
 				case "LT":
@@ -194,8 +194,9 @@ function initWorkGrid(){
 			ctx.lineTo(boxObj.data().p3.x, boxObj.data().p3.y);
 			ctx.lineTo(boxObj.data().p4.x, boxObj.data().p4.y);
 			ctx.closePath();
-			ctx.fillStyle = '#f75c2f';
+			ctx.fillStyle = '#f75c2f';			
 			ctx.fill();
+
 		});
 
 		canvasObject.data( "cleanCanvas", function(boxObj){
