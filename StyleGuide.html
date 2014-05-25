@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Style Guide.</title>
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+	<link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+		body{
+			background-color: white;	
+		}
+		.nunito{
+			font-size: 24px;
+			font-family: 'Nunito', sans-serif;
+		}
+		.oxygen{
+			font-size: 24px;
+			font-family: 'Oxygen', sans-serif; 
+		}
+		.boldFont{
+			font-weight: bold;
+		}
+		a{
+			text-decoration: none;
+		}
+		.colorBlock{
+			display: inline-block;
+			width: 160px;
+			height: 160px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<section>
+			<h1>Licas Chiu's Portfolio site style guide</h1>
+			<h2>Content list</h2>
+			<ul>
+				<li>3rd party libs</li>
+				<li>Font families</li>
+				<li>Color Palette</li>
+				<li>Grid System</li>
+				<li>Blocks</li>
+				<li>Elements</li>
+			</ul>
+
+			<h2>3rd party libs</h2>
+			<ul>
+				<li><a href="http://html5doctor.com/html-5-reset-stylesheet/" target="blank">reset.css</a></li>
+				<li><a href="http://git.io/normalize" target="blank">normalize.css</a></li>
+				<li><a href="http://susy.oddbird.net/" target="blank">SUSY</a></li>
+				<li><a href="http://jquery.com" target="blank">jQuery</a></li>
+				<li><a href="http://responsejs.com" target="blank">response.js</a></li>
+				<li><a href="http://processingjs.org" target="blank">processing.js</a></li>
+			</ul>
+
+			<h2>Font families</h2>
+			<ul>
+				<li><a href="http://www.google.com/fonts/specimen/Nunito" target="blank" class='nunito'>Nunito</a><span class='nunito'> Font Weight 400</span><span class='nunito boldFont'> Font Weight 700</span></li>
+				<li><a href="http://www.google.com/fonts/specimen/Oxygen" target="blank" class='oxygen'>Oxygen</a><span class='oxygen'> Font Weight 400</span><span class='oxygen boldFont'> Font Weight 700</span></li>
+			</ul>
+
+			<h2>Color Palette</h2>
+			<div class='colorBlock' style="background-color:#fcfaf2">#fcfaf2</div>
+			<div class='colorBlock' style="background-color:#bdc0ba">#bdc0ba</div>
+			<div class='colorBlock' style="color:#fcfaf2; background-color:#4f4f48">#4f4f48</div>
+			<div class='colorBlock' style="color:#fcfaf2; background-color:#0c0c0c">#0c0c0c</div>
+			<div class='colorBlock' style="background-color:#ffb11b">#ffb11b</div>
+			<div class='colorBlock' style="background-color:#f75c2f">#f75c2f</div>			
+			<div class='colorBlock' style="background-color:#eb3015">#eb3015</div>
+			<div class='colorBlock' style="background-color:#cb1b45">#cb1b45</div>
+
+			<h2>Grid System</h2>
+			<p>This site uses SUSY fluid grid. Total columns = 12. Column width = 60px. Gutter width, grid-padding = 0px.</p>
+			<p>Main container class: <b>.container</b></p><code>&lt;div class="container"&gt;&lt;/div&gt;</code>
+			<p>Background pattern class: <b>.gridBackground</b></p><code>&lt;body class="gridBackground"&gt;&lt;/body&gt;</code>
+			<p>General section structure</p>
+			<pre>
+				&lt;section&gt;<br />
+				&emsp;&lt;div class="verticalAlignContainer"&gt;<br />
+				&emsp;&emsp;&lt;div class="verticalAlignCell"&gt;<br />
+				&emsp;&emsp;&emsp;&lt;article&gt;<br />
+				&emsp;&emsp;&emsp;&lt;/article&gt;<br />
+				&emsp;&emsp;&lt;/div&gt;<br />
+				&emsp;&lt;/div&gt;<br />
+				&lt;/section&gt;
+			</pre>
+
+		</section>
+	</div>
+    <script type="text/javascript" src="scripts/jquery-1.7.2.min.js"></script>	    
+    <script type="text/javascript" src="scripts/response.min.js"></script>
+</body>
+</html>
