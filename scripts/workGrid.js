@@ -5,7 +5,8 @@ function resetWorkGrid(){
 	// });
 	$('#workList a img').each(function(){		
 		$(this).parent().css({'height': $(this).width()});
-	});	
+	});
+	
 	$(".canvasBox").each(function(){
 		$(this).find('canvas').attr('width', $(this)[0].offsetWidth);
 		$(this).find('canvas').attr('height', $(this)[0].offsetHeight);
@@ -194,7 +195,7 @@ function initWorkGrid(){
 			ctx.lineTo(boxObj.data().p3.x, boxObj.data().p3.y);
 			ctx.lineTo(boxObj.data().p4.x, boxObj.data().p4.y);
 			ctx.closePath();
-			ctx.fillStyle = '#f75c2f';			
+			ctx.fillStyle = '#5677fc';			
 			ctx.fill();
 
 		});

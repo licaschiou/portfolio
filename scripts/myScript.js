@@ -2,7 +2,7 @@ var myVars={
 	titleString: "",
 	pageMouseX: 0.0,
 	pageMouseY: 0.0,
-	titleCharColors:['fff75c2f','ffeb3015','ffcb1b45'],
+	titleCharColors:['ffe51c23','ffe91e63','ff9c27b0','ff5677fc','ff03a9f4','ff259b24','ffffeb3b','ffff9800'],
 	charForC:['creative', 'credible', 'capable', 'classy'],
 	charForH:['honest', 'humour', 'humane', 'heuristic'],
 	charForI:['initiative', 'inspiration', 'innovate', 'interesting'],
@@ -52,6 +52,7 @@ $(document).ready(function(){
 		myVars.skillSetSketchEngine=new Processing(myVars.$skillSetCanvas, skillSetSketch);
 
 		$('#skillSetCanvas').mouseleave(function(event){
+
 			myVars.mouseOutOfCanvas = 1;
 		});
 		$('#skillSetCanvas').mouseenter(function(event){
@@ -280,6 +281,15 @@ function skillSetSketch(processing){
 	var readMeButtonLocation = new p5.PVector();
 	var showSkillHint = -1;
 
+	// var cGraphic="ffffb11b";
+	// var cInteractive="ffeb3015";
+	// var cTechnical="ffddd23b"; 
+	// var cUI="fff75c2f";
+	var cGraphic="ff03a9f4";
+	var cInteractive="ff5677fc";
+	var cTechnical="ff3f51b5"; 
+	var cUI="ff00bcd4";
+
 	p5.setup=function(){
 		p5.size(myVars.canvasWidth, myVars.canvasHeight);		
 		p5.background(252,250,242,0);
@@ -310,10 +320,11 @@ function skillSetSketch(processing){
 			seletecNodeId=-1;
 		}
 
-		if(seletecNodeId>-1){
-			nodeArray[seletecNodeId].location.x=p5.mouseX;			
-			if ( $.browser.webkit ) nodeArray[seletecNodeId].location.y = p5.mouseY - $(window).scrollTop();
-			else nodeArray[seletecNodeId].location.y=p5.mouseY;
+		if(seletecNodeId > -1){
+			nodeArray[seletecNodeId].location.x=p5.mouseX;
+			nodeArray[seletecNodeId].location.y=p5.mouseY;
+			//if ( $.browser.webkit ) nodeArray[seletecNodeId].location.y = p5.mouseY - $(window).scrollTop();
+			//else nodeArray[seletecNodeId].location.y=p5.mouseY;
 		}
 
 		for(var i=0; i<springArray.length; i++){
@@ -334,16 +345,16 @@ function skillSetSketch(processing){
 		if(seletecNodeId>-1){
 			nodeArray[seletecNodeId].render();	
 			nodeArray[seletecNodeId].renderText();		
-		}
-	
+		}	
 	}
-	p5.mouseMoved = function(){
-		var mouseLoc;
-		if ( $.browser.webkit ) mouseLoc=new p5.PVector(p5.mouseX, p5.mouseY - $(window).scrollTop());
-		else mouseLoc = new p5.PVector(p5.mouseX, p5.mouseY);
-		
 
+	p5.mouseMoved = function(){		
+		var mouseLoc;
+		mouseLoc = new p5.PVector(p5.mouseX, p5.mouseY);
+		//if ( $.browser.webkit ) mouseLo = new p5.PVector(p5.mouseX, p5.mouseY - $(window).scrollTop());
+		//else mouseLoc = new p5.PVector(p5.mouseX, p5.mouseY);
 		var distToHint=p5.PVector.sub(readMeButtonLocation, mouseLoc);
+				
 		if(distToHint.mag() < 40){
 			p5.cursor(p5.HAND);
 		}else{
@@ -359,8 +370,9 @@ function skillSetSketch(processing){
 
 	p5.mousePressed=function(){
 		var mouseLoc;
-		if ( $.browser.webkit ) mouseLoc=new p5.PVector(p5.mouseX, p5.mouseY - $(window).scrollTop());
-		else mouseLoc = new p5.PVector(p5.mouseX, p5.mouseY);
+		mouseLoc = new p5.PVector(p5.mouseX, p5.mouseY);
+		//if ( $.browser.webkit ) mouseLoc=new p5.PVector(p5.mouseX, p5.mouseY - $(window).scrollTop());
+		//else mouseLoc = new p5.PVector(p5.mouseX, p5.mouseY);
 		var distToCurosr=p5.PVector.sub(readMeButtonLocation, mouseLoc);
 		if(distToCurosr.mag() < 40){
 			if(showSkillHint == -1)showSkillHint = 1;
@@ -387,7 +399,6 @@ function skillSetSketch(processing){
 			nodeArray[seletecNodeId].shrink();
 		}		
 		seletecNodeId=-1;
-
 	}
 
 	p5.resize=function(){		
@@ -445,10 +456,6 @@ function skillSetSketch(processing){
 		var randLength= 0; //100 * myVars.screenSizeRatio;	
 		var longSpringLength= 160 * myVars.screenSizeRatio;//240 * myVars.screenSizeRatio;
 
-		var cGraphic="ffffb11b";
-		var cInteractive="ffeb3015";
-		var cTechnical="ffddd23b"; //eb3015
-		var cUI="fff75c2f";
 		createNodeArrayItem(myVars.nodeCount, largeNodeRadius, cGraphic, "Graphic");
 		nodeArray[myVars.nodeCount-1].setSkillLevel(360);
 		createNodeArrayItem(myVars.nodeCount, largeNodeRadius, cInteractive, "Interactive");
@@ -670,7 +677,8 @@ function p5Node(processing){
 		p5.fill(255);		
 		p5.ellipse(node.location.x, node.location.y, node.radius-node.radius/5,node.radius-node.radius/5);
 		if(Boolean(node.showSkill)){
-			p5.fill(247,92,47);
+			//p5.fill(247,92,47);
+			p5.fill(p5.unhex(node.myColor));
 			node.drawPie();
 		}
 		//p5.fill(255);		

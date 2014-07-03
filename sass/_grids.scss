@@ -1,0 +1,34 @@
+// Requirements
+// ============
+// Use sass --compass --watch. Otherwise breakpoint won't work !
+
+// $total-columns  : 12;
+// $column-width   : 60px;
+// $gutter-width   : 0px;
+// $grid-padding   : $gutter-width ;
+// $container-style: fluid;
+@import "susy";
+
+$susy: (
+  math: fluid,
+  container: auto,
+  columns: 12,
+  gutters: 0,
+  column-width: false,
+  box-sizing: border-box,
+
+  // debug: (
+  //   image: show-columns,
+  //   output: overlay,
+  //   toggle: top right,
+  // )
+
+  // use-custom: (
+  //   background-image: true,
+  //   background-options: false,
+  //   box-sizing: true,
+  //   clearfix: false,
+  //   rem: true,
+  // )
+);
+
