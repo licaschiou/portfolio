@@ -256,24 +256,35 @@ section#top{
 		padding:0;	
 		margin-bottom: 10px;
 		nav{	
-			@include span(12);
+			@include span(12);			
 			background-color: $grey900;
 			font-size:18px;
 			text-align: center;
-			padding:$navPadding 0 $navPadding + 2px;
-			border-bottom: 1px solid $grey400;
-			a{	  	
+			padding: 1px;
+			ul{
+				padding: 0;
+				margin: 0 auto;
+			}
+			li{
+				height: 100%;
+				display: inline-block;
+			}
+			
+			a{			
+				height: 100%;		
+				line-height: 40px;  
 				color:$grey50;
 				text-decoration: none;
 				padding: $navPadding 10px;
 			}
 			a:link, a:active, a:visited{color:$grey50;}
 			a:hover{
-				background-color: $grey800;
-				padding-bottom: $navPadding + 2px;
+				background-color: $blue;
 				color:$grey50;
-				border-bottom: 10px solid $blue;
 			}  
+			a#pullDown{			
+				display: none;
+			}
 		}
 	}
 	
@@ -853,11 +864,7 @@ footer{
 			@include span(12);		
 			nav{	
 				@include span(12);
-				border-bottom: 1px solid $grey400;
 				font-size:16px;
-				a:hover{
-					border-bottom: 5px solid $blue;
-				}  
 			}
 
 		}
@@ -1149,14 +1156,27 @@ section#skillSetMobile{
 		header{
 			@include span(12);
 			nav{
+				padding: 0;
 				font-size:14px;
-				a{	  	
-					padding: $navPadding 5px;
+				ul{
+					display: none;
+					height: auto;
 				}
-				a:hover{
-					padding-bottom: $navPadding + 2px;
-					border-bottom: 5px solid $blue;
-				}  
+				li{
+					display: block;
+					width: 100%;
+				}
+				a#pullDown{
+					display: block;
+					width: 100%;
+					position: relative;
+				}
+				a{	  	
+					display: block;
+					padding: 0;
+					width: 100%;
+					height: 100%;
+				}
 			}
 		}
 		h2{

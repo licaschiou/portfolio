@@ -21,6 +21,19 @@ $(document).ready(function(){
 	// forcing width will break all responsive layout. 
 	// var odd = $('body').width() % 2;
 	// if(odd != 0) $('body').css('width', $('body').width() + 1);
+	var pullDown = $('#pullDown');
+	var menu = $('nav ul');
+	var menuHeight = menu.height();
+
+	pullDown.click(function(e){
+		menu.slideToggle();
+	});
+	$(window).resize(function(){
+		var screenWidth = $(window).width();
+		if(screenWidth > 320 && menu.is(':hidden')){
+			menu.removeAttr('style');
+		}
+	});
 
 	$(window).load(function(){
 		$('#workList a').css({'height': $('#workList a img').height()});

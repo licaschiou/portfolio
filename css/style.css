@@ -235,19 +235,26 @@ section#top {
       background-color: #212121;
       font-size: 18px;
       text-align: center;
-      padding: 10px 0 12px;
-      border-bottom: 1px solid #bdbdbd; }
+      padding: 1px; }
+      section#top header nav ul {
+        padding: 0;
+        margin: 0 auto; }
+      section#top header nav li {
+        height: 100%;
+        display: inline-block; }
       section#top header nav a {
+        height: 100%;
+        line-height: 40px;
         color: #fafafa;
         text-decoration: none;
         padding: 10px 10px; }
       section#top header nav a:link, section#top header nav a:active, section#top header nav a:visited {
         color: #fafafa; }
       section#top header nav a:hover {
-        background-color: #424242;
-        padding-bottom: 12px;
-        color: #fafafa;
-        border-bottom: 10px solid #5677fc; }
+        background-color: #5677fc;
+        color: #fafafa; }
+      section#top header nav a#pullDown {
+        display: none; }
   section#top h2 {
     display: inline-block;
     font-family: 'Nunito', sans-serif;
@@ -828,10 +835,7 @@ footer {
       float: left;
       margin-left: 0;
       margin-right: 0;
-      border-bottom: 1px solid #bdbdbd;
       font-size: 16px; }
-      section#top header nav a:hover {
-        border-bottom: 5px solid #5677fc; }
   section#top h2 {
     font-size: 56px;
     margin-bottom: -0.1em; }
@@ -1119,12 +1123,23 @@ section#skillSetMobile {
       margin-left: 0;
       margin-right: 0; }
       section#top header nav {
+        padding: 0;
         font-size: 14px; }
+        section#top header nav ul {
+          display: none;
+          height: auto; }
+        section#top header nav li {
+          display: block;
+          width: 100%; }
+        section#top header nav a#pullDown {
+          display: block;
+          width: 100%;
+          position: relative; }
         section#top header nav a {
-          padding: 10px 5px; }
-        section#top header nav a:hover {
-          padding-bottom: 12px;
-          border-bottom: 5px solid #5677fc; }
+          display: block;
+          padding: 0;
+          width: 100%;
+          height: 100%; }
     section#top h2 {
       font-size: 32px;
       letter-spacing: -1px;
