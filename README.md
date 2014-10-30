@@ -24,9 +24,9 @@ External css files :
 ./css/reset.css  
 ./css/style.css  
 
-External font URL :  
-<link href='http://fonts.googleapis.com/css?family=Nunito:400,700' rel='stylesheet' type='text/css'>  
-<link href='http://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+External font :  
+[Nunito](http://fonts.googleapis.com/css?family=Nunito:400,700)  
+[Oxygen](http://fonts.googleapis.com/css?family=Oxygen:400,700)
 
 External script :  
 ./scripts/jquery-1.7.2.min.js  
